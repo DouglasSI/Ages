@@ -1,0 +1,1619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_agesModel.Store" Provider="Npgsql" ProviderManifestToken="9.2.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6005: The data type 'oid' is currently not supported for the target Entity Framework version; the column 'arquivo' in the table 'db_ages.public.tb_anexo' was excluded.-->
+        <EntityType Name="tb_anexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_campi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_endereco" Type="int4" Nullable="false" />
+          <Property Name="id_contato" Type="int4" Nullable="false" />
+          <Property Name="id_mantenedora" Type="int4" Nullable="false" />
+          <Property Name="num_inscricao" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="nome_fantasia" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="atividade_principal" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="atividade_secundaria" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="natureza_juridica" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="cnpj" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_fatura" Type="int4" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="1000" />
+          <Property Name="data_compra" Type="timestamptz" Precision="7" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_contato">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="telefone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fax" Type="varchar" MaxLength="20" />
+          <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="site" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="tb_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_endereco" Type="int4" Nullable="false" />
+          <Property Name="id_contato" Type="int4" Nullable="false" />
+          <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="nome_fantasia" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="cnpj" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="atividade_principal" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_endereco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="logradouro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="numero" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="complemento" Type="varchar" MaxLength="100" />
+          <Property Name="cep" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="bairro" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="municipio" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="uf" Type="varchar" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="id_forma_pagamento" Type="int4" Nullable="false" />
+          <Property Name="id_orcamento" Type="int4" Nullable="false" />
+          <Property Name="data_pagamento" Type="timestamptz" Precision="7" />
+          <Property Name="data_prevista" Type="timestamptz" Precision="7" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="1000" />
+          <Property Name="banco" Type="varchar" MaxLength="50" />
+          <Property Name="agencia" Type="varchar" MaxLength="10" />
+          <Property Name="conta" Type="varchar" MaxLength="20" />
+          <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+          <Property Name="valor_inicial" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="valor_pendente" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="is_aditivo" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_forma_pagamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="75" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_funcao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="add_usuario" Type="bool" Nullable="false" />
+          <Property Name="edt_usuario" Type="bool" Nullable="false" />
+          <Property Name="add_empresa" Type="bool" Nullable="false" />
+          <Property Name="edt_empresa" Type="bool" Nullable="false" />
+          <Property Name="add_anexo_projeto" Type="bool" Nullable="false" />
+          <Property Name="exl_anexo_projeto" Type="bool" Nullable="false" />
+          <Property Name="add_projeto" Type="bool" Nullable="false" />
+          <Property Name="exl_projeto" Type="bool" Nullable="false" />
+          <Property Name="edt_projeto" Type="bool" Nullable="false" />
+          <Property Name="add_orcamento_projeto" Type="bool" Nullable="false" />
+          <Property Name="exl_orcamento_projeto" Type="bool" Nullable="false" />
+          <Property Name="edt_orcamento_projeto" Type="bool" Nullable="false" />
+          <Property Name="add_anexo_orcamento" Type="bool" Nullable="false" />
+          <Property Name="exl_anexo_orcamento" Type="bool" Nullable="false" />
+          <Property Name="add_fatura_orcamento" Type="bool" Nullable="false" />
+          <Property Name="exl_fatura_orcamento" Type="bool" Nullable="false" />
+          <Property Name="edt_fatura_orcamento" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_mantenedora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_endereco" Type="int4" Nullable="false" />
+          <Property Name="id_contato" Type="int4" Nullable="false" />
+          <Property Name="num_inscricao" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="nome_fantasia" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="atividade_principal" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="atividade_secundaria" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="cnpj" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_orcamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="id_status" Type="int4" Nullable="false" />
+          <Property Name="id_empresa" Type="int4" Nullable="false" />
+          <Property Name="id_projeto" Type="int4" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tb_orcamento_servico">
+          <Key>
+            <PropertyRef Name="id_orcamento" />
+            <PropertyRef Name="id_servico" />
+          </Key>
+          <Property Name="id_orcamento" Type="int4" Nullable="false" />
+          <Property Name="id_servico" Type="int4" Nullable="false" />
+          <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tb_projeto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="id_status" Type="int4" Nullable="false" />
+          <Property Name="id_campi" Type="int4" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="500" />
+          <Property Name="valor_estimado" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_projeto_servico">
+          <Key>
+            <PropertyRef Name="id_projeto" />
+            <PropertyRef Name="id_servico" />
+          </Key>
+          <Property Name="id_projeto" Type="int4" Nullable="false" />
+          <Property Name="id_servico" Type="int4" Nullable="false" />
+          <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+          <Property Name="valor_limite" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="tb_servico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int4" Nullable="false" />
+          <Property Name="valor" Type="numeric" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_status_orcamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_status_projeto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="senha" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="id_funcao" Type="int4" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_campi_projeto">
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_campi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_campi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_campi">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_empresa">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_mantenedora">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_orcamento">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_campi">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_empresa">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_mantenedora">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fatura_compra">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_forma_pagamento_fatura">
+          <End Role="tb_forma_pagamento" Type="Self.tb_forma_pagamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_forma_pagamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_forma_pagamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_funcao_usuario">
+          <End Role="tb_funcao" Type="Self.tb_funcao" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mantenedora_campi">
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_mantenedora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_mantenedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orcamento_fatura">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_orcamento">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_projeto_orcamento">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_projeto">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_orcamento">
+          <End Role="tb_status_orcamento" Type="Self.tb_status_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_projeto">
+          <End Role="tb_status_projeto" Type="Self.tb_status_projeto" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_anexo">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_fatura">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_orcamento">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_projeto">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_servico">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_servico">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_agesModelStoreContainer">
+          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_campi" EntityType="Self.tb_campi" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_compra" EntityType="Self.tb_compra" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_contato" EntityType="Self.tb_contato" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_endereco" EntityType="Self.tb_endereco" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_fatura" EntityType="Self.tb_fatura" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_forma_pagamento" EntityType="Self.tb_forma_pagamento" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_funcao" EntityType="Self.tb_funcao" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_mantenedora" EntityType="Self.tb_mantenedora" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_orcamento" EntityType="Self.tb_orcamento" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_orcamento_servico" EntityType="Self.tb_orcamento_servico" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_projeto" EntityType="Self.tb_projeto" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_projeto_servico" EntityType="Self.tb_projeto_servico" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_servico" EntityType="Self.tb_servico" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
+            <End Role="tb_campi" EntitySet="tb_campi" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_campi" Association="Self.fk_contato_campi">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_empresa" Association="Self.fk_contato_empresa">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_mantenedora" Association="Self.fk_contato_mantenedora">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_orcamento" Association="Self.fk_empresa_orcamento">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_campi" Association="Self.fk_endereco_campi">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_empresa" Association="Self.fk_endereco_empresa">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_mantenedora" Association="Self.fk_endereco_mantenedora">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fatura_compra" Association="Self.fk_fatura_compra">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_forma_pagamento_fatura" Association="Self.fk_forma_pagamento_fatura">
+            <End Role="tb_forma_pagamento" EntitySet="tb_forma_pagamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_funcao_usuario" Association="Self.fk_funcao_usuario">
+            <End Role="tb_funcao" EntitySet="tb_funcao" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mantenedora_campi" Association="Self.fk_mantenedora_campi">
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orcamento_fatura" Association="Self.fk_orcamento_fatura">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_orcamento" Association="Self.fk_os_orcamento">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_servico" Association="Self.fk_os_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_projeto_orcamento" Association="Self.fk_projeto_orcamento">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_projeto" Association="Self.fk_ps_projeto">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_servico" Association="Self.fk_ps_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_orcamento" Association="Self.fk_status_orcamento">
+            <End Role="tb_status_orcamento" EntitySet="tb_status_orcamento" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_projeto" Association="Self.fk_status_projeto">
+            <End Role="tb_status_projeto" EntitySet="tb_status_projeto" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_fatura" Association="Self.fk_usuario_fatura">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_orcamento" Association="Self.fk_usuario_orcamento">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_projeto" Association="Self.fk_usuario_projeto">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_servico" Association="Self.fk_usuario_servico">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_servico" EntitySet="tb_servico" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_agesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tb_anexo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_anexo" FromRole="tb_anexo" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_campi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_endereco" Type="Int32" Nullable="false" />
+          <Property Name="id_contato" Type="Int32" Nullable="false" />
+          <Property Name="id_mantenedora" Type="Int32" Nullable="false" />
+          <Property Name="num_inscricao" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nome_fantasia" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="atividade_principal" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="atividade_secundaria" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="natureza_juridica" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_campi_projeto" FromRole="tb_campi" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_campi" FromRole="tb_campi" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_campi" FromRole="tb_campi" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_mantenedora_campi" FromRole="tb_campi" ToRole="tb_mantenedora" />
+        </EntityType>
+        <EntityType Name="tb_compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_fatura" Type="Int32" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="data_compra" Type="DateTimeOffset" Precision="7" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_fatura_compra" FromRole="tb_compra" ToRole="tb_fatura" />
+        </EntityType>
+        <EntityType Name="tb_contato">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fax" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="site" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_contato_campi" FromRole="tb_contato" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_contato_empresa" FromRole="tb_contato" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_contato_mantenedora" FromRole="tb_contato" ToRole="tb_mantenedora" />
+        </EntityType>
+        <EntityType Name="tb_empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_endereco" Type="Int32" Nullable="false" />
+          <Property Name="id_contato" Type="Int32" Nullable="false" />
+          <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nome_fantasia" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="atividade_principal" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_empresa" FromRole="tb_empresa" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_empresa_orcamento" FromRole="tb_empresa" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_empresa" FromRole="tb_empresa" ToRole="tb_endereco" />
+        </EntityType>
+        <EntityType Name="tb_endereco">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="logradouro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="cep" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_endereco_campi" FromRole="tb_endereco" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_endereco_empresa" FromRole="tb_endereco" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_endereco_mantenedora" FromRole="tb_endereco" ToRole="tb_mantenedora" />
+        </EntityType>
+        <EntityType Name="tb_fatura">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_forma_pagamento" Type="Int32" Nullable="false" />
+          <Property Name="id_orcamento" Type="Int32" Nullable="false" />
+          <Property Name="data_pagamento" Type="DateTimeOffset" Precision="7" />
+          <Property Name="data_prevista" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="banco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="agencia" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="conta" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <Property Name="valor_inicial" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="valor_pendente" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="is_aditivo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_compra" Relationship="Self.fk_fatura_compra" FromRole="tb_fatura" ToRole="tb_compra" />
+          <NavigationProperty Name="tb_forma_pagamento" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_fatura" ToRole="tb_forma_pagamento" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_orcamento_fatura" FromRole="tb_fatura" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_fatura" FromRole="tb_fatura" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_forma_pagamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_forma_pagamento" ToRole="tb_fatura" />
+        </EntityType>
+        <EntityType Name="tb_funcao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="add_usuario" Type="Boolean" Nullable="false" />
+          <Property Name="edt_usuario" Type="Boolean" Nullable="false" />
+          <Property Name="add_empresa" Type="Boolean" Nullable="false" />
+          <Property Name="edt_empresa" Type="Boolean" Nullable="false" />
+          <Property Name="add_anexo_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="exl_anexo_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="add_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="exl_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="edt_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="add_orcamento_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="exl_orcamento_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="edt_orcamento_projeto" Type="Boolean" Nullable="false" />
+          <Property Name="add_anexo_orcamento" Type="Boolean" Nullable="false" />
+          <Property Name="exl_anexo_orcamento" Type="Boolean" Nullable="false" />
+          <Property Name="add_fatura_orcamento" Type="Boolean" Nullable="false" />
+          <Property Name="exl_fatura_orcamento" Type="Boolean" Nullable="false" />
+          <Property Name="edt_fatura_orcamento" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_funcao_usuario" FromRole="tb_funcao" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_mantenedora">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_endereco" Type="Int32" Nullable="false" />
+          <Property Name="id_contato" Type="Int32" Nullable="false" />
+          <Property Name="num_inscricao" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nome_fantasia" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="atividade_principal" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="atividade_secundaria" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_mantenedora_campi" FromRole="tb_mantenedora" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_mantenedora" FromRole="tb_mantenedora" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_mantenedora" FromRole="tb_mantenedora" ToRole="tb_endereco" />
+        </EntityType>
+        <EntityType Name="tb_orcamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <Property Name="id_projeto" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_empresa_orcamento" FromRole="tb_orcamento" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_orcamento_fatura" FromRole="tb_orcamento" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_orcamento_servico" Relationship="Self.fk_os_orcamento" FromRole="tb_orcamento" ToRole="tb_orcamento_servico" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_projeto_orcamento" FromRole="tb_orcamento" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_status_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_orcamento" ToRole="tb_status_orcamento" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_orcamento" FromRole="tb_orcamento" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_orcamento_servico">
+          <Key>
+            <PropertyRef Name="id_orcamento" />
+            <PropertyRef Name="id_servico" />
+          </Key>
+          <Property Name="id_orcamento" Type="Int32" Nullable="false" />
+          <Property Name="id_servico" Type="Int32" Nullable="false" />
+          <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_os_orcamento" FromRole="tb_orcamento_servico" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_os_servico" FromRole="tb_orcamento_servico" ToRole="tb_servico" />
+        </EntityType>
+        <EntityType Name="tb_projeto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_status" Type="Int32" Nullable="false" />
+          <Property Name="id_campi" Type="Int32" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="valor_estimado" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_campi_projeto" FromRole="tb_projeto" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_projeto_orcamento" FromRole="tb_projeto" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_projeto" FromRole="tb_projeto" ToRole="tb_projeto_servico" />
+          <NavigationProperty Name="tb_status_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_projeto" ToRole="tb_status_projeto" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_projeto" FromRole="tb_projeto" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_projeto_servico">
+          <Key>
+            <PropertyRef Name="id_projeto" />
+            <PropertyRef Name="id_servico" />
+          </Key>
+          <Property Name="id_projeto" Type="Int32" Nullable="false" />
+          <Property Name="id_servico" Type="Int32" Nullable="false" />
+          <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <Property Name="valor_limite" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_ps_projeto" FromRole="tb_projeto_servico" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_ps_servico" FromRole="tb_projeto_servico" ToRole="tb_servico" />
+        </EntityType>
+        <EntityType Name="tb_servico">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
+          <NavigationProperty Name="tb_orcamento_servico" Relationship="Self.fk_os_servico" FromRole="tb_servico" ToRole="tb_orcamento_servico" />
+          <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_servico" FromRole="tb_servico" ToRole="tb_projeto_servico" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_servico" FromRole="tb_servico" ToRole="tb_usuario" />
+        </EntityType>
+        <EntityType Name="tb_status_orcamento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_status_orcamento" ToRole="tb_orcamento" />
+        </EntityType>
+        <EntityType Name="tb_status_projeto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_status_projeto" ToRole="tb_projeto" />
+        </EntityType>
+        <EntityType Name="tb_usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="senha" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_funcao" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.fk_usuario_anexo" FromRole="tb_usuario" ToRole="tb_anexo" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_usuario_fatura" FromRole="tb_usuario" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_funcao" Relationship="Self.fk_funcao_usuario" FromRole="tb_usuario" ToRole="tb_funcao" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_usuario_orcamento" FromRole="tb_usuario" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_usuario_projeto" FromRole="tb_usuario" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_usuario_servico" FromRole="tb_usuario" ToRole="tb_servico" />
+        </EntityType>
+        <Association Name="fk_usuario_anexo">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_campi_projeto">
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_campi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_campi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_campi">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_campi">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mantenedora_campi">
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_mantenedora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_mantenedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fatura_compra">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_empresa">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_mantenedora">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_orcamento">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_empresa">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_mantenedora">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_forma_pagamento_fatura">
+          <End Role="tb_forma_pagamento" Type="Self.tb_forma_pagamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_forma_pagamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_forma_pagamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orcamento_fatura">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_fatura">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_funcao_usuario">
+          <End Role="tb_funcao" Type="Self.tb_funcao" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_orcamento">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_projeto_orcamento">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_orcamento">
+          <End Role="tb_status_orcamento" Type="Self.tb_status_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_orcamento">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_projeto">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_projeto">
+          <End Role="tb_status_projeto" Type="Self.tb_status_projeto" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_projeto">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_servico">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_servico">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" />
+          <EntitySet Name="tb_campi" EntityType="Self.tb_campi" />
+          <EntitySet Name="tb_compra" EntityType="Self.tb_compra" />
+          <EntitySet Name="tb_contato" EntityType="Self.tb_contato" />
+          <EntitySet Name="tb_empresa" EntityType="Self.tb_empresa" />
+          <EntitySet Name="tb_endereco" EntityType="Self.tb_endereco" />
+          <EntitySet Name="tb_fatura" EntityType="Self.tb_fatura" />
+          <EntitySet Name="tb_forma_pagamento" EntityType="Self.tb_forma_pagamento" />
+          <EntitySet Name="tb_funcao" EntityType="Self.tb_funcao" />
+          <EntitySet Name="tb_mantenedora" EntityType="Self.tb_mantenedora" />
+          <EntitySet Name="tb_orcamento" EntityType="Self.tb_orcamento" />
+          <EntitySet Name="tb_orcamento_servico" EntityType="Self.tb_orcamento_servico" />
+          <EntitySet Name="tb_projeto" EntityType="Self.tb_projeto" />
+          <EntitySet Name="tb_projeto_servico" EntityType="Self.tb_projeto_servico" />
+          <EntitySet Name="tb_servico" EntityType="Self.tb_servico" />
+          <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" />
+          <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" />
+          <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
+          <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
+            <End Role="tb_campi" EntitySet="tb_campi" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_campi" Association="Self.fk_contato_campi">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_campi" Association="Self.fk_endereco_campi">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mantenedora_campi" Association="Self.fk_mantenedora_campi">
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fatura_compra" Association="Self.fk_fatura_compra">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_empresa" Association="Self.fk_contato_empresa">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_mantenedora" Association="Self.fk_contato_mantenedora">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_orcamento" Association="Self.fk_empresa_orcamento">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_empresa" Association="Self.fk_endereco_empresa">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_mantenedora" Association="Self.fk_endereco_mantenedora">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_forma_pagamento_fatura" Association="Self.fk_forma_pagamento_fatura">
+            <End Role="tb_forma_pagamento" EntitySet="tb_forma_pagamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orcamento_fatura" Association="Self.fk_orcamento_fatura">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_fatura" Association="Self.fk_usuario_fatura">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_funcao_usuario" Association="Self.fk_funcao_usuario">
+            <End Role="tb_funcao" EntitySet="tb_funcao" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_orcamento" Association="Self.fk_os_orcamento">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_projeto_orcamento" Association="Self.fk_projeto_orcamento">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_orcamento" Association="Self.fk_status_orcamento">
+            <End Role="tb_status_orcamento" EntitySet="tb_status_orcamento" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_orcamento" Association="Self.fk_usuario_orcamento">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_servico" Association="Self.fk_os_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_projeto" Association="Self.fk_ps_projeto">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_projeto" Association="Self.fk_status_projeto">
+            <End Role="tb_status_projeto" EntitySet="tb_status_projeto" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_projeto" Association="Self.fk_usuario_projeto">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_servico" Association="Self.fk_ps_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_servico" Association="Self.fk_usuario_servico">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_servico" EntitySet="tb_servico" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_agesModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="tb_anexo">
+            <EntityTypeMapping TypeName="db_agesModel.tb_anexo">
+              <MappingFragment StoreEntitySet="tb_anexo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_campi">
+            <EntityTypeMapping TypeName="db_agesModel.tb_campi">
+              <MappingFragment StoreEntitySet="tb_campi">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+                <ScalarProperty Name="id_contato" ColumnName="id_contato" />
+                <ScalarProperty Name="id_mantenedora" ColumnName="id_mantenedora" />
+                <ScalarProperty Name="num_inscricao" ColumnName="num_inscricao" />
+                <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+                <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+                <ScalarProperty Name="atividade_principal" ColumnName="atividade_principal" />
+                <ScalarProperty Name="atividade_secundaria" ColumnName="atividade_secundaria" />
+                <ScalarProperty Name="natureza_juridica" ColumnName="natureza_juridica" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="inscricao_estadual" ColumnName="inscricao_estadual" />
+                <ScalarProperty Name="inscricao_municipal" ColumnName="inscricao_municipal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_compra">
+            <EntityTypeMapping TypeName="db_agesModel.tb_compra">
+              <MappingFragment StoreEntitySet="tb_compra">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_fatura" ColumnName="id_fatura" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+                <ScalarProperty Name="data_compra" ColumnName="data_compra" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_contato">
+            <EntityTypeMapping TypeName="db_agesModel.tb_contato">
+              <MappingFragment StoreEntitySet="tb_contato">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="site" ColumnName="site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_empresa">
+            <EntityTypeMapping TypeName="db_agesModel.tb_empresa">
+              <MappingFragment StoreEntitySet="tb_empresa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+                <ScalarProperty Name="id_contato" ColumnName="id_contato" />
+                <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+                <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="inscricao_estadual" ColumnName="inscricao_estadual" />
+                <ScalarProperty Name="inscricao_municipal" ColumnName="inscricao_municipal" />
+                <ScalarProperty Name="atividade_principal" ColumnName="atividade_principal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_endereco">
+            <EntityTypeMapping TypeName="db_agesModel.tb_endereco">
+              <MappingFragment StoreEntitySet="tb_endereco">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="logradouro" ColumnName="logradouro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="municipio" ColumnName="municipio" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_fatura">
+            <EntityTypeMapping TypeName="db_agesModel.tb_fatura">
+              <MappingFragment StoreEntitySet="tb_fatura">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_forma_pagamento" ColumnName="id_forma_pagamento" />
+                <ScalarProperty Name="id_orcamento" ColumnName="id_orcamento" />
+                <ScalarProperty Name="data_pagamento" ColumnName="data_pagamento" />
+                <ScalarProperty Name="data_prevista" ColumnName="data_prevista" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="agencia" ColumnName="agencia" />
+                <ScalarProperty Name="conta" ColumnName="conta" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+                <ScalarProperty Name="valor_inicial" ColumnName="valor_inicial" />
+                <ScalarProperty Name="valor_pendente" ColumnName="valor_pendente" />
+                <ScalarProperty Name="is_aditivo" ColumnName="is_aditivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_forma_pagamento">
+            <EntityTypeMapping TypeName="db_agesModel.tb_forma_pagamento">
+              <MappingFragment StoreEntitySet="tb_forma_pagamento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_funcao">
+            <EntityTypeMapping TypeName="db_agesModel.tb_funcao">
+              <MappingFragment StoreEntitySet="tb_funcao">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="add_usuario" ColumnName="add_usuario" />
+                <ScalarProperty Name="edt_usuario" ColumnName="edt_usuario" />
+                <ScalarProperty Name="add_empresa" ColumnName="add_empresa" />
+                <ScalarProperty Name="edt_empresa" ColumnName="edt_empresa" />
+                <ScalarProperty Name="add_anexo_projeto" ColumnName="add_anexo_projeto" />
+                <ScalarProperty Name="exl_anexo_projeto" ColumnName="exl_anexo_projeto" />
+                <ScalarProperty Name="add_projeto" ColumnName="add_projeto" />
+                <ScalarProperty Name="exl_projeto" ColumnName="exl_projeto" />
+                <ScalarProperty Name="edt_projeto" ColumnName="edt_projeto" />
+                <ScalarProperty Name="add_orcamento_projeto" ColumnName="add_orcamento_projeto" />
+                <ScalarProperty Name="exl_orcamento_projeto" ColumnName="exl_orcamento_projeto" />
+                <ScalarProperty Name="edt_orcamento_projeto" ColumnName="edt_orcamento_projeto" />
+                <ScalarProperty Name="add_anexo_orcamento" ColumnName="add_anexo_orcamento" />
+                <ScalarProperty Name="exl_anexo_orcamento" ColumnName="exl_anexo_orcamento" />
+                <ScalarProperty Name="add_fatura_orcamento" ColumnName="add_fatura_orcamento" />
+                <ScalarProperty Name="exl_fatura_orcamento" ColumnName="exl_fatura_orcamento" />
+                <ScalarProperty Name="edt_fatura_orcamento" ColumnName="edt_fatura_orcamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_mantenedora">
+            <EntityTypeMapping TypeName="db_agesModel.tb_mantenedora">
+              <MappingFragment StoreEntitySet="tb_mantenedora">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
+                <ScalarProperty Name="id_contato" ColumnName="id_contato" />
+                <ScalarProperty Name="num_inscricao" ColumnName="num_inscricao" />
+                <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+                <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
+                <ScalarProperty Name="atividade_principal" ColumnName="atividade_principal" />
+                <ScalarProperty Name="atividade_secundaria" ColumnName="atividade_secundaria" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="inscricao_estadual" ColumnName="inscricao_estadual" />
+                <ScalarProperty Name="inscricao_municipal" ColumnName="inscricao_municipal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_orcamento">
+            <EntityTypeMapping TypeName="db_agesModel.tb_orcamento">
+              <MappingFragment StoreEntitySet="tb_orcamento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="id_projeto" ColumnName="id_projeto" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_orcamento_servico">
+            <EntityTypeMapping TypeName="db_agesModel.tb_orcamento_servico">
+              <MappingFragment StoreEntitySet="tb_orcamento_servico">
+                <ScalarProperty Name="id_orcamento" ColumnName="id_orcamento" />
+                <ScalarProperty Name="id_servico" ColumnName="id_servico" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_projeto">
+            <EntityTypeMapping TypeName="db_agesModel.tb_projeto">
+              <MappingFragment StoreEntitySet="tb_projeto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_status" ColumnName="id_status" />
+                <ScalarProperty Name="id_campi" ColumnName="id_campi" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+                <ScalarProperty Name="valor_estimado" ColumnName="valor_estimado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_projeto_servico">
+            <EntityTypeMapping TypeName="db_agesModel.tb_projeto_servico">
+              <MappingFragment StoreEntitySet="tb_projeto_servico">
+                <ScalarProperty Name="id_projeto" ColumnName="id_projeto" />
+                <ScalarProperty Name="id_servico" ColumnName="id_servico" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+                <ScalarProperty Name="valor_limite" ColumnName="valor_limite" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_servico">
+            <EntityTypeMapping TypeName="db_agesModel.tb_servico">
+              <MappingFragment StoreEntitySet="tb_servico">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="titulo" ColumnName="titulo" />
+                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
+                <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_status_orcamento">
+            <EntityTypeMapping TypeName="db_agesModel.tb_status_orcamento">
+              <MappingFragment StoreEntitySet="tb_status_orcamento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_status_projeto">
+            <EntityTypeMapping TypeName="db_agesModel.tb_status_projeto">
+              <MappingFragment StoreEntitySet="tb_status_projeto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tb_usuario">
+            <EntityTypeMapping TypeName="db_agesModel.tb_usuario">
+              <MappingFragment StoreEntitySet="tb_usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="id_funcao" ColumnName="id_funcao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
