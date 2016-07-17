@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Model.tb_empresa>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Empresas de Licitação
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("Infra"))
+{
+    <div class="box-content">
+        <a>
+            <span>
+                @Html.ActionLink("Cadastrar Nova Empresa de Licitação", "Create", "Empresa", new { @class = "button" })
+            </span>
+        </a>
+        <div class="cl">&nbsp;</div>
+    </div>
+}
+<div class="box">
+    <div class="box-head">
+        <h2 class="left">Empresas de Licitação</h2>
+    </div>
+
+    <div class="table">
+        @if (Model.Count() > 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Razão Social
+                    </th>
+                    <th>
+                        Nome Fantasia
+                    </th>
+                    <th>
+                        Cnpj
+                    </th>
+
+                    <th>
+                        Atividade Principal
+                    </th>
+                    <th>
+                        Telefone
+                    </th>
+                    <th>
+                        Logradouro
+                    </th>
+                    <th>Ações Disponíveis</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.razao_social)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nome_fantasia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cnpj)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.atividade_principal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_contato.telefone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_endereco.logradouro)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Infra"))
+                            {
+                                <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
+                            }
+                            <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id }) </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        <div class="pagging">
+            <div class="left">
+                @if (Model.Count() == 0)
+                {
+                    @Html.Label("Não Há Empresas Cadastradas")
+                }
+                else if (Model.Count() > 1)
+                {  @Html.Label(@Model.Count() + " Empresas Cadastradas")}
+                else
+                { @Html.Label(@Model.Count() + " Emrpesa Cadastrada")}
+            </div>
+        </div>
+    </div>
+</div>

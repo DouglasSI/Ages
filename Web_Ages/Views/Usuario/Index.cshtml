@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Model.tb_usuario>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Listas de Usuários
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("TI"))
+{
+    <div class="box-content">
+        <a>
+            <span>
+                @Html.ActionLink("Cadastrar Novo Usuário", "Create", "Usuario", new { @class = "button" })
+            </span>
+        </a>
+        <div class="cl">&nbsp;</div>
+    </div>
+}
+<div class="box">
+    <div class="box-head">
+        <h2 class="left">Usuários</h2>
+    </div>
+   
+    <div class="table">
+        @if (Model.Count() > 0)
+        {
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>
+                        Nome do usuário
+                    </th>
+                    <th>
+                        Senha
+                    </th>
+                    <th>
+                        E-mail
+                    </th>
+                    <th>
+                        Ativo
+                    </th>
+                    <th>
+                        Função
+                    </th>
+                    <th>
+                        Sobrenome
+                    </th>
+                    <th>
+                        Nome da função
+                    </th>
+                    <th class="ac">Ações Disponiveis</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.senha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.email)
+                        </td>
+                        <td>
+                            @(item.ativo ? "Sim" : "Não")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.perfil)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sobrenome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_funcao.nome)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("TI"))
+                            {
+                                <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
+                            }
+                            <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id }) </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+        <div class="pagging">
+            <div class="left">
+                @if (Model.Count() == 0)
+                {
+                    @Html.Label("Não Há Usuários Cadastrados")
+                }
+                else if (Model.Count() > 1)
+                {  @Html.Label(@Model.Count() + " Usuários Cadastrados")}
+                else
+                { @Html.Label(@Model.Count() + " Usuário Cadastrado")}
+            </div>
+        </div>
+    </div>
+
+</div>

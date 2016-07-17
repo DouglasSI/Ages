@@ -27,6 +27,10 @@ namespace Model
         public string nome { get; set; }
         public string senha { get; set; }
         public int id_funcao { get; set; }
+        public string email { get; set; }
+        public bool ativo { get; set; }
+        public string perfil { get; set; }
+        public string sobrenome { get; set; }
     
         public virtual ICollection<tb_anexo> tb_anexo { get; set; }
         public virtual ICollection<tb_fatura> tb_fatura { get; set; }

@@ -1,0 +1,72 @@
+﻿@model Model.tb_projeto
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Propostas", "Listar", "Projeto")
+            <span>&gt;</span>
+            Modificar
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Voçê realmente deseja modificar esta Proposta?</strong></p>
+</div>
+<div class="msg msg-error">
+    <p><strong>Os Anexos desta Proposta podem ser encontrados nos detalhes da proposta!</strong></p>
+</div>
+<hr />
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        Html.AntiForgeryToken();
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.id_usuario)
+            @Html.HiddenFor(model => model.id_status)
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.id_campi, "Mantenedora-Campi", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("id_campi", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_campi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.titulo, "Nome do Projeto", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.anotacao, "Observação", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.anotacao, new { col = 5, htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.valor_estimado, "Valor Estimado", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.valor_estimado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Confirmar Alteração" class="btn btn-block" />
+                </div>
+            </div>
+        </div><br><br><br>
+    }
+}

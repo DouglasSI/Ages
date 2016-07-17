@@ -1,0 +1,83 @@
+﻿@model Model.tb_projeto
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Propostas", "Listar", "Projeto")
+            <span>&gt;</span>
+            Cadastrar
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Você está criando uma Proposta de Projeto!</strong></p>
+</div>
+<hr />
+    <!-- Main -->
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm())
+        {
+            Html.AntiForgeryToken();
+            <div class="form-horizontal">
+               
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_usuario, "Responsável", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("id_usuario", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_status, "Situação", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("id_status", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                        @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.id_campi, "Mantenedora-Campi", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("id_campi", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_campi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.titulo, "Nome do Projeto", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.anotacao, "Observação", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.anotacao, new { col = 5, htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.valor_estimado, "Valor Estimado", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.valor_estimado, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar Esta Proposta" class="btn btn-block" />
+                    </div>
+                </div>
+            </div><br><br><br>
+        }
+    }

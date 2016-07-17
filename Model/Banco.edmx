@@ -109,6 +109,11 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           </Key>
           <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descricao" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="ativo" Type="bool" Nullable="false" />
+          <Property Name="banco" Type="varchar" MaxLength="50" />
+          <Property Name="agencia" Type="varchar" MaxLength="20" />
+          <Property Name="conta_corrente" Type="varchar" MaxLength="20" />
+          <Property Name="digito" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="tb_funcao">
           <Key>
@@ -182,7 +187,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="id_status" Type="int4" Nullable="false" />
           <Property Name="id_campi" Type="int4" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="anotacao" Type="varchar" MaxLength="500" />
+          <Property Name="anotacao" Type="text" />
           <Property Name="valor_estimado" Type="numeric" Precision="10" Scale="4" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_projeto_servico">
@@ -229,6 +234,10 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="senha" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="id_funcao" Type="int4" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ativo" Type="bool" Nullable="false" />
+          <Property Name="perfil" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sobrenome" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <Association Name="fk_campi_projeto">
           <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
@@ -776,6 +785,11 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descricao" Type="String" MaxLength="75" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="tb_fatura" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_forma_pagamento" ToRole="tb_fatura" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="banco" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="agencia" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="conta_corrente" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="digito" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_funcao">
           <Key>
@@ -926,6 +940,10 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_usuario_orcamento" FromRole="tb_usuario" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_projeto" Relationship="Self.fk_usuario_projeto" FromRole="tb_usuario" ToRole="tb_projeto" />
           <NavigationProperty Name="tb_servico" Relationship="Self.fk_usuario_servico" FromRole="tb_usuario" ToRole="tb_servico" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <Property Name="perfil" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="sobrenome" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="fk_usuario_anexo">
           <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
@@ -1459,6 +1477,11 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySetMapping Name="tb_forma_pagamento">
             <EntityTypeMapping TypeName="db_agesModel.tb_forma_pagamento">
               <MappingFragment StoreEntitySet="tb_forma_pagamento">
+                <ScalarProperty Name="digito" ColumnName="digito" />
+                <ScalarProperty Name="conta_corrente" ColumnName="conta_corrente" />
+                <ScalarProperty Name="agencia" ColumnName="agencia" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descricao" ColumnName="descricao" />
               </MappingFragment>
@@ -1585,6 +1608,10 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySetMapping Name="tb_usuario">
             <EntityTypeMapping TypeName="db_agesModel.tb_usuario">
               <MappingFragment StoreEntitySet="tb_usuario">
+                <ScalarProperty Name="sobrenome" ColumnName="sobrenome" />
+                <ScalarProperty Name="perfil" ColumnName="perfil" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="senha" ColumnName="senha" />

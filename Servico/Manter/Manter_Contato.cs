@@ -19,17 +19,18 @@ namespace Servico.Manter
         {
             return entidade.tb_contato.ToList();
         }
-        public void cadastrar(tb_contato objeto)
+        public tb_contato cadastrar(tb_contato objeto)
         {
+            tb_contato cont  =
             entidade.tb_contato.Add(objeto);
+            entidade.SaveChanges();
+            return cont;
         }
         public void editar(tb_contato objeto)
         {
             entidade = new Entities();
             entidade.tb_contato.Attach(objeto);
             var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            entry.Property(e => e.id).IsModified = false;
             entidade.SaveChanges();
         }
         public tb_contato obterContato(object filtro)

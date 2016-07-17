@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Model.tb_forma_pagamento>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Listas de Formas de Pagamento
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("FINANCEIRO"))
+{
+    <div class="box-content">
+        <a>
+            <span>
+                @Html.ActionLink("Cadastrar Nova Forma de Pagamento", "Create", "FormaPagamento", new { @class = "button" })
+            </span>
+        </a>
+        <div class="cl">&nbsp;</div>
+    </div>
+}
+<div class="box">
+    <div class="box-head">
+        <h2 class="left">Formas de Pagamento</h2>
+    </div>
+
+    <div class="table">
+        @if (Model.Count() > 0)
+    {
+    <table class="table">
+        <tr>
+            <th>Forma de Pagamento</th>
+            <th>Banco              </th>
+            <th>
+                Banco
+            </th>
+            <th>
+                Agencia
+            </th>
+            <th>
+                Digito
+            </th>
+            <th>
+                Ativo
+            </th>
+            <th>Ações Disponíveis</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.banco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.agencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.conta_corrente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.digito)
+            </td>
+            <td>
+                @(item.ativo ? "Sim" : "Não")
+            </td>
+            <td>
+                @if (User.IsInRole("Financeiro"))
+                    {
+                    <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
+                    }
+                <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id }) </a>
+            </td>
+        </tr>
+        }
+
+    </table>
+    }
+        <div class="pagging">
+            <div class="left">
+                @if (Model.Count() == 0)
+           {
+            @Html.Label("Não Há Formas de Pagamento Cadastradas")
+           }
+           else if (Model.Count() > 1)
+           {  @Html.Label(@Model.Count() + " Formas de Pagamento Cadastradas")}
+            else
+            { @Html.Label(@Model.Count() + " Forma de Pagamento Cadastrada")}
+            </div>
+        </div>
+    </div>
+</div>

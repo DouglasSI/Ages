@@ -16,11 +16,16 @@ namespace Servico.Manter
         private Entities entidade;
         public List<tb_campi> obterCampis()
         {
-            return entidade.tb_campi.ToList();
+            List<tb_campi> campis =entidade.tb_campi.ToList();
+            for(int i = 0; i < campis.Count;i++)
+                campis[i].nome_fantasia = new Manter_Mantenedora().getFantasiaById(campis[i].id_mantenedora)+" - "+campis[i].nome_fantasia.ToUpper();
+
+            return campis;
         }
         public void cadastrar(tb_campi objeto)
         {
             entidade.tb_campi.Add(objeto);
+            entidade.SaveChanges();
         }
         public void editar(tb_campi objeto)
         {
@@ -31,9 +36,16 @@ namespace Servico.Manter
             entry.Property(e => e.id).IsModified = false;
             entidade.SaveChanges();
         }
-        public tb_campi obterCampi(object filtro)
+        public tb_campi obterCampi(int filtro)
         {
-            return entidade.tb_campi.Where(f => f.id.Equals(filtro)).FirstOrDefault();
+            tb_campi tb_campi  = entidade.tb_campi.Where(f => f.id.Equals(filtro)).FirstOrDefault();
+            return tb_campi;
+        }
+        public void remover(int id)
+        {
+
+            entidade.tb_campi.Remove(obterCampi(id));
+            entidade.SaveChanges();
         }
     }
 }

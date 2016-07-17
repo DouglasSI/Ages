@@ -1,0 +1,92 @@
+﻿@model Model.tb_projeto
+
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Propostas", "Listar", "Projeto")
+            <span>&gt;</span>
+            Excluir
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Você realmente deseja excluir esta proposta?</strong></p>
+</div>
+<div class="msg msg-error">
+    <p><strong>Os anexos existentes desta proposta também serão deletados!</strong></p>
+</div>
+<hr />
+    <div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.LabelFor(model => model.titulo, "Nome do Projeto", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                
+                @Html.DisplayFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+            <dt>
+                @Html.LabelFor(model => model.anotacao, "Observação", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+            <dt>
+                @Html.LabelFor(model => model.valor_estimado, "Valor Estimado", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+            <dt>
+                @Html.LabelFor(model => model.id_campi, "Mantenedora", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_campi.tb_mantenedora.nome_fantasia, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+
+            <dt>
+                @Html.LabelFor(model => model.id_campi, "Campi", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tb_campi.nome_fantasia, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+            <dt>
+                @Html.LabelFor(model => model.id_status, "Situação", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_status_projeto.descricao, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+            <dt>
+                @Html.LabelFor(model => model.id_usuario, "Ultima Atualização", htmlAttributes: new { @class = "control-label col-md-2" })
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_usuario.nome, new { htmlAttributes = new { @class = "form-control" } })
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Excluir esta Proposta" class="btn btn-block" /> 
+                  
+            </div>
+        }
+    </div>

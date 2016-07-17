@@ -19,13 +19,29 @@ namespace Servico.Manter
         {
             return entidade.tb_usuario.ToList();
         }
-        public tb_usuario obterUsuario(string nome, string senha)
+        public tb_usuario obterUsuario(string email, string senha)
         {
-            return entidade.tb_usuario.Where(f => f.nome.Equals(nome) && f.senha.Equals(senha)).FirstOrDefault();
+            return entidade.tb_usuario.Where(f => f.email.Equals(email) && f.senha.Equals(senha) && (bool)f.ativo).FirstOrDefault();
+        }
+        public tb_usuario obterUsuario(string email)
+        {
+            tb_usuario user = entidade.tb_usuario.Where(f => f.email.Equals(email)).FirstOrDefault();
+
+            user.nome = user.nome.ToUpper() + " - " + user.perfil.ToUpper() + " - " + user.email;
+
+            return user;
+        }
+
+        public tb_usuario obterUsuarioByid(int id)
+        {
+            tb_usuario user = entidade.tb_usuario.Where(f => f.id.Equals(id)).FirstOrDefault();
+
+             return user;
         }
         public void cadastrar(tb_usuario usuario)
         {
-            entidade.tb_usuario.Add(usuario);   
+            entidade.tb_usuario.Add(usuario);
+            entidade.SaveChanges();
         }
         public void editar(tb_usuario usuario)
         {

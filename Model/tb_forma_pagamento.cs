@@ -21,6 +21,11 @@ namespace Model
     
         public int id { get; set; }
         public string descricao { get; set; }
+        public bool ativo { get; set; }
+        public string banco { get; set; }
+        public string agencia { get; set; }
+        public string conta_corrente { get; set; }
+        public string digito { get; set; }
     
         public virtual ICollection<tb_fatura> tb_fatura { get; set; }
     }

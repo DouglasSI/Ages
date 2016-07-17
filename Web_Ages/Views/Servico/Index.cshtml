@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Model.tb_servico>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Listas de Serviços para Orçamentos
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("Infra"))
+{
+    <div class="box-content">
+        <a>
+            <span>
+                @Html.ActionLink("Cadastrar Novo Servico", "Create", "Servico", new { @class = "button" })
+            </span>
+        </a>
+        <div class="cl">&nbsp;</div>
+    </div>
+}
+<div class="box">
+    <div class="box-head">
+        <h2 class="left">Serviços para Orçamentos</h2>
+    </div>
+
+    <div class="table">
+        @if (Model.Count() > 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Valor Esperado
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.anotacao)
+                    </th>
+                    <th>
+                        Ultima Modificacao
+                    </th>
+                    <th>
+                        Atualizado por
+                    </th>
+                    <th>Ações Disponíveis</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.valor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.anotacao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.data_cadastro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_usuario.nome)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Infra"))
+                            {
+                                <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
+                            }
+                            <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id }) </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        <div class="pagging">
+            <div class="left">
+                @if (Model.Count() == 0)
+            {
+                    @Html.Label("Não Há Serviços Cadastrados")
+            }
+            else if (Model.Count() > 1)
+            {  @Html.Label(@Model.Count() + " Serviços Cadastrados")}
+            else
+            { @Html.Label(@Model.Count() + " Serviço Cadastrado")}
+            </div>
+        </div>
+    </div>
+</div>

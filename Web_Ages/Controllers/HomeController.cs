@@ -5,8 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using Servico.Manter;
+using System.Web.Security;
 namespace Web_Ages.Controllers
 {
+    
     public class HomeController : Controller
     {
         //
@@ -14,8 +16,14 @@ namespace Web_Ages.Controllers
 
         public ActionResult Index()
         {
-            tb_usuario user = new Manter_Usuario().obterUsuario("FABRICIO", "1234");
+         
             return View();
+        }
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.Abandon(); // it will clear the session at the end of request
+            return RedirectToAction("Index", "Home");
         }
 
     }

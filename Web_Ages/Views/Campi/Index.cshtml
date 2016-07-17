@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Model.tb_campi>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Campi
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("Infra"))
+{
+    <div class="box-content">
+        <a>
+            <span>
+                @Html.ActionLink("Cadastrar Novo Campi ", "Create", "Campi", new { @class = "button" })
+            </span>
+        </a>
+        <div class="cl">&nbsp;</div>
+    </div>
+}
+<div class="box">
+    <div class="box-head">
+        <h2 class="left">Campi</h2>
+    </div>
+
+    <div class="table">
+        @if (Model.Count() > 0)
+        {
+            <table class="table">
+                <tr>
+                    <th>
+                        Mantenedora
+                    </th>
+                    <th>
+                        Razão Social
+                    </th>
+                    <th>
+                        Nome Fantasia
+                    </th>
+                    <th>
+                        Atividade Principal
+                    </th>
+                    <th>
+                        Cnpj
+                    </th>
+                    <th>
+                        Telefone
+                    </th>
+                    <th>Ações Disponíveis</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_mantenedora.num_inscricao)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.razao_social)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nome_fantasia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.atividade_principal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cnpj)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_contato.telefone)
+                        </td>
+                        <td>
+                            @if (User.IsInRole("Infra"))
+                            {
+                                <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
+                            }
+                            <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id }) </a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+        <div class="pagging">
+            <div class="left">
+                @if (Model.Count() == 0)
+                {
+                    @Html.Label("Não Há Campis Cadastrados")
+                }
+                else if (Model.Count() > 1)
+                {  @Html.Label(@Model.Count() + " Campis Cadastrados")}
+                else
+                { @Html.Label(@Model.Count() + " Campi Cadastrado")}
+            </div>
+        </div>
+    </div>
+</div>

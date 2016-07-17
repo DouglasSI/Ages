@@ -1,0 +1,66 @@
+﻿@model Model.tb_forma_pagamento
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Listas de Formas de Pagamento", "Index")
+            <span>&gt;</span>
+            Detalhes
+        </a>
+    </div>
+</div>
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            Descrição
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descricao)
+        </dd>
+
+        <dt>
+            Ativo
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ativo)
+        </dd>
+
+        <dt>
+          Banco
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.banco)
+        </dd>
+
+        <dt>
+            Agência
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.agencia)
+        </dd>
+
+        <dt>
+            Conta
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.conta_corrente)
+        </dd>
+
+        <dt>
+            Digito
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.digito)
+        </dd>
+
+    </dl>
+</div>

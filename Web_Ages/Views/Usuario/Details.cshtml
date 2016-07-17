@@ -1,0 +1,82 @@
+﻿@model Model.tb_usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>tb_usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.senha)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.senha)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ativo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ativo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.perfil)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.perfil)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.sobrenome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.sobrenome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_funcao.nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.tb_funcao.nome)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
