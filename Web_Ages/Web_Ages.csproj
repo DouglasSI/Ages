@@ -139,6 +139,7 @@
     <Compile Include="Controllers\FormaPagamentoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MantenedoraController.cs" />
+    <Compile Include="Controllers\OrcamentoController.cs" />
     <Compile Include="Controllers\ProjetoController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -316,6 +317,12 @@
     <Content Include="Views\Empresa\Index.cshtml" />
     <Content Include="Views\FormaPagamento\Edit.cshtml" />
     <Content Include="Views\FormaPagamento\Details.cshtml" />
+    <Content Include="Views\Projeto\Projetos.cshtml" />
+    <Content Include="Views\Orcamento\Create.cshtml" />
+    <Content Include="Views\Orcamento\Delete.cshtml" />
+    <Content Include="Views\Orcamento\Details.cshtml" />
+    <Content Include="Views\Orcamento\Edit.cshtml" />
+    <Content Include="Views\Orcamento\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

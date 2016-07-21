@@ -33,7 +33,6 @@ namespace Servico.Manter
             entidade.tb_campi.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;
-            entry.Property(e => e.id).IsModified = false;
             entidade.SaveChanges();
         }
         public tb_campi obterCampi(int filtro)

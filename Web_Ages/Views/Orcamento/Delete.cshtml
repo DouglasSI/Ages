@@ -1,0 +1,80 @@
+﻿@model Model.tb_orcamento
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>tb_orcamento</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.valor)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valor)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.anotacao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.anotacao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_empresa.razao_social)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_empresa.razao_social)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_projeto.titulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_projeto.titulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_status_orcamento.descricao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_status_orcamento.descricao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_usuario.nome)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_usuario.nome)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

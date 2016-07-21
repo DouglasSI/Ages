@@ -25,6 +25,7 @@ namespace Servico.Manter
         }
         public void editar(tb_forma_pagamento objeto)
         {
+            entidade = new Entities();
             entidade.tb_forma_pagamento.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

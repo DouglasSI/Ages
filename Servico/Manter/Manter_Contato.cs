@@ -31,6 +31,7 @@ namespace Servico.Manter
             entidade = new Entities();
             entidade.tb_contato.Attach(objeto);
             var entry = entidade.Entry(objeto);
+            entry.State = System.Data.Entity.EntityState.Modified;
             entidade.SaveChanges();
         }
         public tb_contato obterContato(object filtro)

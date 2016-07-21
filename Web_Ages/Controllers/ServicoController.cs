@@ -13,6 +13,7 @@ namespace Web_Ages.Controllers
 {
     public class ServicoController : Controller
     {
+        [Authorize]
         // GET: Servico
         public ActionResult Index()
         {

@@ -11,6 +11,7 @@ using Servico.Manter;
 
 namespace Web_Ages.Controllers
 {
+    [Authorize]
     public class ProjetoController : Controller
     {
         // GET: Projeto
@@ -20,7 +21,12 @@ namespace Web_Ages.Controllers
             ViewBag.Analise = new Manter_Projeto().obterAnalises();
             return PartialView(new Servico.Manter.Manter_Projeto().obterPropostas());
         }
-
+        public ActionResult Projetos()
+        {
+            ViewBag.Finalizado = new Manter_Projeto().obterFinalizados();
+            ViewBag.Suspensos = new Manter_Projeto().obterSuspensos();
+            return PartialView(new Manter_Projeto().obterProjetos());
+        }
         // GET: Projeto/Details/5
         public ActionResult Details(int? id)
         {

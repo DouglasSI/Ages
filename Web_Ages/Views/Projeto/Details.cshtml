@@ -1,74 +1,201 @@
 ﻿@model Model.tb_projeto
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @if (Model.id_status == 1)
+            {
+                @Html.ActionLink("Lista de Propostas ", "Listar")}
+            else if (Model.id_status == 2)
+            { @Html.ActionLink("Lista de Propostas (Em Análise) ", "Listar")}
 
-@{
-    Layout = null;
+            <span>&gt;</span>
+            Detalhes da Proposta
+        </a>
+    </div>
+</div>
+
+@if (User.IsInRole("Diretor"))
+{
+    <div class="msg msg-ok">
+        <p><strong>Você pode adicionar Anexos a esta Proposta</strong></p>
+    </div>
+}
+else if (User.IsInRole("Infra"))
+{
+    <div class="msg msg-ok">
+        <p><strong>Você pode adicionar Orçamentos a esta Proposta</strong></p>
+    </div>
+}
+else
+{
+    <div class="msg msg-error">
+        <p><strong>Você não pode Modificar esta Área</strong></p>
+    </div>
+}
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div class="form-horizontal col-md-12">
+        <div class="form-group">
+
+            <dl class="dl-horizontal">
+                <dt>
+                    Título da Proposta
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.titulo)
+                </dd>
+
+                <dt>
+                    Observação
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.anotacao)
+                </dd>
+
+                <dt>
+                    Valor estimado
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.valor_estimado)
+                </dd>
+
+                <dt>
+                    Mantenedora
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_campi.tb_mantenedora.nome_fantasia)
+                </dd>
+
+                <dt>
+                    Campi
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_campi.nome_fantasia)
+                </dd>
+
+                <dt>
+                    Criado por
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.tb_usuario.nome)
+                </dd>
+
+            </dl>
+        </div>
+        <hr />
+    </div>
+    if (User.IsInRole("Infra"))
+    {
+        <div class="box-content">
+            <a>
+                <span>
+                    
+                    @Html.ActionLink("Cadastrar Orçamento", "Create", "Orcamento", new { id_projeto = Model.id }, null)
+                </span>
+            </a>
+            <div class="cl">&nbsp;</div>
+        </div>
+    }
+    if (Model.id_status == 2)
+    {
+        if (((List<Model.tb_orcamento>)ViewBag.Orcamento).Count > 0)
+        {
+            <div class="msg msg-error">
+
+                <p><strong>Estes Orçamentos estão em Analise, ainda é possivel Excluir Orçamentos Invalidados!</strong></p>
+
+            </div>
+            <div class="box">
+                <div class="box-head">
+                    <h2 class="left">Orçamentos em Análise para Aprovação e Definição</h2>
+                    <div class="right">
+                        <label>Escolha um Título</label>
+                        <input type="text" class="field small-field" />
+                        <input type="submit" class="button" value="Pesquisar" />
+                    </div>
+                </div>
+
+
+                <div class="table">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>
+                                Titulo do Projeto
+                            </th>
+                            <th>
+                                Observação
+                            </th>
+                            <th>
+                                Valor Estimado
+                            </th>
+                            <th>
+                                Mantenedora
+                            </th>
+                            <th>
+                                Campi
+                            </th>
+                            <th>
+                                Situação
+                            </th>
+                            <th>
+                                Criado por
+                            </th>
+                            <th class="ac">Ações Disponiveis</th>
+                        </tr>
+                        @foreach (var item in (List<Model.tb_orcamento>)ViewBag.Orcamento)
+                        {
+                            <tr>
+                                @Html.HiddenFor(modelItem => item.id)
+                                <td><h3><a href="#">@Html.DisplayFor(modelItem => item.tb_projeto.titulo)</a></h3></td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.anotacao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.valor)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_projeto.tb_campi.tb_mantenedora.nome_fantasia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_projeto.tb_campi.nome_fantasia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_status_orcamento.descricao)
+                                </td>
+                                <td><a href="#">@Html.DisplayFor(modelItem => item.tb_usuario.nome)</a></td>
+                                <td>
+                                    <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+
+
+            </div>
+        }
+        else
+        {
+            <div class="msg msg-error">
+
+                <p><strong>Não Existe Orçamentos Cadastrados!</strong></p>
+
+            </div>
+
+        }
+    }
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
-    <div>
-        <h4>tb_projeto</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.titulo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.titulo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.anotacao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.anotacao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.valor_estimado)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.valor_estimado)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_campi.num_inscricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_campi.num_inscricao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_status_projeto.descricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_status_projeto.descricao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_usuario.nome)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_usuario.nome)
-            </dd>
-    
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+

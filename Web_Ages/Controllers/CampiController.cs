@@ -11,6 +11,7 @@ using Servico.Manter;
 
 namespace Web_Ages.Controllers
 {
+    [Authorize]
     public class CampiController : Controller
     {
         // GET: Campi

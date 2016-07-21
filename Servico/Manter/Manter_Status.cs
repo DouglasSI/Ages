@@ -18,5 +18,9 @@ namespace Servico.Manter
         {
             return entidade.tb_status_projeto.Where(f => f.id.Equals(id) ).FirstOrDefault();
         }
+        public tb_status_orcamento obterByIdOrcamento(int id)
+        {
+            return entidade.tb_status_orcamento.Where(f => f.id.Equals(id)).FirstOrDefault();
+        }
     }
 }

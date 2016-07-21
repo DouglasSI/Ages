@@ -49,8 +49,9 @@ namespace Servico.Manter
             entidade.tb_usuario.Attach(usuario);
             var entry = entidade.Entry(usuario);
             entry.State = System.Data.Entity.EntityState.Modified;
-            entry.Property(e => e.id).IsModified = false;
+           
             entidade.SaveChanges();   
         }
+        
     }
 }

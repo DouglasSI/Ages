@@ -78,6 +78,7 @@
       <DependentUpon>Banco.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Super\SuperOrcamento.cs" />
     <Compile Include="tb_anexo.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>

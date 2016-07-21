@@ -1,40 +1,25 @@
 ﻿@model IEnumerable<Model.tb_projeto>
-
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
 <div class="small-nav">
     <div>
         <a href="#">
             @Html.ActionLink("Página Inicial", "Index", "Home")
             <span>&gt;</span>
-            Listas de Propostas
+            Listas de Projetos
         </a>
     </div>
 </div>
-@if (User.IsInRole("Diretor"))
-{
-    <div class="box-content">
-        <a>
-            <span>
-                @Html.ActionLink("Cadastrar Nova Proposta", "Create", "Projeto", new { @class = "button" })
-            </span>
-        </a>
-        <div class="cl">&nbsp;</div>
-    </div>
-}
-
 <div id="container">
     <div class="shell">
-        <!-- Main -->
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
             <div id="main">
-
                 <div id="content">
                     <!-- Box -->
                     @if (Model.Any())
                     {
                         <div class="msg msg-ok">
-                            <p><strong>Propostas Abertas só podem ser modificadas pela Direção!</strong></p>
+                            <p><strong>P Abertas só podem ser modificadas pela Direção!</strong></p>
                         </div>
                         <div class="box">
                             <div class="box-head">
@@ -127,10 +112,8 @@
                         <div class="msg msg-ok">
                             <p><strong>Não Existe Propostas Abertas Cadastradas!</strong></p>
                         </div>
-
                     }
-
-                    @if (((List<Model.tb_projeto>)ViewBag.Analise).Count > 0)
+                    @if (((List<Model.tb_projeto>)ViewBag.Finalizado).Count > 0)
                     {
                         <div class="msg msg-error">
 
@@ -225,13 +208,10 @@
                             <p><strong>Não Existe Propostas em Analise Cadastradas!</strong></p>
 
                         </div>
-
                     }
-
                     <!-- End Box -->
                 </div>
             </div>
         }
     </div>
 </div><br /><br /><br />.
-

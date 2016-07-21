@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-
+@if (HttpContext.Current.User.Identity.IsAuthenticated) {
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -57,14 +57,14 @@
                                 </ul>
                             </li>
                             <li><a class="navbar-brand" href="~/Projeto/Listar">Propostas</a></li>
-                            <li><a class="navbar-brand" href="~/Projeto/Listar">Projetos</a></li>
+                            <li><a class="navbar-brand" href="~/Projeto/Projetos">Projetos</a></li>
                             <li><a class="navbar-brand" href="~/Projeto/Listar">Anexos</a></li>
                             <li><a class="navbar-brand" href="~/Projeto/Listar">Relatórios</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
-
+            }
 
             <!-- End Main Nav -->
         </div>

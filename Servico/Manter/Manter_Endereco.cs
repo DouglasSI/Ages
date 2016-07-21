@@ -31,7 +31,7 @@ namespace Servico.Manter
             entidade.tb_endereco.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;
-            entry.Property(e => e.id).IsModified = false;
+            
             entidade.SaveChanges();
         }
         public tb_endereco obterEndereco(object filtro)

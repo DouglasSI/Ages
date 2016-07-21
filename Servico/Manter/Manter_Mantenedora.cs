@@ -29,10 +29,10 @@ namespace Servico.Manter
         }
         public void editar(tb_mantenedora objeto)
         {
+            entidade = new Entities();
             entidade.tb_mantenedora.Attach(objeto);
             var entry = entidade.Entry(objeto);
-            
-
+            entry.State = System.Data.Entity.EntityState.Modified;
             entidade.SaveChanges();
         }
         public void remover(int id)

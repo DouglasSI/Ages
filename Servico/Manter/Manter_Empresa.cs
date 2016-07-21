@@ -29,6 +29,7 @@ namespace Servico.Manter
         }
         public void editar(tb_empresa objeto)
         {
+            entidade = new Entities();
             entidade.tb_empresa.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

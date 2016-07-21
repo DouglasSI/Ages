@@ -1,0 +1,74 @@
+﻿@model Model.tb_orcamento
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>tb_orcamento</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.valor)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.valor)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.anotacao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.anotacao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_empresa.razao_social)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_empresa.razao_social)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_projeto.titulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_projeto.titulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_status_orcamento.descricao)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_status_orcamento.descricao)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.tb_usuario.nome)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.tb_usuario.nome)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
