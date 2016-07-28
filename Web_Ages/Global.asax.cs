@@ -9,19 +9,22 @@ using System.Web.Routing;
 
 namespace Web_Ages
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
 
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            Model.Super.SuperOrcamento.orcamento = new Model.tb_orcamento();
+            Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico = new List<Model.tb_orcamento_servico>();
+            Model.Super.SuperOrcamento.orcamento.tb_fatura = new List<Model.tb_fatura>();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            
+
         }
     }
 }

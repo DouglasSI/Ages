@@ -1,0 +1,46 @@
+﻿@model List<Model.tb_orcamento_servico>
+
+    <div class="col-md-3" style="width: 5%"></div>
+    <div class="col-md-3" style="width: 90%">
+        <div class="box-head">
+            <h2 class="left">Serviços Cadastrados</h2>
+        </div>
+        <div class="table">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>
+                        Serviço
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                    <th class="ac">Remover</th>
+                </tr>
+
+                @foreach (var item in (List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico)
+                {
+                    <tr>
+
+                        @Html.HiddenFor(modelItem => item.id_servico)
+                        @Html.HiddenFor(modelItem => item.tb_servico.id)
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tb_servico.titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.valor)
+                        </td>
+
+                        <td>
+                            @if (User.IsInRole("Infra"))
+                            {
+                                <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverServico", new { id_servico = item.id_servico })</a>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+    
+

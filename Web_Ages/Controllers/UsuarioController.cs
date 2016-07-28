@@ -11,9 +11,10 @@ using Servico.Manter;
 
 namespace Web_Ages.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
-        private Entities db = new Entities();
+ 
 
         // GET: Usuario
         public ActionResult Index()
@@ -29,7 +30,7 @@ namespace Web_Ages.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tb_usuario tb_usuario = db.tb_usuario.Find(id);
+            tb_usuario tb_usuario = new Manter_Usuario().obterUsuarioByid((int)id);
             if (tb_usuario == null)
             {
                 return HttpNotFound();
@@ -41,7 +42,7 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "TI")]
         public ActionResult Create()
         {
-            ViewBag.id_funcao = new SelectList(db.tb_funcao, "id", "nome");
+            ViewBag.id_funcao = new SelectList(new Manter_Funcao().obterFuncoes(), "id", "nome");
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace Web_Ages.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "TI")]
-        public ActionResult Create([Bind(Include = "id,nome,senha,id_funcao,email,perfil,sobrenome")] tb_usuario tb_usuario)
+        public ActionResult Create([Bind(Include = "nome,senha,id_funcao,email,perfil,sobrenome")] tb_usuario tb_usuario)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +61,7 @@ namespace Web_Ages.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_funcao = new SelectList(db.tb_funcao, "id", "nome", tb_usuario.id_funcao);
+            ViewBag.id_funcao = new SelectList(new Manter_Funcao().obterFuncoes(), "id", "nome", tb_usuario.id_funcao);
             return View(tb_usuario);
         }
 
@@ -93,11 +94,10 @@ namespace Web_Ages.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tb_usuario).State = EntityState.Modified;
-                db.SaveChanges();
+                new Manter_Usuario().editar(tb_usuario);
                 return RedirectToAction("Index");
             }
-            ViewBag.id_funcao = new SelectList(db.tb_funcao, "id", "nome", tb_usuario.id_funcao);
+            ViewBag.id_funcao = (new SelectList(new Manter_Funcao().obterFuncoes(), "id", "nome"));
             return View(tb_usuario);
         }
 
@@ -106,7 +106,6 @@ namespace Web_Ages.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
             }
             base.Dispose(disposing);
         }

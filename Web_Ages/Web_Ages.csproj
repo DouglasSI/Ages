@@ -323,6 +323,10 @@
     <Content Include="Views\Orcamento\Details.cshtml" />
     <Content Include="Views\Orcamento\Edit.cshtml" />
     <Content Include="Views\Orcamento\Index.cshtml" />
+    <Content Include="Views\Orcamento\CreateServico.cshtml" />
+    <Content Include="Views\Orcamento\ListaServicosOrcamento.cshtml" />
+    <Content Include="Views\Orcamento\CreateFatura.cshtml" />
+    <Content Include="Views\Orcamento\ListarFaturas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,10 +335,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Persistencia.csproj">
-      <Project>{86add253-e99d-4b2d-8756-7530758786c8}</Project>
-      <Name>Persistencia</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Servico\Servico.csproj">
       <Project>{005fe776-1e29-4ee0-9827-89c331b72afe}</Project>
       <Name>Servico</Name>

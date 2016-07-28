@@ -1,5 +1,7 @@
-﻿@model Model.Super.SuperOrcamento
+﻿@model Model.tb_orcamento
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+
 <div class="small-nav">
     <div>
         <a href="#">
@@ -11,176 +13,121 @@
         </a>
     </div>
 </div>
-@if (HttpContext.Current.User.Identity.IsAuthenticated)
-{
-    using (Html.BeginForm())
+<div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <div class="form-horizontal col-md-12 ">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.AntiForgeryToken()
-            <div class="form-group">
-                <div class="control-label col-md-2" style="width: 15%">
-                    @Html.LabelFor(model => model.orcamento.id_usuario, "Registrado por")
-                </div>
-                <div class="col-md-3" style="width: 30%">
-                    @Html.LabelFor(model => model.orcamento.id_usuario, ((Model.tb_usuario)@ViewBag.id_usuario).nome, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.id_usuario, "", new { @class = "text-danger" })
-                </div>
-                <div class="control-label col-md-2" style="width: 10%">
-                    @Html.LabelFor(model => model.orcamento.id_status, "Orçamento")
-                </div>
-                <div class="col-md-3" style="width: 10%">
-                    @Html.LabelFor(model => model.orcamento.id_status, ((Model.tb_status_orcamento)@ViewBag.id_status).descricao, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.id_status, "", new { @class = "text-danger" })
-                </div>
-                <div class="control-label col-md-2" style="width: 20%">
-                    @Html.LabelFor(model => model.orcamento.tb_projeto.valor_estimado, "Valor Estimado")
-                </div>
-                <div class="col-md-3" style="width: 15%">
-                    @Html.LabelFor(model => model.orcamento.id_projeto,"R$ " +((Model.tb_projeto)@ViewBag.id_projeto).valor_estimado.ToString("0.00").ToUpper(), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.id_status, "", new { @class = "text-danger" })
-                </div>
 
-            </div>
-
-            <div class="form-group">
-                <div class="control-label col-md-2" style="width: 15%">
-                    @Html.LabelFor(model => model.orcamento.id_projeto, "Projeto")
-                </div>
-                <div class="col-md-3" style="width: 30%">
-                    @Html.LabelFor(model => model.orcamento.id_projeto, ((Model.tb_projeto)@ViewBag.id_projeto).titulo.ToUpper(), new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.id_projeto, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="control-label col-md-2" style="width: 20%">
-                    @Html.LabelFor(model => model.orcamento.tb_projeto.id_campi, "Mantenedora/Campi")
-                </div>
-                <div class="col-md-3" style="width: 35%">
-                    @Html.LabelFor(model => model.orcamento.tb_projeto.id_campi, ((Model.tb_campi)@ViewBag.id_campi).nome_fantasia, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.tb_projeto.id_campi, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="control-label col-md-2" style="width: 15%">
-                    @Html.LabelFor(model => model.orcamento.id_empresa, "Fornecedor")
-                </div>
-                <div class="col-md-3" style="width: 30%">
-                    @Html.DropDownList("id_empresa", null, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.orcamento.id_empresa, "", new { @class = "text-danger" })
-                </div>
-
-                <div class="control-label col-md-2" style="width: 40%">
-                    @Html.LabelFor(model => model.orcamento.valor, "Valor Orçado")
-                </div>
-                <div class="col-md-3" style="width: 15%">
-
-                    @Html.EditorFor(model => model.orcamento.valor, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.orcamento.valor, "", new { @class = "text-danger" })
-                </div>
-
-            </div>
-            <div class="form-group">
-                <div class="control-label col-md-2" style="width: 15%">
-                    @Html.LabelFor(model => model.orcamento.anotacao, "Observação")
-                </div>
-
-                <div class="col-md-3" style="width: 85%">
-                    @Html.EditorFor(model => model.orcamento.anotacao, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.orcamento.anotacao, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            @using (Html.BeginForm())
-            {
-                <div class="form-horizontal col-md-12">
-                    <div class="form-horizontal col-md-6">
-                       
-                       
-                        <div class="form-group">
-                            <hr />
-                            <div class="control-label col-md-2" style="width: 29%">
-                                @Html.LabelFor(model => model.servico.titulo, "Servico")
-                            </div>
-                            <div class="col-md-3" style="width: 29%">
-                                @Html.DropDownList("id_servico", null, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.servico.titulo, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="control-label col-md-2" style="width: 15%">
-                                @Html.LabelFor(model => model.servico.valor, "Valor")
-                            </div>
-                            <div class="col-md-3" style="width: 15%">
-                                @Html.EditorFor(model => model.servico.valor, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.servico.valor, "", new { @class = "text-danger" })
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="control-label col-md-2" style="width: 29%">
-                                @Html.LabelFor(model => model.servico.anotacao, "Observação")
-                            </div>
-                            <div class="col-md-3" style="width: 44%">
-                                @Html.EditorFor(model => model.servico.anotacao, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.servico.anotacao, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-3" style="width: 15%">
-                                <input type="submit" value="Salvar" class="btn btn-block" name="bt_submit_2" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-3" style="width: 29%"></div>
-                            <div class="col-md-3" style="width: 59%">
-                                <div class="box-head">
-                                    <h2 class="left">Serviços Cadastrados</h2>
-                                </div>
-                                <div class="table">
-                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                            <th>
-                                                Serviço
-                                            </th>
-                                            <th>
-                                                Valor Estimado
-                                            </th>
-                                            <th class="ac">Remover</th>
-                                        </tr>
-                                        @if (Model != null)
-                                        {
-                                            foreach (var item in Model.servico.tb_orcamento_servico)
-                                            {
-                                                <tr>
-
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.tb_servico.titulo)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.valor)
-                                                    </td>
-
-                                                    <td>
-                                                        @if (User.IsInRole("Infra"))
-                                                        {
-                                                            <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverServico", new { id_servico = item.id_servico })</a>
-                                                        }
-                                                    </td>
-                                                </tr>
-                                            }
-                                        }
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-horizontal col-md-6"><hr /></div>
-                </div>
-            }
-            <div class="form-horizontal">
+        using (Html.BeginForm())
+        {
+            <div class="form-horizontal col-md-12 ">
                 <hr />
-                <div class="col-md-3" style="width: 15%"></div>
-                <div class="col-md-3" style="width: 85%">
-                    <input type="submit" value="Salvar este orçamento" class="btn btn-block" name="bt_submit_1" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_usuario, "Registrado por")
+                    </div>
+                    <div class="col-md-3" style="width: 30%">
+                        @Html.LabelFor(model => model.id_usuario, ((Model.tb_usuario)@ViewBag.id_usuario).nome, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 10%">
+                        @Html.LabelFor(model => model.id_status, "Orçamento")
+                    </div>
+                    <div class="col-md-3" style="width: 10%">
+                        @Html.LabelFor(model => model.id_status, ((Model.tb_status_orcamento)@ViewBag.id_status).descricao, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 20%">
+                        @Html.LabelFor(model => model.tb_projeto.valor_estimado, "Valor Estimado")
+                    </div>
+                    <div class="col-md-3" style="width: 14%">
+                        @Html.LabelFor(model => model.valor, "R$ " + ((Model.tb_projeto)@ViewBag.id_projeto).valor_estimado.ToString("0.00").ToUpper(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_projeto, "Projeto")
+                    </div>
+                    <div class="col-md-3" style="width: 30%">
+                        @Html.LabelFor(model => model.id_projeto, ((Model.tb_projeto)@ViewBag.id_projeto).titulo.ToUpper(), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_projeto, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="control-label col-md-2" style="width: 20%">
+                        @Html.LabelFor(model => model.tb_projeto.id_campi, "Mantenedora/Campi")
+                    </div>
+                    <div class="col-md-3" style="width: 34%">
+                        @Html.LabelFor(model => model.tb_projeto.id_campi, ((Model.tb_campi)@ViewBag.id_campi).nome_fantasia, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.tb_projeto.id_campi, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_empresa, "Fornecedor")
+                    </div>
+                    <div class="col-md-3" style="width: 30%">
+                        @Html.DropDownList("id_empresa", null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_empresa, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="control-label col-md-2" style="width: 40%">
+                        @Html.LabelFor(model => model.valor, "Valor Orçado")
+                    </div>
+                    <div class="col-md-3" style="width: 14%">
+
+                        @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.anotacao, "Observação")
+                    </div>
+                    <div class="col-md-3" style="width: 84%">
+                        @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    </div>
                 </div>
             </div>
-        </div>
-    }
 
-}
+
+
+            <div class="form-horizontal col-md-12">
+                
+                <div class="col-md-3" style="width: 15%"></div>
+                <div class="col-md-3 col-lg-offset-10" style="padding:1px  ; width: 15%">
+                    <input type="submit" value="Salvar" class="btn btn-block" name="bt_submit_1" style=" height:56px " />
+                    
+                </div>
+                
+            </div>
+
+        }
+        <div class="form-horizontal" style="padding-bottom:inherit">
+            <div class=" form-horizontal col-md-12">
+                <hr />
+                <div class="form-horizontal col-md-3" style="width: 28%; background-color:rgba(251, 251, 251, 0.75)">
+
+                    @{Html.RenderPartial("CreateServico");}
+
+                </div>
+                <div class="form-horizontal col-md-9" style="width: 72%; background-color:rgba(250, 247, 247, 0.75)">
+
+                    @{Html.RenderPartial("CreateFatura");}
+
+                </div>
+
+            </div>
+            <div class="form-horizontal col-md-12">
+                <hr />
+                <br><br><br><br>
+            </div>
+
+        </div>
+
+    }
+</div>
