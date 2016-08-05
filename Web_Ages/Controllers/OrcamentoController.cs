@@ -31,11 +31,42 @@ namespace Web_Ages.Controllers
 
                 return RedirectToAction("Projetos");
             }
-            //ViewBag.Orcamento = new Manter_Orcamento().obterOrcamentos();
+            
+            tb_orcamento  orc = new Manter_Orcamento().obterOrcamento((int)id);
+            orc.tb_projeto = new Manter_Projeto().obterProjeto(orc.id_projeto);
+            orc.tb_projeto.tb_campi = new Manter_Campi().obterCampi(orc.tb_projeto.id_campi);
+            orc.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.id_usuario);
+            orc.tb_projeto.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.tb_projeto.id_usuario);
+            //orc.tb_fatura = new Manter_Fatura().ObterFaturasporOrcamento((int)orc.id);
+            //orc.tb_orcamento_servico = new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)orc.id);
 
-            return View();
+           return  View(orc);
+            
+           
         }
+        [HttpPost]
+        public ActionResult Details(tb_orcamento orcamento)
+        {
+            tb_orcamento orc = new Manter_Orcamento().obterOrcamento((int)orcamento.id);
+            if (Request.Form["aceitar"] != null)
+            {
 
+                new Manter_Orcamento().editarStatus(orc, 2);
+                return RedirectToAction("Details", "Projeto", new { id = orc. id_projeto });
+            }
+            else
+                if (Request.Form["rejeitar"] != null)
+            {
+                new Manter_Orcamento().editarStatus(orc, 3);
+                return RedirectToAction("Details", "Projeto", new { id = orc. id_projeto });
+            }
+            return View(orcamento);
+        }
+        public ActionResult EnviarParaDetailsProjeto(int? id)
+        {
+            return RedirectToAction("Details", "Projeto", new {id = id});
+        }
+      
         // GET: Orcamento/Create
         public ActionResult Create(int? id_projeto)
         {
@@ -54,6 +85,47 @@ namespace Web_Ages.Controllers
             @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
             return PartialView();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Model.tb_orcamento tb_orcamento)
+        {
+
+            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
+            ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
+
+
+            ViewBag.id_projeto = new Manter_Projeto().obterProjeto(tb_orcamento.id_projeto);
+            ViewBag.id_campi = new Manter_Campi().obterCampis().Where(x => x.id == ((tb_projeto)ViewBag.id_projeto).id_campi).FirstOrDefault();
+            ViewBag.id_status = new Manter_Status().obterByIdOrcamento(1);
+            tb_usuario userr = new Manter_Usuario().obterUsuario(User.Identity.Name);
+            ViewBag.id_usuario = userr;
+            if (Request.Form["bt_submit_1"] != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    Servico.Manter_ m = new Servico.Manter_();
+                    tb_orcamento.id_usuario = userr.id;
+                    tb_orcamento.id_status = 1;
+
+
+                    tb_orcamento.tb_orcamento_servico = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
+                    tb_orcamento.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
+
+                    m.PersistirGrupo(tb_orcamento);
+
+
+
+                    return RedirectToAction("Details", "Projeto", new { id = tb_orcamento.id_projeto });
+
+                    //return RedirectToAction("Listar","Projeto");
+
+                }
+
+            }
+            return View(tb_orcamento);
+
+        }
+
         public ActionResult CreateServico()
         {
 
@@ -98,6 +170,7 @@ namespace Web_Ages.Controllers
             return PartialView("ListarFaturas");
 
         }
+        
         public void RemoverFatura( int id)
         {
             foreach (tb_fatura ft in ((List<tb_fatura>)ViewBag.faturas))
@@ -150,60 +223,7 @@ namespace Web_Ages.Controllers
         // POST: Orcamento/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Model.tb_orcamento tb_orcamento)
-        {
-
-            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
-            //ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
-
-
-            ViewBag.id_projeto = new Manter_Projeto().obterProjeto(tb_orcamento.id_projeto);
-            ViewBag.id_campi = new Manter_Campi().obterCampis().Where(x => x.id == ((tb_projeto)ViewBag.id_projeto).id_campi).FirstOrDefault();
-            ViewBag.id_status = new Manter_Status().obterByIdOrcamento(1);
-            tb_usuario userr = new Manter_Usuario().obterUsuario(User.Identity.Name);
-            ViewBag.id_usuario = userr;
-            if (Request.Form["bt_submit_1"] != null)
-            {
-                if (ModelState.IsValid)
-                {
-                    Servico.Manter_ m = new Servico.Manter_();
-                    tb_orcamento.id_usuario = userr.id;
-                    tb_orcamento.id_status = 1;
-                    m.M_Orcamento().cadastrar(tb_orcamento);
-
-                 //tb_orcamento.tb_orcamento_servico = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
-                  // tb_orcamento.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
-                    
-
-                  foreach (tb_orcamento_servico os in Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico)
-                  {
-                      os.id_orcamento = tb_orcamento.id;
-                      os.tb_orcamento = tb_orcamento;
-                      m.M_Orcamento_Servico().cadastrar(os);
-                  }
-
-                  foreach (tb_fatura fatura in Model.Super.SuperOrcamento.orcamento.tb_fatura)
-                    {   
-                        fatura.id_usuario = tb_orcamento.id_usuario;
-                        fatura.id_orcamento = tb_orcamento.id;
-                        new Manter_Fatura().cadastrar(fatura );
-                    }
-                  new Manter_Projeto().editarStatus(tb_orcamento.id_projeto, 2);
-                    return RedirectToAction("Index");
-                }
-
-            }
-            //else if (Request.Form["bt_submit_2"] != null)
-            //{
-            //    tb_orcamento.orcamento.tb_orcamento_servico.Add(new tb_orcamento_servico() { id_servico = tb_orcamento.servico.id, data_cadastro = DateTime.Now, valor = tb_orcamento.servico.valor, anotacao = tb_orcamento.servico.anotacao });
-            //    return View(tb_orcamento);
-            //}
-            return View(tb_orcamento);
-
-        }
-
+        
         // GET: Orcamento/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -263,10 +283,21 @@ namespace Web_Ages.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tb_orcamento tb_orcamento = db.tb_orcamento.Find(id);
-            db.tb_orcamento.Remove(tb_orcamento);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            int id_projeto = 0;
+            foreach (var item in new Manter_Fatura().ObterFaturasporOrcamento((int) id ))
+            {
+                
+                new Manter_Fatura().remover((int)item.id_orcamento);
+            }
+            foreach (var item in new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)id))
+            {
+                new Manter_Orcamento_Servico().remover((int)item.id_orcamento);
+            }
+            tb_orcamento os = new Manter_Orcamento().obterOrcamento((int)id);
+            id_projeto = os.id_projeto;
+           
+            new Manter_Orcamento().remover((int) id);
+            return RedirectToAction("Details", "Projeto", new { id = id_projeto });
         }
 
         protected override void Dispose(bool disposing)
@@ -277,5 +308,33 @@ namespace Web_Ages.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult CreateAnexo()
+        {
+            Model.Super.SuperAnexo.clearAnexos();
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult CreateAnexo(tb_anexo tb_anexo)
+        {
+
+            if (ModelState.IsValid)
+            {
+                tb_anexo.data_cadastro = DateTime.Now;
+                tb_anexo.tb_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
+                tb_anexo.id_usuario = tb_anexo.tb_usuario.id;
+                Model.Super.SuperAnexo.anexos.Add(tb_anexo);
+                return ListarAnexos();
+            }
+            return ListarAnexos();
+        }
+        public ActionResult ListarAnexos()
+        {
+            @ViewBag.tb_anexo = Model.Super.SuperAnexo.anexos;
+            return PartialView("ListarAnexos");
+
+        }
+
+
     }
 }

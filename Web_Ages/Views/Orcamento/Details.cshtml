@@ -1,74 +1,258 @@
 ﻿@model Model.tb_orcamento
 
-@{
-    Layout = null;
-}
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+<div class="small-nav">
     <div>
-        <h4>tb_orcamento</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.valor)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.valor)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.anotacao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.anotacao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_empresa.razao_social)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_empresa.razao_social)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_projeto.titulo)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_projeto.titulo)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_status_orcamento.descricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_status_orcamento.descricao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_usuario.nome)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_usuario.nome)
-            </dd>
-    
-        </dl>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Lista de Orcamentos", "EnviarParaDetailsProjeto", new { id = Model.id_projeto })
+            <span>&gt;</span>
+            Ver
+        </a>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</div>
+<div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <div class="form-horizontal col-md-12">
+            <div class="form-group">
+                <div class="msg msg-ok">
+                    <p><strong>Orçamentos aguardando Análise</strong></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+
+                    @Html.LabelFor(model => model.tb_projeto.titulo, "PROPOSTA EM ANÁLISE")
+                    <hr />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-1">
+                    @Html.LabelFor(model => model.tb_projeto.titulo, "Projeto :")
+                </div>
+                <div class="col-md-7">
+                    @Html.Label(Model.tb_projeto.titulo, new { @class = "form-control" })
+                </div>
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.tb_projeto.valor_estimado, "Valor Estimado :")
+                </div>
+                <div class="col-md-2">
+                    @Html.Label(Model.tb_projeto.valor_estimado.ToString("0.00"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-1">
+                    @Html.LabelFor(model => model.tb_projeto.anotacao, "Anotação")
+                </div>
+                <div class="col-md-11">
+                    @Html.Label(Model.tb_projeto.anotacao, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-1">
+                    @Html.LabelFor(model => model.tb_projeto.tb_usuario.nome, "Diretor")
+                </div>
+                <div class="col-md-5">
+                    @Html.Label(Model.tb_projeto.tb_usuario.nome, new { @class = "form-control" })
+                </div>
+
+
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.tb_projeto.tb_campi.tb_mantenedora.nome_fantasia, "Mantenedora")
+                </div>
+                <div class="col-md-4">
+                    @Html.Label(Model.tb_projeto.tb_campi.tb_mantenedora.nome_fantasia, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-8">
+                    @Html.LabelFor(model => model.tb_projeto.tb_campi.nome_fantasia, "Campus")
+                </div>
+                <div class="col-md-4">
+                    @Html.Label(Model.tb_projeto.tb_campi.nome_fantasia, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="form-horizontal col-md-12">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.LabelFor(model => model.tb_projeto.titulo, "ORÇAMENTO EM ANÁLISE")
+                    <hr />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.tb_empresa.nome_fantasia, "Fornecedor")
+                </div>
+                <div class="col-md-6">
+                    @Html.Label(Model.tb_empresa.nome_fantasia, new { @class = "form-control" })
+                </div>
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.valor, "Valor Ofertado")
+                </div>
+                <div class="col-md-2">
+                    @Html.Label("R$ " + Model.valor.ToString("0.00"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.anotacao, "Anotação")
+                </div>
+                <div class="col-md-10">
+                    @Html.Label(Model.anotacao, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.tb_usuario.nome, "Cadastrado por")
+                </div>
+                <div class="col-md-4">
+                    @Html.Label(Model.tb_usuario.nome, new { @class = "form-control" })
+                </div>
+                <div class="control-label col-md-2">
+                    @Html.LabelFor(model => model.id_status, "Status")
+                </div>
+                <div class="col-md-4">
+                    @Html.Label(Model.tb_status_orcamento.descricao, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @if (User.IsInRole("Diretor"))
+                {
+                    <div class="col-md-12">
+                        @using (Html.BeginForm())
+                        {
+                            Html.AntiForgeryToken();
+                            <div class="form-group">
+                                <br><br>
+                                <div class="col-md-3 offset-3">
+                                    <div class="form-actions no-color">
+                                        <input type="submit" name="aceitar" value="Aprovar Orçamento" class="btn btn-default" style="background-color:rgb(76, 255, 0)" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 offset-3">
+                                    <div class="form-actions no-color">
+                                        <input type="submit" name="rejeitar" value="Rejeitar Orçamento" class="btn btn-default" style="background-color:rgb(255, 0, 0); color:white" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <hr />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="form-horizontal" style="padding-bottom:inherit">
+            <div class=" form-horizontal col-md-12" style="padding-bottom:inherit ; background-color:rgba(251, 251, 251, 0.75)">
+                <hr />
+                <div class="form-horizontal col-md-3" style="width: 33%">
+
+                    <div class="col-md-3" style="width: 5%"></div>
+                    <div class="col-md-3" style="width: 90%">
+                        <div class="box-head">
+                            <h2 class="left">Serviços</h2>
+                        </div>
+                        <div class="table">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <th>
+                                        Serviço
+                                    </th>
+                                    <th>
+                                        Observação
+                                    </th>
+                                    <th>
+                                        Valor
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model.tb_orcamento_servico)
+                                {
+                                    <tr>
+
+                                        @Html.HiddenFor(modelItem => item.id_servico)
+                                        @Html.HiddenFor(modelItem => item.tb_servico.id)
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tb_servico.titulo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.anotacao)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.valor)
+                                        </td>
+
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal col-md-9" style="width: 67%">
+                    <div class="col-md-3" style="width: 2%"></div>
+                    <div class="col-md-3" style="width: 96%">
+                        <div class="box-head">
+                            <h2 class="left">Faturas</h2>
+                        </div>
+                        <div class="table">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+
+                                    <th>
+                                        Título
+                                    </th>
+
+                                    <th>
+                                        Banco
+                                    </th>
+                                    <th>
+                                        Pagamento
+                                    </th>
+
+                                    <th>
+                                        Valor
+                                    </th>
+                                    <th>
+                                        Vencimento
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model.tb_fatura)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.titulo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.banco)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.tb_forma_pagamento.descricao)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.valor_inicial)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.data_prevista)
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal col-md-12">
+                <hr />
+                <br><br><br><br>
+            </div>
+
+        </div>
+
+    }
+</div>

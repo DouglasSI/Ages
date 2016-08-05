@@ -1,0 +1,93 @@
+﻿@model Model.tb_compra
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Projetos", "Projetos", "Projeto")
+            <span>&gt;</span>
+            BAIXA POR MATERIAL
+        </a>
+    </div>
+</div>
+<div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal col-md-12 ">
+                <div class="msg msg-ok">
+                    <p><strong>Informe o Valor e anexe os comprovantes!</strong></p>
+                </div>
+                <div class="form-horizontal">
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="width: 15%">
+
+                            @Html.LabelFor(model => model.anotacao, "Observação")
+                        </div>
+                        <div class="col-md-3" style="width: 84%">
+                            @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="width: 15%">
+                            @Html.LabelFor(model => model.data_compra, "Data da Compra")
+                        </div>
+                        <div class="col-md-3" style="width: 30%">
+                            @Html.EditorFor(model => model.data_compra, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                            @Html.ValidationMessageFor(model => model.data_compra, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="control-label col-md-2" style="width: 15%">
+                            @Html.LabelFor(model => model.valor, "Valor")
+                        </div>
+                        <div class="col-md-3" style="width: 20%">
+                            @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0" } })
+                            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-2" style="width: 50%">
+                            @Html.LabelFor(model => model.id_fatura, "Fatura")
+                        </div>
+                        <div class="col-md-3" style="width: 30%">
+                            @Html.LabelFor(model => model.id_fatura, ((Model.tb_fatura)@ViewBag.tb_fatura).valor_pendente.ToString("0.00"), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.id_fatura, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-md-3" style="width: 20%">
+                            <input value="Incluir" class=" btn btn-block" type="submit" id="button" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+        <div class="form-horizontal" style="padding-bottom:inherit">
+            <div class=" form-horizontal col-md-12">
+                <hr />
+                <div class="form-horizontal col-md-3" style="width: 99%; background-color:rgba(251, 251, 251, 0.75)">
+
+                    @{Html.RenderPartial("CreateAnexo");}
+
+                </div>
+
+            </div>
+            <div class="form-horizontal col-md-12">
+                <hr />
+                <br><br><br><br>
+            </div>
+
+        </div>
+    }
+
+
+</div>

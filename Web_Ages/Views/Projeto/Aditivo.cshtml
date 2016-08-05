@@ -1,0 +1,102 @@
+﻿@model Model.tb_fatura
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Projetos", "Projetos", "Projeto")
+            <span>&gt;</span>
+            BAIXA POR MATERIAL
+        </a>
+    </div>
+</div>
+
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        <div class="form-horizontal col-md-12 ">
+            <div class="msg msg-ok">
+                <p><strong>Informe o Valor e anexe os comprovantes!</strong></p>
+            </div>
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.titulo, "Título")
+                    </div>
+                    <div class="col-md-3" style="width: 46%">
+                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_forma_pagamento, "Pagamento")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+
+                        @Html.DropDownList("id_forma_pagamento", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_forma_pagamento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.banco, "Banco")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        @Html.EditorFor(model => model.banco, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.banco, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 10%">
+                        @Html.LabelFor(model => model.agencia, "Agência")
+                    </div>
+                    <div class="col-md-3" style="width: 16%">
+                        @Html.EditorFor(model => model.agencia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.agencia, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.valor_inicial, "Valor")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        @Html.EditorFor(model => model.valor_inicial, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0" } })
+                        @Html.ValidationMessageFor(model => model.valor_inicial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.conta, "Conta")
+                    </div>
+                    <div class="col-md-3" style="width: 16%">
+                        @Html.EditorFor(model => model.conta, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.conta, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="control-label col-md-2" style="width: 30%">
+                        @Html.LabelFor(model => model.data_prevista, "Vencimento")
+                    </div>
+                    <div class="col-md-3" style="width: 35%">
+                        @Html.EditorFor(model => model.data_prevista, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                        @Html.ValidationMessageFor(model => model.data_prevista, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.anotacao, "Observação")
+                    </div>
+                    <div class="col-md-3" style="width: 61%">
+                        @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        <input value="Incluir" class=" btn btn-block" type="submit" id="button" />
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+
+    }
+}

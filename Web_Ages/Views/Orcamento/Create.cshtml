@@ -1,7 +1,6 @@
 ﻿@model Model.tb_orcamento
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
 
-
 <div class="small-nav">
     <div>
         <a href="#">
@@ -14,12 +13,15 @@
     </div>
 </div>
 <div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
-    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+    @if (HttpContext.Current.User.Identity.IsAuthenticated) 
     {
-
         using (Html.BeginForm())
         {
             <div class="form-horizontal col-md-12 ">
+                <div class="msg msg-ok">
+                    <p><strong>Crie um Novo orçamento com Serviços e Faturas!</strong></p>
+                </div>
+                
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.AntiForgeryToken()
@@ -93,19 +95,15 @@
                     </div>
                 </div>
             </div>
-
-
-
             <div class="form-horizontal col-md-12">
-                
+
                 <div class="col-md-3" style="width: 15%"></div>
                 <div class="col-md-3 col-lg-offset-10" style="padding:1px  ; width: 15%">
                     <input type="submit" value="Salvar" class="btn btn-block" name="bt_submit_1" style=" height:56px " />
-                    
-                </div>
-                
-            </div>
 
+                </div>
+
+            </div>
         }
         <div class="form-horizontal" style="padding-bottom:inherit">
             <div class=" form-horizontal col-md-12">
@@ -128,6 +126,5 @@
             </div>
 
         </div>
-
     }
 </div>

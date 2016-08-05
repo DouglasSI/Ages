@@ -134,6 +134,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnexoController.cs" />
     <Compile Include="Controllers\CampiController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\FormaPagamentoController.cs" />
@@ -260,6 +261,12 @@
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.blockUI.js" />
+    <Content Include="Scripts\jquery.form.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.MetaData.js" />
+    <Content Include="Scripts\jquery.MultiFile.js" />
+    <Content Include="Scripts\jquery.MultiFile.pack.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -327,14 +334,29 @@
     <Content Include="Views\Orcamento\ListaServicosOrcamento.cshtml" />
     <Content Include="Views\Orcamento\CreateFatura.cshtml" />
     <Content Include="Views\Orcamento\ListarFaturas.cshtml" />
+    <Content Include="Views\Projeto\DetailsSomenteVisualizar.cshtml" />
+    <Content Include="Views\Projeto\DetailsOrcamentosdoProjeto.cshtml" />
+    <Content Include="Views\Projeto\DetailsFaturasServicos.cshtml" />
+    <Content Include="Views\Projeto\Material.cshtml" />
+    <Content Include="Views\Projeto\Aditivo.cshtml" />
+    <Content Include="Views\Projeto\Autorizar.cshtml" />
+    <Content Include="Views\Anexo\CreateAnexo.cshtml" />
+    <Content Include="Views\Anexo\ListarAnexo.cshtml" />
+    <Content Include="Views\Projeto\ListarAnexos.cshtml" />
+    <Content Include="Views\Projeto\CreateAnexo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="arquivos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{6e38c556-8c7a-4efe-881d-7288d9cd9946}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Servico\Servico.csproj">
       <Project>{005fe776-1e29-4ee0-9827-89c331b72afe}</Project>
       <Name>Servico</Name>

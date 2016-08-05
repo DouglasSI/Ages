@@ -39,11 +39,7 @@
                         <div class="box">
                             <div class="box-head">
                                 <h2 class="left">Propostas Abertas</h2>
-                                <div class="right">
-                                    <label>Escolha um Título</label>
-                                    <input type="text" class="field small-field" />
-                                    <input type="submit" class="button" value="Pesquisar" />
-                                </div>
+                                
                             </div>
                             <div class="table">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -100,25 +96,18 @@
                                                 {
                                                     <a href="#" class="ico del">@Html.ActionLink("Excluir", "Delete", new { id = item.id })</a>
                                                     <a href="#" class="ico edit">@Html.ActionLink("Editar", "Edit", new { id = item.id })</a>
+                                                } @if (User.IsInRole("Diretor"))
+                                                {
+                                                    <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "DetailsSomenteVisualizar", new { id = item.id })</a>
+                                                }@if (User.IsInRole("INFRA"))
+                                                {   
+                                                     <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
+                                                
                                                 }
-                                                <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
                                             </td>
                                         </tr>
                                     }
                                 </table>
-                                <!-- Pagging -->
-                                <div class="pagging">
-                                    <div class="left">Exibindo 1-1 de 1</div>
-                                    <div class="right">
-                                        <a href="#">Anterior</a>
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <span>...</span>
-                                        <a href="#">Proximo</a>
-                                        <a href="#">Ver Todos</a>
-                                    </div>
-                                </div>
-                                <!-- End Pagging -->
                             </div>
                         </div>
                     }
@@ -140,11 +129,7 @@
                         <div class="box">
                             <div class="box-head">
                                 <h2 class="left">Propostas com Orçamentos em Análise para Aprovação e Definição</h2>
-                                <div class="right">
-                                    <label>Escolha um Título</label>
-                                    <input type="text" class="field small-field" />
-                                    <input type="submit" class="button" value="Pesquisar" />
-                                </div>
+                              
                             </div>
                             <div class="table">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -202,19 +187,6 @@
                                         </tr>
                                     }
                                 </table>
-                                <!-- Pagging -->
-                                <div class="pagging">
-                                    <div class="left">Exibindo 1-1 de 1</div>
-                                    <div class="right">
-                                        <a href="#">Anterior</a>
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <span>...</span>
-                                        <a href="#">Proximo</a>
-                                        <a href="#">Ver Todos</a>
-                                    </div>
-                                </div>
-                                <!-- End Pagging -->
                             </div>
                         </div>
                     }

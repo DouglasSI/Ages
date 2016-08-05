@@ -19,16 +19,12 @@
                     @if (Model.Any())
                     {
                         <div class="msg msg-ok">
-                            <p><strong>P Abertas só podem ser modificadas pela Direção!</strong></p>
+                            <p><strong>Projetos em Execução!</strong></p>
                         </div>
                         <div class="box">
                             <div class="box-head">
-                                <h2 class="left">Propostas Abertas</h2>
-                                <div class="right">
-                                    <label>Escolha um Título</label>
-                                    <input type="text" class="field small-field" />
-                                    <input type="submit" class="button" value="Pesquisar" />
-                                </div>
+                                <h2 class="left">Projetos</h2>
+                               
                             </div>
                             <div class="table">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -81,28 +77,13 @@
                                             </td>
                                             <td><a href="#">@Html.DisplayFor(modelItem => item.tb_usuario.nome)</a></td>
                                             <td>
-                                                @if (User.IsInRole("Diretor"))
-                                                {
-                                                    <a href="#" class="ico del">@Html.ActionLink("Excluir", "Delete", new { id = item.id })</a>
-                                                    <a href="#" class="ico edit">@Html.ActionLink("Editar", "Edit", new { id = item.id })</a>
-                                                }
-                                                <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
+                                                <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "DetailsOrcamentosdoProjeto", new { id = item.id })</a>
                                             </td>
                                         </tr>
                                     }
                                 </table>
                                 <!-- Pagging -->
-                                <div class="pagging">
-                                    <div class="left">Exibindo 1-1 de 1</div>
-                                    <div class="right">
-                                        <a href="#">Anterior</a>
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <span>...</span>
-                                        <a href="#">Proximo</a>
-                                        <a href="#">Ver Todos</a>
-                                    </div>
-                                </div>
+                               
                                 <!-- End Pagging -->
                             </div>
                         </div>
@@ -110,24 +91,20 @@
                     else
                     {
                         <div class="msg msg-ok">
-                            <p><strong>Não Existe Propostas Abertas Cadastradas!</strong></p>
+                            <p><strong>Não Existe Projetos em Execução!</strong></p>
                         </div>
                     }
                     @if (((List<Model.tb_projeto>)ViewBag.Finalizado).Count > 0)
                     {
-                        <div class="msg msg-error">
+                        <div class="msg msg-ok">
 
-                            <p><strong>As propostas em Analise estão aguardando a aprovação dos Orçamentos!</strong></p>
+                            <p><strong>Projetos Finalizados!</strong></p>
 
                         </div>
                         <div class="box">
                             <div class="box-head">
-                                <h2 class="left">Propostas com Orçamentos em Análise para Aprovação e Definição</h2>
-                                <div class="right">
-                                    <label>Escolha um Título</label>
-                                    <input type="text" class="field small-field" />
-                                    <input type="submit" class="button" value="Pesquisar" />
-                                </div>
+                                <h2 class="left">Projetos Finalizados</h2>
+                                
                             </div>
                             <div class="table">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -157,7 +134,7 @@
                                         <th class="ac">Ações Disponiveis</th>
                                     </tr>
 
-                                    @foreach (var item in (List<Model.tb_projeto>)ViewBag.Analise)
+                                    @foreach (var item in (List<Model.tb_projeto>)ViewBag.Finalizados)
                                     {
                                         <tr>
 
@@ -180,35 +157,16 @@
                                             </td>
                                             <td><a href="#">@Html.DisplayFor(modelItem => item.tb_usuario.nome)</a></td>
                                             <td>
-                                                <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
+                                                <a href="#" class="ico edit">@Html.ActionLink("??", "??", new { id = item.id })</a>
                                             </td>
                                         </tr>
                                     }
                                 </table>
-                                <!-- Pagging -->
-                                <div class="pagging">
-                                    <div class="left">Exibindo 1-1 de 1</div>
-                                    <div class="right">
-                                        <a href="#">Anterior</a>
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <span>...</span>
-                                        <a href="#">Proximo</a>
-                                        <a href="#">Ver Todos</a>
-                                    </div>
-                                </div>
-                                <!-- End Pagging -->
+                               
                             </div>
                         </div>
                     }
-                    else
-                    {
-                        <div class="msg msg-error">
-
-                            <p><strong>Não Existe Propostas em Analise Cadastradas!</strong></p>
-
-                        </div>
-                    }
+                    
                     <!-- End Box -->
                 </div>
             </div>

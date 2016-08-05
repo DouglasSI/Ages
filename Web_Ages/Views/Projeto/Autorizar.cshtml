@@ -1,0 +1,106 @@
+﻿@model Model.tb_fatura
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Projetos", "Projetos", "Projeto")
+            <span>&gt;</span>
+            BAIXA POR MATERIAL
+        </a>
+    </div>
+</div>
+
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(Model => Model.id)
+        <div class="form-horizontal col-md-12 ">
+            <div class="msg msg-ok">
+                <p><strong>Informe o Valor e anexe os comprovantes!</strong></p>
+            </div>
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.titulo, "Título")
+                    </div>
+                    <div class="col-md-3" style="width: 46%">
+
+                        @Html.LabelFor(Model => Model.titulo, ((Model.tb_fatura)@ViewBag.tb_fatura).titulo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_forma_pagamento, "Pagamento")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        @Html.LabelFor(model => model.tb_forma_pagamento.descricao, ((Model.tb_fatura)@ViewBag.tb_fatura).tb_forma_pagamento.descricao, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.id_forma_pagamento, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.banco, "Banco")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        @Html.LabelFor(model => model.banco, ((Model.tb_fatura)@ViewBag.tb_fatura).banco, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.banco, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 10%">
+                        @Html.LabelFor(model => model.agencia, "Agência")
+                    </div>
+                    <div class="col-md-3" style="width: 16%">
+                        @Html.LabelFor(model => model.agencia, ((Model.tb_fatura)@ViewBag.tb_fatura).agencia, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.agencia, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.valor_inicial, "Valor")
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        @Html.LabelFor(model => model.valor_inicial, ((Model.tb_fatura)@ViewBag.tb_fatura).valor_inicial.ToString("0.00"), new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.valor_inicial, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.conta, "Conta")
+                    </div>
+                    <div class="col-md-3" style="width: 16%">
+                        @Html.LabelFor(model => model.conta, ((Model.tb_fatura)@ViewBag.tb_fatura).conta, new { @class = "form-control" })
+
+                        @Html.ValidationMessageFor(model => model.conta, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="control-label col-md-2" style="width: 30%">
+                        @Html.LabelFor(model => model.data_prevista, "Vencimento")
+                    </div>
+                    <div class="col-md-3" style="width: 35%">
+                        @Html.LabelFor(model => model.data_prevista,
+                        ((Model.tb_fatura)@ViewBag.tb_fatura).data_prevista.ToString(),
+                        new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(model => model.data_prevista, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="width: 17%">
+                        @Html.LabelFor(model => model.anotacao, "Observação")
+                    </div>
+                    <div class="col-md-3" style="width: 61%">
+                        @Html.LabelFor(model => model.anotacao, ((Model.tb_fatura)@ViewBag.tb_fatura).anotacao, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3" style="width: 20%">
+                        <input value="Autorizar Pagamento" class=" btn btn-block" type="submit" id="button" />
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    }
+}

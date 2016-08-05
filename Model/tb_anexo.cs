@@ -19,6 +19,9 @@ namespace Model
         public string titulo { get; set; }
         public string anotacao { get; set; }
         public System.DateTimeOffset data_cadastro { get; set; }
+        public int tamanho { get; set; }
+        public string tipo { get; set; }
+        public string caminho { get; set; }
     
         public virtual tb_usuario tb_usuario { get; set; }
     }

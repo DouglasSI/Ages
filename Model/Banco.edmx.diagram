@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="db_agesModel.tb_contato" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_empresa" Width="1.5" PointX="9.375" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_endereco" Width="1.5" PointX="6.375" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_fatura" Width="1.5" PointX="10.75" PointY="5" IsExpanded="false" />
+        <EntityTypeShape EntityType="db_agesModel.tb_fatura" Width="1.5" PointX="10.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="db_agesModel.tb_forma_pagamento" Width="1.5" PointX="11.5" PointY="6" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_funcao" Width="1.5" PointX="7.625" PointY="6" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_orcamento" Width="1.5" PointX="10.375" PointY="4.125" IsExpanded="false" />
@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="db_agesModel.tb_servico" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_status_orcamento" Width="1.5" PointX="11.625" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_status_projeto" Width="1.5" PointX="8.75" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_usuario" Width="1.5" PointX="8.625" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_usuario" Width="1.5" PointX="8.625" PointY="5" IsExpanded="false" />
         <AssociationConnector Association="db_agesModel.fk_usuario_anexo" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_campi_projeto" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_contato_campi" ManuallyRouted="false" />
@@ -36,7 +36,20 @@
         <AssociationConnector Association="db_agesModel.fk_projeto_orcamento" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_status_orcamento" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_usuario_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_os_servico" ManuallyRouted="false" />
+        <AssociationConnector Association="db_agesModel.fk_os_servico" ManuallyRouted="true" >
+          <ConnectorPoint PointX="8.25" PointY="7.0027493372395835" />
+          <ConnectorPoint PointX="7.875" PointY="7.0027493372395835" />
+          <ConnectorPoint PointX="7.875" PointY="4.7360074751209016" />
+          <ConnectorPoint PointX="8.2116760105677926" PointY="4.7360074751209007" />
+          <ConnectorPoint PointX="8.37834267723446" PointY="4.7360074751209016" />
+          <ConnectorPoint PointX="10.18061010081356" PointY="4.7360074751209007" />
+          <ConnectorPoint PointX="10.347276767480228" PointY="4.7360074751209016" />
+          <ConnectorPoint PointX="11.229166666666666" PointY="4.7360074751209007" />
+          <ConnectorPoint PointX="11.395833333333334" PointY="4.7360074751209016" />
+          <ConnectorPoint PointX="12.5" PointY="4.7360074751209016" />
+          <ConnectorPoint PointX="12.5" PointY="6.2" />
+          <ConnectorPoint PointX="13.25" PointY="6.2" />
+        </AssociationConnector>
         <AssociationConnector Association="db_agesModel.fk_ps_projeto" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_status_projeto" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_usuario_projeto" ManuallyRouted="false" />

@@ -1,55 +1,50 @@
-﻿@model List<Model.tb_fatura>
+﻿@model List<Model.tb_anexo>
 
 <div class="col-md-3" style="width: 2%"></div>
 <div class="col-md-3" style="width: 96%">
     <div class="box-head">
-        <h2 class="left">Faturas Cadastradas</h2>
+        <h2 class="left">Itens Anexados</h2>
     </div>
     <div class="table">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-
                 <th>
                     Título
                 </th>
-
                 <th>
-                    Banco
+                    Anotação
                 </th>
                 <th>
-                    Pagamento
-                </th>
-
-                <th>
-                    Valor
+                    Criado em
                 </th>
                 <th>
-                    Vencimento
+                    Baixar
+                </th>
+                <th>
+                    Excluir
                 </th>
                 <th class="ac">Remover</th>
             </tr>
-            @foreach (var item in (List<Model.tb_fatura>)@ViewBag.tb_fatura)
+            @foreach (var item in (List<Model.tb_anexo>)@ViewBag.tb_anexo)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.titulo)
-                    </td>                   
-                    <td>
-                        @Html.DisplayFor(modelItem => item.banco)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.tb_forma_pagamento.descricao)
+                        @Html.DisplayFor(modelItem => item.anotacao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.valor_inicial)
+                        @Html.DisplayFor(modelItem => item.data_cadastro)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.data_prevista)
+                        Download/Visualizar
                     </td>
+                    
                     <td>
                         @if (User.IsInRole("Infra"))
                         {
-                            <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverFatura", new { id = item.id })</a>
+                            <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverAnexo", new { id = item.id })</a>
                         }
                     </td>
                 </tr>

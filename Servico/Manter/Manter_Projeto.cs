@@ -45,11 +45,47 @@ namespace Servico.Manter
             entidade.tb_projeto.Add(objeto);
             entidade.SaveChanges();
         }
+        public void editarStatus(tb_projeto proj, int id_status)
+        {
+
+            using (Entities context = new Entities())
+            {
+                tb_projeto pr = new tb_projeto()
+                {
+                    id = proj.id,
+                    id_status = id_status,
+                    id_campi = proj.id_campi,
+                    id_usuario = proj.id_usuario,
+                    titulo = proj.titulo,
+                    valor_estimado = proj.valor_estimado,
+                    anotacao = proj.anotacao,
+                   
+                };
+                context.tb_projeto.Attach(pr);
+                var entry = context.Entry(pr);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
+
+        }
+     
         public void editar(tb_projeto objeto)
         {
             entidade = new Entities();
             entidade.tb_projeto.Attach(objeto);
             var entry = entidade.Entry(objeto);
+            entry.State = System.Data.Entity.EntityState.Modified;
+            entidade.SaveChanges();
+        }
+        public void editarStatus(int id_projeto, int id_status)
+        {
+            tb_projeto p = obterProjeto(id_projeto);
+            p.id_status = id_status;
+
+            entidade = new Entities();
+            entidade.tb_projeto.Attach(p);
+            var entry = entidade.Entry(p);
             entry.State = System.Data.Entity.EntityState.Modified;
             entidade.SaveChanges();
         }

@@ -16,6 +16,9 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="anotacao" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
+          <Property Name="tamanho" Type="int4" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="caminho" Type="varchar" MaxLength="8000" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_campi">
           <Key>
@@ -102,6 +105,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="valor_inicial" Type="numeric" Precision="10" Scale="4" Nullable="false" />
           <Property Name="valor_pendente" Type="numeric" Precision="10" Scale="4" Nullable="false" />
           <Property Name="is_aditivo" Type="bool" Nullable="false" />
+          <Property Name="autorizado" Type="bool" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
@@ -673,6 +677,9 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="data_cadastro" Type="DateTimeOffset" Precision="7" Nullable="false" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_anexo" FromRole="tb_anexo" ToRole="tb_usuario" />
+          <Property Name="tamanho" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="caminho" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tb_campi">
           <Key>
@@ -777,6 +784,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_forma_pagamento" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_fatura" ToRole="tb_forma_pagamento" />
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_orcamento_fatura" FromRole="tb_fatura" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_fatura" FromRole="tb_fatura" ToRole="tb_usuario" />
+          <Property Name="autorizado" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
@@ -1374,6 +1382,9 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySetMapping Name="tb_anexo">
             <EntityTypeMapping TypeName="db_agesModel.tb_anexo">
               <MappingFragment StoreEntitySet="tb_anexo">
+                <ScalarProperty Name="caminho" ColumnName="caminho" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="tamanho" ColumnName="tamanho" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="titulo" ColumnName="titulo" />
@@ -1456,6 +1467,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySetMapping Name="tb_fatura">
             <EntityTypeMapping TypeName="db_agesModel.tb_fatura">
               <MappingFragment StoreEntitySet="tb_fatura">
+                <ScalarProperty Name="autorizado" ColumnName="autorizado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_forma_pagamento" ColumnName="id_forma_pagamento" />
