@@ -1,4 +1,4 @@
-﻿@model List<Model.tb_anexo>
+﻿@model List<Web_Ages.Models.ViewModel>
 
 <div class="col-md-3" style="width: 2%"></div>
 <div class="col-md-3" style="width: 96%">
@@ -20,30 +20,23 @@
                 <th>
                     Baixar
                 </th>
-                <th>
-                    Excluir
-                </th>
                 <th class="ac">Remover</th>
             </tr>
-            @foreach (var item in (List<Model.tb_anexo>)@ViewBag.tb_anexo)
+            @foreach (var item in (List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)
             {
+
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.titulo)
+                        @Html.DisplayFor(modelItem => item.tb_anexo.titulo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.anotacao)
+                        @Html.DisplayFor(modelItem => item.tb_anexo.anotacao)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.data_cadastro)
+                        @Html.DisplayFor(modelItem => item.tb_anexo.data_cadastro)
                     </td>
                     <td>
                         Download/Visualizar
-                    </td>
-
-                    <td>
-                     
-    
                     </td>
                 </tr>
             }

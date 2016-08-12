@@ -149,7 +149,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\TempAnexo.cs" />
+    <Compile Include="Models\testemodel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-3.3.6-dist\css\bootstrap-theme.css" />
@@ -344,6 +350,8 @@
     <Content Include="Views\Anexo\ListarAnexo.cshtml" />
     <Content Include="Views\Projeto\ListarAnexos.cshtml" />
     <Content Include="Views\Projeto\CreateAnexo.cshtml" />
+    <Content Include="UploadHandler.ashx" />
+    <Content Include="Views\Projeto\CreateAloneAnexo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

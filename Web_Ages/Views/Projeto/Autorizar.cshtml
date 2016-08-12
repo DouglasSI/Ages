@@ -11,20 +11,19 @@
         </a>
     </div>
 </div>
-
-@if (HttpContext.Current.User.Identity.IsAuthenticated)
-{
-    using (Html.BeginForm())
+<div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        @Html.HiddenFor(Model => Model.id)
         <div class="form-horizontal col-md-12 ">
-            <div class="msg msg-ok">
-                <p><strong>Informe o Valor e anexe os comprovantes!</strong></p>
-            </div>
-            <div class="form-horizontal">
-                <hr />
+            @using (Html.BeginForm())
+            {
+                <div class="msg msg-ok">
+                    <p><strong>Informe o Valor e anexe os comprovantes!</strong></p>
+                </div>
+               
+                @Html.HiddenFor(Model => Model.id)
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                
+                @Html.AntiForgeryToken()
                 <div class="form-group">
                     <div class="control-label col-md-2" style="width: 17%">
                         @Html.LabelFor(model => model.titulo, "Título")
@@ -43,7 +42,6 @@
 
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="control-label col-md-2" style="width: 17%">
                         @Html.LabelFor(model => model.banco, "Banco")
@@ -96,11 +94,19 @@
                         @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-3" style="width: 20%">
+                        <input name="fatura" type="hidden" value="Model.id">
                         <input value="Autorizar Pagamento" class=" btn btn-block" type="submit" id="button" />
                     </div>
-                    
+
+                </div>
+            }
+            <div class="form-group">
+                <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                    @{Html.RenderPartial("CreateAnexo");}
                 </div>
             </div>
+            <hr />
         </div>
     }
-}
+</div>
+<div class="form-horizontal col-md-12">.</div>

@@ -106,37 +106,20 @@ namespace Web_Ages.Controllers
                     Servico.Manter_ m = new Servico.Manter_();
                     tb_orcamento.id_usuario = userr.id;
                     tb_orcamento.id_status = 1;
-
-
                     tb_orcamento.tb_orcamento_servico = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
                     tb_orcamento.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
-
                     m.PersistirGrupo(tb_orcamento);
-
-
-
                     return RedirectToAction("Details", "Projeto", new { id = tb_orcamento.id_projeto });
-
-                    //return RedirectToAction("Listar","Projeto");
-
                 }
-
             }
             return View(tb_orcamento);
-
         }
 
         public ActionResult CreateServico()
         {
 
             ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
-
-
             return PartialView();
-            //    return Json(@ViewBag.tb_orcamento_servico, JsonRequestBehavior.AllowGet);
-
-            //  return PartialView("CreateServico", @ViewBag.tb_orcamento_servico);
-            //return Json(@ViewBag.tb_orcamento_servico, JsonRequestBehavior.AllowGet);
         }
         public ActionResult CreateFatura()
         {

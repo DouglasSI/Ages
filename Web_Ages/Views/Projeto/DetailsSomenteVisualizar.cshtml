@@ -15,47 +15,106 @@
 {
     <div class="form-horizontal col-md-12">
         <div class="form-group">
-
-            <div class="control-label col-md-2">
+            <div class="control-label col-md-2" style="width: 15%">
                 @Html.LabelFor(model => model.titulo, "Proposta :")
             </div>
-            <div class="col-md-5">
+            <div class="col-md-3" style="width: 50%">
                 @Html.Label(Model.titulo, new { @class = "form-control" })
             </div>
-            <div class="control-label col-md-1">
-                @Html.LabelFor(model => model.anotacao, "Anotação :")
-            </div>
-            <div class="col-md-4">
-                @Html.Label(Model.anotacao, new { @class = "form-control" })
-            </div>
-            <div class="control-label col-md-2">
-                @Html.LabelFor(model => model.tb_usuario.nome, "Criado por")
-            </div>
-            <div class="col-md-4">
-                @Html.Label(Model.tb_usuario.nome, new { @class = "form-control" })
-            </div>
-
-            <div class="control-label col-md-4">
+            <div class="control-label col-md-2" style="width: 15%">
                 @Html.LabelFor(model => model.valor_estimado, "Valor Estimado :")
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3" style="width: 20%">
                 @Html.Label(Model.valor_estimado.ToString("0.00"), new { @class = "form-control" })
             </div>
-
-            <div class="control-label col-md-2">
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2" style="width: 15%">
+                @Html.LabelFor(model => model.anotacao, "Anotação :")
+            </div>
+            <div class="col-md-3" style="width: 50%">
+                @Html.Label(Model.anotacao, new { @class = "form-control" })
+            </div>
+            <div class="control-label col-md-2" style="width: 15%">
+                @Html.LabelFor(model => model.tb_usuario.nome, "Criado por")
+            </div>
+            <div class="col-md-3" style="width: 20%">
+                @Html.Label(Model.tb_usuario.nome, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-2" style="width: 15%">
                 @Html.LabelFor(model => model.tb_campi.tb_mantenedora.nome_fantasia, "Mantenedora :")
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="width: 35%">
                 @Html.Label(Model.tb_campi.tb_mantenedora.nome_fantasia, new { @class = "form-control" })
             </div>
-            <div class="control-label col-md-2">
+            <div class="control-label col-md-2" style="width: 15%">
                 @Html.LabelFor(model => model.tb_campi.nome_fantasia, "Campi :")
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3" style="width: 35%">
                 @Html.Label(Model.tb_campi.nome_fantasia, new { @class = "form-control" })
             </div>
-
         </div>
         <hr />
+        @using (Html.BeginForm())
+        {
+            Html.AntiForgeryToken();
+            <div class="form-group" style="background-color:white">
+                <div class="col-md-3" style="width: 2%"></div>
+                <div class="form-actions no-color">
+                    <input name="proposta" type="hidden" value=@Model.id>
+                    <input type="submit" name="anexo" value="Adicionar Anexo"
+                           class="btn btn-default" style="background-color:rgb(255, 255, 255)" />
+
+                </div>
+            </div>
+        }
+       
+    </div>
+    <div class="form-horizontal col-md-12">
+        <div class="form-group" id="foda2">
+            <div class="col-md-3" style="width: 100%">
+                <div class="box-head">
+                    <h2 class="left">Itens Anexados</h2>
+                </div>
+                <div class="table">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>
+                                Título
+                            </th>
+                            <th>
+                                Anotação
+                            </th>
+                            <th>
+                                Criado em
+                            </th>
+                            <th>
+                                Baixar
+                            </th>
+                            <th class="ac">Remover</th>
+                        </tr>
+                        @foreach (var item in (List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_anexo.titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_anexo.anotacao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tb_anexo.data_cadastro)
+                                </td>
+                                <td>
+                                    Download/Visualizar
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 }

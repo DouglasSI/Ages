@@ -102,29 +102,57 @@ namespace Servico
 
             }
         }
-        public void PersistirCompra( tb_compra compra)
+        public int PersistirCompra( tb_compra compra)
         {
             using (Entities context = new Entities())
             {
-
-                context.tb_compra.Add(new tb_compra() {
-                anotacao = compra.anotacao,
-                data_compra = compra.data_compra,
-                 id_fatura = compra.id_fatura,
-                 valor = compra.valor
-                });
-                context.SaveChanges();
                 tb_fatura fat = context.tb_fatura.Where(f => f.id.Equals(compra.id_fatura)).FirstOrDefault();
-                 fat . valor_pendente = compra.tb_fatura.valor_pendente;
-
+                if (fat.valor_pendente < compra.valor)
+                    return -1;
+                context.tb_compra.Add(compra);
+                context.SaveChanges();
+                fat.valor_pendente -= compra.valor;
                 context.tb_fatura.Attach(fat);
                 var entry = context.Entry(fat);
                 entry.State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
+                return compra.id;
+            }
+        }
+        public enum tipo { fatura, orcamento, projeto, compra,empresa };
+        public tb_anexo PersistirAnexo(tb_anexo anexo, tipo N, int id)
+        {
 
+            using (Entities contexts = new Entities())
+            {
+                tb_anexo anex = new tb_anexo() 
+                {  
+                   id_usuario = anexo.id_usuario,
+                   anotacao = "observação",
+                   titulo = anexo.titulo,
+                   data_cadastro = anexo.data_cadastro,
+                   tipo = anexo.tipo,
+                   tamanho = anexo.tamanho,
+                   caminho = anexo.caminho,
+                   nome_arquivo=anexo.nome_arquivo,
+                   url = "url",
+                };
+                
+                contexts.tb_anexo.Add(anex);
+                contexts.SaveChanges();
+                return contexts.tb_anexo.FirstOrDefault();            
+            };
+            switch (N)
+            {
+                case tipo.compra:
+                    {
+                        
 
+                    } break;
 
             }
+
+
         }
         public Manter_Orcamento_Servico M_Orcamento_Servico(){
 

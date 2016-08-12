@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0007ffab37304fdd9e36690df07f596d" Name="Diagram1" ZoomLevel="91">
-        <EntityTypeShape EntityType="db_agesModel.tb_anexo" Width="1.5" PointX="9.75" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo" Width="2" PointX="9.625" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="db_agesModel.tb_campi" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_contato" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="false" />
         <EntityTypeShape EntityType="db_agesModel.tb_empresa" Width="1.5" PointX="9.375" PointY="2.25" IsExpanded="false" />
@@ -37,18 +37,16 @@
         <AssociationConnector Association="db_agesModel.fk_status_orcamento" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_usuario_orcamento" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_os_servico" ManuallyRouted="true" >
-          <ConnectorPoint PointX="8.25" PointY="7.0027493372395835" />
-          <ConnectorPoint PointX="7.875" PointY="7.0027493372395835" />
-          <ConnectorPoint PointX="7.875" PointY="4.7360074751209016" />
-          <ConnectorPoint PointX="8.2116760105677926" PointY="4.7360074751209007" />
-          <ConnectorPoint PointX="8.37834267723446" PointY="4.7360074751209016" />
-          <ConnectorPoint PointX="10.18061010081356" PointY="4.7360074751209007" />
-          <ConnectorPoint PointX="10.347276767480228" PointY="4.7360074751209016" />
-          <ConnectorPoint PointX="11.229166666666666" PointY="4.7360074751209007" />
-          <ConnectorPoint PointX="11.395833333333334" PointY="4.7360074751209016" />
-          <ConnectorPoint PointX="12.5" PointY="4.7360074751209016" />
-          <ConnectorPoint PointX="12.5" PointY="6.2" />
-          <ConnectorPoint PointX="13.25" PointY="6.2" />
+          <ConnectorPoint PointX="9.3229719497879131" PointY="7.15" />
+          <ConnectorPoint PointX="7.875" PointY="10.198797879166669" />
+          <ConnectorPoint PointX="7.875" PointY="7.3760074751209039" />
+          <ConnectorPoint PointX="9.13230041386212" PointY="7.376007475120903" />
+          <ConnectorPoint PointX="9.2989670805287883" PointY="7.3760074751209039" />
+          <ConnectorPoint PointX="10.416666666666666" PointY="7.376007475120903" />
+          <ConnectorPoint PointX="10.583333333333334" PointY="7.3760074751209039" />
+          <ConnectorPoint PointX="12.5" PointY="7.3760074751209039" />
+          <ConnectorPoint PointX="12.5" PointY="9.2800000000000029" />
+          <ConnectorPoint PointX="14.24342412451362" PointY="6.4" />
         </AssociationConnector>
         <AssociationConnector Association="db_agesModel.fk_ps_projeto" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.fk_status_projeto" ManuallyRouted="false" />
@@ -61,6 +59,11 @@
         <AssociationConnector Association="db_agesModel.fk_endereco_mantenedora" />
         <EntityTypeShape EntityType="db_agesModel.tb_compra" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="false" />
         <AssociationConnector Association="db_agesModel.fk_fatura_compra" />
+        <AssociationConnector Association="db_agesModel.tb_anexo_compra" />
+        <AssociationConnector Association="db_agesModel.tb_anexo_empresa" />
+        <AssociationConnector Association="db_agesModel.tb_anexo_fatura" />
+        <AssociationConnector Association="db_agesModel.tb_anexo_orcamento" />
+        <AssociationConnector Association="db_agesModel.tb_anexo_projeto" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

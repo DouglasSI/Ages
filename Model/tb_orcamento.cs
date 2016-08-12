@@ -18,6 +18,7 @@ namespace Model
         {
             this.tb_fatura = new HashSet<tb_fatura>();
             this.tb_orcamento_servico = new HashSet<tb_orcamento_servico>();
+            this.tb_anexo = new HashSet<tb_anexo>();
         }
     
         public int id { get; set; }
@@ -34,5 +35,6 @@ namespace Model
         public virtual tb_projeto tb_projeto { get; set; }
         public virtual tb_status_orcamento tb_status_orcamento { get; set; }
         public virtual tb_usuario tb_usuario { get; set; }
+        public virtual ICollection<tb_anexo> tb_anexo { get; set; }
     }
 }

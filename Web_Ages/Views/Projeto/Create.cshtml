@@ -12,72 +12,85 @@
         </a>
     </div>
 </div>
-<div class="msg msg-ok">
-    <p><strong>Você está criando uma Proposta de Projeto!</strong></p>
-</div>
-<hr />
-    <!-- Main -->
+<div class=" form-horizontal col-md-12">
+    <div class="msg msg-ok">
+        <p><strong>Você está criando uma Proposta de Projeto!</strong></p>
+    </div>
+    <hr />
+
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         using (Html.BeginForm())
         {
             Html.AntiForgeryToken();
-            <div class="form-horizontal">
-               
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-horizontal col-md-12 ">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.id_usuario, "Responsável", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_usuario, "Responsável")
+                    </div>
+                    <div class="col-md-3" style="width: 35%">
                         @Html.DropDownList("id_usuario", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
                         @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.id_status, "Situação", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_status, "Situação")
+                    </div>
+                    <div class="col-md-3" style="width: 35%">
                         @Html.DropDownList("id_status", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
                         @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.id_campi, "Mantenedora-Campi", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.id_campi, "Mantenedora-Campi")
+                    </div>
+                    <div class="col-md-3" style="width: 35%">
                         @Html.DropDownList("id_campi", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.id_campi, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.titulo, "Nome do Projeto", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.titulo, "Nome do Projeto")
+                    </div>
+                    <div class="col-md-3" style="width: 50%">
                         @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.anotacao, "Observação", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.anotacao, new { col = 5, htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.valor_estimado, "Valor Estimado")
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.valor_estimado, "Valor Estimado", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-3" style="width: 20%">
                         @Html.EditorFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.valor_estimado, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="control-label col-md-2" style="width: 15%">
+                        @Html.LabelFor(model => model.anotacao, "Observação")
+                    </div>
+                    <div class="col-md-3" style="width: 85%">
+                        @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3" style="width: 15%"></div>
+                    <div class="col-md-3 col-lg-offset-9" style="padding:1px ">
                         <input type="submit" value="Salvar Esta Proposta" class="btn btn-block" />
                     </div>
                 </div>
-            </div><br><br><br>
+                <div class="form-group">
+                    <hr />
+                    <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                        @{Html.RenderPartial("CreateAnexo");}
+                    </div>
+                </div>
+                <div class="form-group">.
+                </div>
+            </div>
         }
     }
+</div>

@@ -17,6 +17,7 @@ namespace Model
         public tb_fatura()
         {
             this.tb_compra = new HashSet<tb_compra>();
+            this.tb_anexo = new HashSet<tb_anexo>();
         }
     
         public int id { get; set; }
@@ -40,5 +41,6 @@ namespace Model
         public virtual tb_forma_pagamento tb_forma_pagamento { get; set; }
         public virtual tb_orcamento tb_orcamento { get; set; }
         public virtual tb_usuario tb_usuario { get; set; }
+        public virtual ICollection<tb_anexo> tb_anexo { get; set; }
     }
 }

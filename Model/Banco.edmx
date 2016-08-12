@@ -5,8 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="db_agesModel.Store" Provider="Npgsql" ProviderManifestToken="9.2.4" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6005: The data type 'oid' is currently not supported for the target Entity Framework version; the column 'arquivo' in the table 'db_ages.public.tb_anexo' was excluded.-->
         <EntityType Name="tb_anexo">
           <Key>
             <PropertyRef Name="id" />
@@ -14,11 +12,53 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int4" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="anotacao" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="anotacao" Type="varchar" MaxLength="1000" />
           <Property Name="data_cadastro" Type="timestamptz" Precision="7" Nullable="false" />
           <Property Name="tamanho" Type="int4" Nullable="false" />
           <Property Name="tipo" Type="varchar" MaxLength="8000" Nullable="false" />
           <Property Name="caminho" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="nome_arquivo" Type="varchar" MaxLength="1000" />
+          <Property Name="url" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="tb_anexo_compra">
+          <Key>
+            <PropertyRef Name="id_anexo" />
+            <PropertyRef Name="id_compra" />
+          </Key>
+          <Property Name="id_anexo" Type="int4" Nullable="false" />
+          <Property Name="id_compra" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_anexo_empresa">
+          <Key>
+            <PropertyRef Name="id_anexo" />
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_anexo" Type="int4" Nullable="false" />
+          <Property Name="id_empresa" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_anexo_fatura">
+          <Key>
+            <PropertyRef Name="id_anexo" />
+            <PropertyRef Name="id_fatura" />
+          </Key>
+          <Property Name="id_anexo" Type="int4" Nullable="false" />
+          <Property Name="id_fatura" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_anexo_orcamento">
+          <Key>
+            <PropertyRef Name="id_anexo" />
+            <PropertyRef Name="id_orcamento" />
+          </Key>
+          <Property Name="id_anexo" Type="int4" Nullable="false" />
+          <Property Name="id_orcamento" Type="int4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tb_anexo_projeto">
+          <Key>
+            <PropertyRef Name="id_anexo" />
+            <PropertyRef Name="id_projeto" />
+          </Key>
+          <Property Name="id_anexo" Type="int4" Nullable="false" />
+          <Property Name="id_projeto" Type="int4" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_campi">
           <Key>
@@ -243,6 +283,126 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="perfil" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="sobrenome" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="fk_ac_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_compra" Type="Self.tb_anexo_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_compra">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ac_2">
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="1" />
+          <End Role="tb_anexo_compra" Type="Self.tb_anexo_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_compra">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_compra">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ae_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_empresa" Type="Self.tb_anexo_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_empresa">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ae_2">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_anexo_empresa" Type="Self.tb_anexo_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_empresa">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_af_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_af_2">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ao_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_orcamento" Type="Self.tb_anexo_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_orcamento">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ao_2">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_anexo_orcamento" Type="Self.tb_anexo_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_orcamento">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ap_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_projeto" Type="Self.tb_anexo_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_projeto">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ap_2">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_anexo_projeto" Type="Self.tb_anexo_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_projeto">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_campi_projeto">
           <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
           <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
@@ -545,6 +705,11 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
         </Association>
         <EntityContainer Name="db_agesModelStoreContainer">
           <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_anexo_compra" EntityType="Self.tb_anexo_compra" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_anexo_empresa" EntityType="Self.tb_anexo_empresa" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_anexo_fatura" EntityType="Self.tb_anexo_fatura" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_anexo_orcamento" EntityType="Self.tb_anexo_orcamento" Schema="public" store:Type="Tables" />
+          <EntitySet Name="tb_anexo_projeto" EntityType="Self.tb_anexo_projeto" Schema="public" store:Type="Tables" />
           <EntitySet Name="tb_campi" EntityType="Self.tb_campi" Schema="public" store:Type="Tables" />
           <EntitySet Name="tb_compra" EntityType="Self.tb_compra" Schema="public" store:Type="Tables" />
           <EntitySet Name="tb_contato" EntityType="Self.tb_contato" Schema="public" store:Type="Tables" />
@@ -562,6 +727,46 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" Schema="public" store:Type="Tables" />
           <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" Schema="public" store:Type="Tables" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="public" store:Type="Tables" />
+          <AssociationSet Name="fk_ac_1" Association="Self.fk_ac_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ac_2" Association="Self.fk_ac_2">
+            <End Role="tb_compra" EntitySet="tb_compra" />
+            <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ae_1" Association="Self.fk_ae_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ae_2" Association="Self.fk_ae_2">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_af_1" Association="Self.fk_af_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_af_2" Association="Self.fk_af_2">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ao_1" Association="Self.fk_ao_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ao_2" Association="Self.fk_ao_2">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ap_1" Association="Self.fk_ap_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ap_2" Association="Self.fk_ap_2">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
+          </AssociationSet>
           <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
             <End Role="tb_campi" EntitySet="tb_campi" />
             <End Role="tb_projeto" EntitySet="tb_projeto" />
@@ -680,6 +885,13 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="tamanho" Type="Int32" Nullable="false" />
           <Property Name="tipo" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
           <Property Name="caminho" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_compra" Relationship="db_agesModel.tb_anexo_compra" FromRole="tb_anexo" ToRole="tb_compra" />
+          <Property Name="nome_arquivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tb_empresa" Relationship="db_agesModel.tb_anexo_empresa" FromRole="tb_anexo" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_fatura" Relationship="db_agesModel.tb_anexo_fatura" FromRole="tb_anexo" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_orcamento" Relationship="db_agesModel.tb_anexo_orcamento" FromRole="tb_anexo" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto" Relationship="db_agesModel.tb_anexo_projeto" FromRole="tb_anexo" ToRole="tb_projeto" />
         </EntityType>
         <EntityType Name="tb_campi">
           <Key>
@@ -713,6 +925,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <Property Name="data_compra" Type="DateTimeOffset" Precision="7" />
           <Property Name="valor" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
           <NavigationProperty Name="tb_fatura" Relationship="Self.fk_fatura_compra" FromRole="tb_compra" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_anexo" Relationship="db_agesModel.tb_anexo_compra" FromRole="tb_compra" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_contato">
           <Key>
@@ -744,6 +957,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_empresa" FromRole="tb_empresa" ToRole="tb_contato" />
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_empresa_orcamento" FromRole="tb_empresa" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_empresa" FromRole="tb_empresa" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_anexo" Relationship="db_agesModel.tb_anexo_empresa" FromRole="tb_empresa" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_endereco">
           <Key>
@@ -785,6 +999,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_orcamento_fatura" FromRole="tb_fatura" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_fatura" FromRole="tb_fatura" ToRole="tb_usuario" />
           <Property Name="autorizado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_anexo" Relationship="db_agesModel.tb_anexo_fatura" FromRole="tb_fatura" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
@@ -860,6 +1075,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_projeto" Relationship="Self.fk_projeto_orcamento" FromRole="tb_orcamento" ToRole="tb_projeto" />
           <NavigationProperty Name="tb_status_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_orcamento" ToRole="tb_status_orcamento" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_orcamento" FromRole="tb_orcamento" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_anexo" Relationship="db_agesModel.tb_anexo_orcamento" FromRole="tb_orcamento" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_orcamento_servico">
           <Key>
@@ -890,6 +1106,7 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_projeto" FromRole="tb_projeto" ToRole="tb_projeto_servico" />
           <NavigationProperty Name="tb_status_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_projeto" ToRole="tb_status_projeto" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_projeto" FromRole="tb_projeto" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_anexo" Relationship="db_agesModel.tb_anexo_projeto" FromRole="tb_projeto" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_projeto_servico">
           <Key>
@@ -1372,7 +1589,47 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
             <End Role="tb_usuario" EntitySet="tb_usuario" />
             <End Role="tb_servico" EntitySet="tb_servico" />
           </AssociationSet>
+          <AssociationSet Name="tb_anexo_compra" Association="db_agesModel.tb_anexo_compra">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_empresa" Association="db_agesModel.tb_anexo_empresa">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_fatura" Association="db_agesModel.tb_anexo_fatura">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_orcamento" Association="db_agesModel.tb_anexo_orcamento">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_projeto" Association="db_agesModel.tb_anexo_projeto">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="tb_anexo_compra">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_compra" Role="tb_compra" Multiplicity="*" />
+        </Association>
+        <Association Name="tb_anexo_empresa">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_empresa" Role="tb_empresa" Multiplicity="*" />
+        </Association>
+        <Association Name="tb_anexo_fatura">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_fatura" Role="tb_fatura" Multiplicity="*" />
+        </Association>
+        <Association Name="tb_anexo_orcamento">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_orcamento" Role="tb_orcamento" Multiplicity="*" />
+        </Association>
+        <Association Name="tb_anexo_projeto">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_projeto" Role="tb_projeto" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1382,6 +1639,8 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
           <EntitySetMapping Name="tb_anexo">
             <EntityTypeMapping TypeName="db_agesModel.tb_anexo">
               <MappingFragment StoreEntitySet="tb_anexo">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="nome_arquivo" ColumnName="nome_arquivo" />
                 <ScalarProperty Name="caminho" ColumnName="caminho" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="tamanho" ColumnName="tamanho" />
@@ -1631,6 +1890,46 @@ warning 6005: The data type 'oid' is currently not supported for the target Enti
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="tb_anexo_compra" TypeName="db_agesModel.tb_anexo_compra" StoreEntitySet="tb_anexo_compra">
+            <EndProperty Name="tb_compra">
+              <ScalarProperty Name="id" ColumnName="id_compra" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_empresa" TypeName="db_agesModel.tb_anexo_empresa" StoreEntitySet="tb_anexo_empresa">
+            <EndProperty Name="tb_empresa">
+              <ScalarProperty Name="id" ColumnName="id_empresa" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_fatura" TypeName="db_agesModel.tb_anexo_fatura" StoreEntitySet="tb_anexo_fatura">
+            <EndProperty Name="tb_fatura">
+              <ScalarProperty Name="id" ColumnName="id_fatura" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_orcamento" TypeName="db_agesModel.tb_anexo_orcamento" StoreEntitySet="tb_anexo_orcamento">
+            <EndProperty Name="tb_orcamento">
+              <ScalarProperty Name="id" ColumnName="id_orcamento" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_projeto" TypeName="db_agesModel.tb_anexo_projeto" StoreEntitySet="tb_anexo_projeto">
+            <EndProperty Name="tb_projeto">
+              <ScalarProperty Name="id" ColumnName="id_projeto" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

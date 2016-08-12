@@ -1,6 +1,5 @@
 ﻿@model  Model.tb_orcamento_servico
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
 
 @using (Ajax.BeginForm("CreateServico", "Orcamento", new AjaxOptions { UpdateTargetId = "foda", HttpMethod = "Post" }))
 {

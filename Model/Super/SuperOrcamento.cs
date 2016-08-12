@@ -24,6 +24,8 @@ namespace Model.Super
     {
         
         public static List<tb_anexo> anexos { get; set; }
+
+        
         public static tb_anexo anexo { get; set; }
         public SuperAnexo()
         {

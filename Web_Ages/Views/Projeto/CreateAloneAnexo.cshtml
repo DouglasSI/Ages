@@ -1,0 +1,39 @@
+﻿@model Web_Ages.Models.ViewModel
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+
+
+@using (Html.BeginForm("CreateAloneAnexo", "Projeto", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="form-horizontal col-md-12 ">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="control-label col-md-2" style="width: 2%">
+            </div>
+            <div class="col-md-3" style="width: 81%">
+                <input type='file' id="file" name="file" multiple="multiple" />
+            </div>
+
+            <div class="col-md-3" style="width: 15%">                
+                <input value="Incluir" class=" btn btn-block" type="submit"/>
+            </div>
+            <div class="control-label col-md-2" style="width: 1%">
+            </div>
+        </div>
+    </div>
+}
+<div class="form-horizontal col-md-12 ">
+    <div class="form-group" id="foda2">
+        @Html.Partial("ListarAnexos")
+    </div>
+</div>
+<div class="form-group">
+    <div class="control-label col-md-2" style="width: 84%">
+    </div>
+    <div class="col-md-3" style="width: 15%">
+       @Html.ActionLink("Voltar", "Listar", null, new { @class = "button btn btn-block" })
+    </div>
+</div>
