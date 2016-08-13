@@ -12,14 +12,9 @@ namespace Model
     using System;
     using System.Collections.Generic;
     
-    public partial class tb_orcamento_servico
+    public partial class tb_anexo_compra
     {
-        public int id_orcamento { get; set; }
-        public int id_servico { get; set; }
-        public System.DateTime data_cadastro { get; set; }
-        public decimal valor { get; set; }
-        public string anotacao { get; set; }
-        public virtual tb_orcamento tb_orcamento { get; set; }
-        public virtual tb_servico tb_servico { get; set; }
+        public int id_anexo { get; set; }
+        public int id_compra { get; set; }
     }
 }

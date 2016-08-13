@@ -4,66 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0007ffab37304fdd9e36690df07f596d" Name="Diagram1" ZoomLevel="91">
-        <EntityTypeShape EntityType="db_agesModel.tb_anexo" Width="2" PointX="9.625" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_agesModel.tb_campi" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_contato" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_empresa" Width="1.5" PointX="9.375" PointY="2.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_endereco" Width="1.5" PointX="6.375" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_fatura" Width="1.5" PointX="10.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="db_agesModel.tb_forma_pagamento" Width="1.5" PointX="11.5" PointY="6" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_funcao" Width="1.5" PointX="7.625" PointY="6" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_orcamento" Width="1.5" PointX="10.375" PointY="4.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_orcamento_servico" Width="1.5" PointX="13.25" PointY="6" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_projeto" Width="1.5" PointX="6.375" PointY="4" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_projeto_servico" Width="1.5" PointX="6.375" PointY="5.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_servico" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_status_orcamento" Width="1.5" PointX="11.625" PointY="2.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_status_projeto" Width="1.5" PointX="8.75" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_usuario" Width="1.5" PointX="8.625" PointY="5" IsExpanded="false" />
-        <AssociationConnector Association="db_agesModel.fk_usuario_anexo" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_campi_projeto" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_contato_campi" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_endereco_campi" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_contato_empresa" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_empresa_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_endereco_empresa" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_forma_pagamento_fatura" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_orcamento_fatura" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_usuario_fatura" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_funcao_usuario" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_os_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_projeto_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_status_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_usuario_orcamento" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_os_servico" ManuallyRouted="true" >
-          <ConnectorPoint PointX="9.3229719497879131" PointY="7.15" />
-          <ConnectorPoint PointX="7.875" PointY="10.198797879166669" />
-          <ConnectorPoint PointX="7.875" PointY="7.3760074751209039" />
-          <ConnectorPoint PointX="9.13230041386212" PointY="7.376007475120903" />
-          <ConnectorPoint PointX="9.2989670805287883" PointY="7.3760074751209039" />
-          <ConnectorPoint PointX="10.416666666666666" PointY="7.376007475120903" />
-          <ConnectorPoint PointX="10.583333333333334" PointY="7.3760074751209039" />
-          <ConnectorPoint PointX="12.5" PointY="7.3760074751209039" />
-          <ConnectorPoint PointX="12.5" PointY="9.2800000000000029" />
-          <ConnectorPoint PointX="14.24342412451362" PointY="6.4" />
-        </AssociationConnector>
-        <AssociationConnector Association="db_agesModel.fk_ps_projeto" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_status_projeto" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_usuario_projeto" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_ps_servico" ManuallyRouted="false" />
-        <AssociationConnector Association="db_agesModel.fk_usuario_servico" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="db_agesModel.tb_mantenedora" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="false" />
-        <AssociationConnector Association="db_agesModel.fk_mantenedora_campi" />
-        <AssociationConnector Association="db_agesModel.fk_contato_mantenedora" />
-        <AssociationConnector Association="db_agesModel.fk_endereco_mantenedora" />
-        <EntityTypeShape EntityType="db_agesModel.tb_compra" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="false" />
-        <AssociationConnector Association="db_agesModel.fk_fatura_compra" />
-        <AssociationConnector Association="db_agesModel.tb_anexo_compra" />
-        <AssociationConnector Association="db_agesModel.tb_anexo_empresa" />
-        <AssociationConnector Association="db_agesModel.tb_anexo_fatura" />
-        <AssociationConnector Association="db_agesModel.tb_anexo_orcamento" />
-        <AssociationConnector Association="db_agesModel.tb_anexo_projeto" />
+      <Diagram DiagramId="a3ee5e19325345a4bca0c082d510134a" Name="Diagram1">
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo_compra" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo_empresa" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo_fatura" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo_orcamento" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_anexo_projeto" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_campi" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_compra" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_contato" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_empresa" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_endereco" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_fatura" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_forma_pagamento" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_funcao" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_mantenedora" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_orcamento" Width="1.5" PointX="2.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_orcamento_servico" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_projeto" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_projeto_servico" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_servico" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_status_orcamento" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_status_projeto" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_agesModel.tb_usuario" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
