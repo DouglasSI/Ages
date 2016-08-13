@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_compra
     {
+        public tb_compra()
+        {
+            this.tb_anexo = new HashSet<tb_anexo>();
+        }
+     
         public int id { get; set; }
         public int id_fatura { get; set; }
         public string anotacao { get; set; }
@@ -22,5 +27,6 @@ namespace Model
 
         public virtual tb_fatura tb_fatura { get; set; }
         public virtual ICollection<tb_anexo> tb_anexo { get; set; }
+
     }
 }

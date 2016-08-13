@@ -14,14 +14,23 @@ namespace Model
     
     public partial class tb_contato
     {
+        public tb_contato()
+        {
+            this.tb_campi = new HashSet<tb_campi>();
+            this.tb_empresa = new HashSet<tb_empresa>();
+            this.tb_mantenedora = new HashSet<tb_mantenedora>();
+        }
+     
         public int id { get; set; }
         public string telefone { get; set; }
         public string fax { get; set; }
         public string celular { get; set; }
         public string email { get; set; }
         public string site { get; set; }
+
         public virtual ICollection<tb_campi> tb_campi { get; set; }
         public virtual ICollection<tb_empresa> tb_empresa { get; set; }
         public virtual ICollection<tb_mantenedora> tb_mantenedora { get; set; }
+
     }
 }

@@ -14,6 +14,10 @@ namespace Model
     
     public partial class tb_empresa
     {
+        public tb_empresa()
+        {
+            this.tb_orcamento = new HashSet<tb_orcamento>();
+        }
         public int id { get; set; }
         public int id_endereco { get; set; }
         public int id_contato { get; set; }
@@ -23,6 +27,7 @@ namespace Model
         public string inscricao_estadual { get; set; }
         public string inscricao_municipal { get; set; }
         public string atividade_principal { get; set; }
+
         public virtual tb_contato tb_contato { get; set; }
         public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }
         public virtual tb_endereco tb_endereco { get; set; }

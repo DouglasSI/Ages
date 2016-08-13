@@ -14,6 +14,16 @@ namespace Model
     
     public partial class tb_anexo
     {
+        public tb_anexo()
+        {
+            this.tb_compra = new HashSet<tb_compra>();
+
+            this.tb_projeto = new HashSet<tb_projeto>();
+            this.tb_fatura = new HashSet<tb_fatura>();
+
+            this.tb_empresa = new HashSet<tb_empresa>();
+            this.tb_orcamento = new HashSet<tb_orcamento>();
+        }
         public int id { get; set; }
         public int id_usuario { get; set; }
         public string titulo { get; set; }
@@ -27,5 +37,9 @@ namespace Model
 
         public virtual tb_usuario tb_usuario { get; set; }
         public virtual ICollection<tb_compra> tb_compra { get; set; }
+        public virtual ICollection<tb_fatura> tb_fatura { get; set; }
+        public virtual ICollection<tb_empresa> tb_empresa { get; set; }
+        public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }
+        public virtual ICollection<tb_projeto> tb_projeto { get; set; }
     }
 }

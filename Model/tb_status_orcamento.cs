@@ -14,10 +14,14 @@ namespace Model
     
     public partial class tb_status_orcamento
     {
-        
+        public tb_status_orcamento()
+        {
+            this.tb_orcamento = new HashSet<tb_orcamento>();
+        }
+     
         public int id { get; set; }
         public string descricao { get; set; }
-
         public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }
     }
+
 }

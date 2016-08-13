@@ -11,9 +11,17 @@ namespace Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class tb_usuario
     {
+        public tb_usuario()
+        {
+            this.tb_anexo = new HashSet<tb_anexo>();
+            this.tb_fatura = new HashSet<tb_fatura>();
+            this.tb_orcamento = new HashSet<tb_orcamento>();
+            this.tb_projeto = new HashSet<tb_projeto>();
+            this.tb_servico = new HashSet<tb_servico>();
+        }
         public int id { get; set; }
         public string nome { get; set; }
         public string senha { get; set; }

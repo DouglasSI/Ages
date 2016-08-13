@@ -14,9 +14,12 @@ namespace Model
     
     public partial class tb_status_projeto
     {
+        public tb_status_projeto()
+        {
+            this.tb_projeto = new HashSet<tb_projeto>();
+        }
         public int id { get; set; }
         public string descricao { get; set; }
-
         public virtual ICollection<tb_projeto> tb_projeto { get; set; }
     }
 }

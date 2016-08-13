@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_orcamento
     {
+        public tb_orcamento()
+        {
+            this.tb_fatura = new HashSet<tb_fatura>();
+            this.tb_orcamento_servico = new HashSet<tb_orcamento_servico>();
+        }
         public int id { get; set; }
         public int id_usuario { get; set; }
         public int id_status { get; set; }
@@ -21,7 +26,6 @@ namespace Model
         public int id_projeto { get; set; }
         public decimal valor { get; set; }
         public string anotacao { get; set; }
-
         public virtual tb_empresa tb_empresa { get; set; }
         public virtual ICollection<tb_fatura> tb_fatura { get; set; }
         public virtual ICollection<tb_orcamento_servico> tb_orcamento_servico { get; set; }

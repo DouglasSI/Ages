@@ -14,6 +14,10 @@ namespace Model
     
     public partial class tb_funcao
     {
+        public tb_funcao()
+        {
+            this.tb_usuario = new HashSet<tb_usuario>();
+        }
         public int id { get; set; }
         public string nome { get; set; }
         public virtual ICollection<tb_usuario> tb_usuario { get; set; }

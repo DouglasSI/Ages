@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_forma_pagamento
     {
+        public tb_forma_pagamento()
+        {
+            this.tb_fatura = new HashSet<tb_fatura>();
+        }
+     
         public int id { get; set; }
         public string descricao { get; set; }
         public bool ativo { get; set; }

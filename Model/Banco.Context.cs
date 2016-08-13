@@ -26,11 +26,6 @@ namespace Model
         }
     
         public DbSet<tb_anexo> tb_anexo { get; set; }
-        public DbSet<tb_anexo_compra> tb_anexo_compra { get; set; }
-        public DbSet<tb_anexo_empresa> tb_anexo_empresa { get; set; }
-        public DbSet<tb_anexo_fatura> tb_anexo_fatura { get; set; }
-        public DbSet<tb_anexo_orcamento> tb_anexo_orcamento { get; set; }
-        public DbSet<tb_anexo_projeto> tb_anexo_projeto { get; set; }
         public DbSet<tb_campi> tb_campi { get; set; }
         public DbSet<tb_compra> tb_compra { get; set; }
         public DbSet<tb_contato> tb_contato { get; set; }

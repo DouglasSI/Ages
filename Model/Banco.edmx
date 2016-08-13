@@ -266,7 +266,436 @@
           <Property Name="perfil" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="sobrenome" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="db_agesModelStoreContainer">
+        
+		<Association Name="fk_ac_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_compra" Type="Self.tb_anexo_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_compra">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ac_2">
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="1" />
+          <End Role="tb_anexo_compra" Type="Self.tb_anexo_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_compra">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_compra">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        
+		<Association Name="fk_af_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_af_2">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+		
+		<Association Name="fk_ae_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_empresa" Type="Self.tb_anexo_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_empresa">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ae_2">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_anexo_empresa" Type="Self.tb_anexo_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_empresa">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+		
+		<Association Name="fk_ao_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_orcamento" Type="Self.tb_anexo_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_orcamento">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ao_2">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_anexo_orcamento" Type="Self.tb_anexo_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_orcamento">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+		
+		<Association Name="fk_ap_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_projeto" Type="Self.tb_anexo_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_projeto">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ap_2">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_anexo_projeto" Type="Self.tb_anexo_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_projeto">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+		
+		
+		<Association Name="fk_campi_projeto">
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_campi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_campi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_campi">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_empresa">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_mantenedora">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_orcamento">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_campi">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_empresa">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_mantenedora">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fatura_compra">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_forma_pagamento_fatura">
+          <End Role="tb_forma_pagamento" Type="Self.tb_forma_pagamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_forma_pagamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_forma_pagamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_funcao_usuario">
+          <End Role="tb_funcao" Type="Self.tb_funcao" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mantenedora_campi">
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_mantenedora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_mantenedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orcamento_fatura">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_orcamento">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_projeto_orcamento">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_projeto">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_orcamento">
+          <End Role="tb_status_orcamento" Type="Self.tb_status_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_projeto">
+          <End Role="tb_status_projeto" Type="Self.tb_status_projeto" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_anexo">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_fatura">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_orcamento">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_projeto">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_servico">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_servico">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--  -->
+        <!--  -->
+		<EntityContainer Name="db_agesModelStoreContainer">
           <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_anexo_compra" EntityType="Self.tb_anexo_compra" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_anexo_empresa" EntityType="Self.tb_anexo_empresa" Schema="db_ages" store:Type="Tables" />
@@ -290,6 +719,152 @@
           <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="db_ages" store:Type="Tables" />
+		  
+		  <AssociationSet Name="fk_ac_1" Association="Self.fk_ac_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ac_2" Association="Self.fk_ac_2">
+            <End Role="tb_compra" EntitySet="tb_compra" />
+            <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="fk_af_1" Association="Self.fk_af_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_af_2" Association="Self.fk_af_2">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="fk_ae_1" Association="Self.fk_ae_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ae_2" Association="Self.fk_ae_2">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="fk_ao_1" Association="Self.fk_ao_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ao_2" Association="Self.fk_ao_2">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="fk_ap_1" Association="Self.fk_ap_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ap_2" Association="Self.fk_ap_2">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
+          </AssociationSet>
+		  		  
+          <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
+            <End Role="tb_campi" EntitySet="tb_campi" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_campi" Association="Self.fk_contato_campi">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_empresa" Association="Self.fk_contato_empresa">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_mantenedora" Association="Self.fk_contato_mantenedora">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_orcamento" Association="Self.fk_empresa_orcamento">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_campi" Association="Self.fk_endereco_campi">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_empresa" Association="Self.fk_endereco_empresa">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_mantenedora" Association="Self.fk_endereco_mantenedora">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fatura_compra" Association="Self.fk_fatura_compra">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_forma_pagamento_fatura" Association="Self.fk_forma_pagamento_fatura">
+            <End Role="tb_forma_pagamento" EntitySet="tb_forma_pagamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_funcao_usuario" Association="Self.fk_funcao_usuario">
+            <End Role="tb_funcao" EntitySet="tb_funcao" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mantenedora_campi" Association="Self.fk_mantenedora_campi">
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orcamento_fatura" Association="Self.fk_orcamento_fatura">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_orcamento" Association="Self.fk_os_orcamento">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_servico" Association="Self.fk_os_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_projeto_orcamento" Association="Self.fk_projeto_orcamento">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_projeto" Association="Self.fk_ps_projeto">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_servico" Association="Self.fk_ps_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_orcamento" Association="Self.fk_status_orcamento">
+            <End Role="tb_status_orcamento" EntitySet="tb_status_orcamento" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_projeto" Association="Self.fk_status_projeto">
+            <End Role="tb_status_projeto" EntitySet="tb_status_projeto" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_fatura" Association="Self.fk_usuario_fatura">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_orcamento" Association="Self.fk_usuario_orcamento">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_projeto" Association="Self.fk_usuario_projeto">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_servico" Association="Self.fk_usuario_servico">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_servico" EntitySet="tb_servico" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -311,46 +886,8 @@
           <Property Name="nome_arquivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tb_anexo_compra">
-          <Key>
-            <PropertyRef Name="id_anexo" />
-            <PropertyRef Name="id_compra" />
-          </Key>
-          <Property Name="id_anexo" Type="Int32" Nullable="false" />
-          <Property Name="id_compra" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_anexo_empresa">
-          <Key>
-            <PropertyRef Name="id_anexo" />
-            <PropertyRef Name="id_empresa" />
-          </Key>
-          <Property Name="id_anexo" Type="Int32" Nullable="false" />
-          <Property Name="id_empresa" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_anexo_fatura">
-          <Key>
-            <PropertyRef Name="id_anexo" />
-            <PropertyRef Name="id_fatura" />
-          </Key>
-          <Property Name="id_anexo" Type="Int32" Nullable="false" />
-          <Property Name="id_fatura" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_anexo_orcamento">
-          <Key>
-            <PropertyRef Name="id_anexo" />
-            <PropertyRef Name="id_orcamento" />
-          </Key>
-          <Property Name="id_anexo" Type="Int32" Nullable="false" />
-          <Property Name="id_orcamento" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tb_anexo_projeto">
-          <Key>
-            <PropertyRef Name="id_anexo" />
-            <PropertyRef Name="id_projeto" />
-          </Key>
-          <Property Name="id_anexo" Type="Int32" Nullable="false" />
-          <Property Name="id_projeto" Type="Int32" Nullable="false" />
-        </EntityType>
+
+		
         <EntityType Name="tb_campi">
           <Key>
             <PropertyRef Name="id" />
@@ -557,13 +1094,334 @@
           <Property Name="perfil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
+		<Association Name="fk_usuario_anexo">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_campi_projeto">
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_campi">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_campi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_campi">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_campi">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_mantenedora_campi">
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="1" />
+          <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_mantenedora">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_campi">
+              <PropertyRef Name="id_mantenedora" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_fatura_compra">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_empresa">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_contato_mantenedora">
+          <End Role="tb_contato" Type="Self.tb_contato" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_contato">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_contato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_orcamento">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_empresa">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_empresa">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_endereco_mantenedora">
+          <End Role="tb_endereco" Type="Self.tb_endereco" Multiplicity="1" />
+          <End Role="tb_mantenedora" Type="Self.tb_mantenedora" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_endereco">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_mantenedora">
+              <PropertyRef Name="id_endereco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_forma_pagamento_fatura">
+          <End Role="tb_forma_pagamento" Type="Self.tb_forma_pagamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_forma_pagamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_forma_pagamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orcamento_fatura">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_fatura">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_fatura">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_funcao_usuario">
+          <End Role="tb_funcao" Type="Self.tb_funcao" Multiplicity="1" />
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_funcao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_usuario">
+              <PropertyRef Name="id_funcao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_orcamento">
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_orcamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_projeto_orcamento">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_orcamento">
+          <End Role="tb_status_orcamento" Type="Self.tb_status_orcamento" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_orcamento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_orcamento">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_os_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_orcamento_servico" Type="Self.tb_orcamento_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_orcamento_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_projeto">
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_projeto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_status_projeto">
+          <End Role="tb_status_projeto" Type="Self.tb_status_projeto" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_status_projeto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_projeto">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ps_servico">
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="1" />
+          <End Role="tb_projeto_servico" Type="Self.tb_projeto_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_servico">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_projeto_servico">
+              <PropertyRef Name="id_servico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuario_servico">
+          <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+          <End Role="tb_servico" Type="Self.tb_servico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_servico">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+
+		<Association Name="tb_anexo_compra">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_compra" Role="tb_compra" Multiplicity="*" />
+        </Association>
+		
+		<Association Name="tb_anexo_fatura">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_fatura" Role="tb_fatura" Multiplicity="*" />
+        </Association>
+		
+		<Association Name="tb_anexo_empresa">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_empresa" Role="tb_empresa" Multiplicity="*" />
+        </Association>
+		
+		<Association Name="tb_anexo_orcamento">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_orcamento" Role="tb_orcamento" Multiplicity="*" />
+        </Association>
+		
+		<Association Name="tb_anexo_projeto">
+          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
+          <End Type="db_agesModel.tb_projeto" Role="tb_projeto" Multiplicity="*" />
+        </Association>
+		
         <EntityContainer Name="db_agesEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" />
-          <EntitySet Name="tb_anexo_compra" EntityType="Self.tb_anexo_compra" />
-          <EntitySet Name="tb_anexo_empresa" EntityType="Self.tb_anexo_empresa" />
-          <EntitySet Name="tb_anexo_fatura" EntityType="Self.tb_anexo_fatura" />
-          <EntitySet Name="tb_anexo_orcamento" EntityType="Self.tb_anexo_orcamento" />
-          <EntitySet Name="tb_anexo_projeto" EntityType="Self.tb_anexo_projeto" />
+          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" />          
           <EntitySet Name="tb_campi" EntityType="Self.tb_campi" />
           <EntitySet Name="tb_compra" EntityType="Self.tb_compra" />
           <EntitySet Name="tb_contato" EntityType="Self.tb_contato" />
@@ -581,6 +1439,132 @@
           <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" />
           <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
+		  <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
+            <End Role="tb_campi" EntitySet="tb_campi" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_campi" Association="Self.fk_contato_campi">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_campi" Association="Self.fk_endereco_campi">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_mantenedora_campi" Association="Self.fk_mantenedora_campi">
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+            <End Role="tb_campi" EntitySet="tb_campi" />
+          </AssociationSet>
+          <AssociationSet Name="fk_fatura_compra" Association="Self.fk_fatura_compra">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_empresa" Association="Self.fk_contato_empresa">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_contato_mantenedora" Association="Self.fk_contato_mantenedora">
+            <End Role="tb_contato" EntitySet="tb_contato" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_orcamento" Association="Self.fk_empresa_orcamento">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_empresa" Association="Self.fk_endereco_empresa">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+          <AssociationSet Name="fk_endereco_mantenedora" Association="Self.fk_endereco_mantenedora">
+            <End Role="tb_endereco" EntitySet="tb_endereco" />
+            <End Role="tb_mantenedora" EntitySet="tb_mantenedora" />
+          </AssociationSet>
+          <AssociationSet Name="fk_forma_pagamento_fatura" Association="Self.fk_forma_pagamento_fatura">
+            <End Role="tb_forma_pagamento" EntitySet="tb_forma_pagamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orcamento_fatura" Association="Self.fk_orcamento_fatura">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_fatura" Association="Self.fk_usuario_fatura">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_funcao_usuario" Association="Self.fk_funcao_usuario">
+            <End Role="tb_funcao" EntitySet="tb_funcao" />
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_orcamento" Association="Self.fk_os_orcamento">
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_projeto_orcamento" Association="Self.fk_projeto_orcamento">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_orcamento" Association="Self.fk_status_orcamento">
+            <End Role="tb_status_orcamento" EntitySet="tb_status_orcamento" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_orcamento" Association="Self.fk_usuario_orcamento">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_os_servico" Association="Self.fk_os_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_orcamento_servico" EntitySet="tb_orcamento_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_projeto" Association="Self.fk_ps_projeto">
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_status_projeto" Association="Self.fk_status_projeto">
+            <End Role="tb_status_projeto" EntitySet="tb_status_projeto" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_projeto" Association="Self.fk_usuario_projeto">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ps_servico" Association="Self.fk_ps_servico">
+            <End Role="tb_servico" EntitySet="tb_servico" />
+            <End Role="tb_projeto_servico" EntitySet="tb_projeto_servico" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuario_servico" Association="Self.fk_usuario_servico">
+            <End Role="tb_usuario" EntitySet="tb_usuario" />
+            <End Role="tb_servico" EntitySet="tb_servico" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_compra" Association="db_agesModel.tb_anexo_compra">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="tb_anexo_fatura" Association="db_agesModel.tb_anexo_fatura">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="tb_anexo_empresa" Association="db_agesModel.tb_anexo_empresa">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="tb_anexo_orcamento" Association="db_agesModel.tb_anexo_orcamento">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_orcamento" EntitySet="tb_orcamento" />
+          </AssociationSet>
+		  
+		  <AssociationSet Name="tb_anexo_projeto" Association="db_agesModel.tb_anexo_projeto">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_projeto" EntitySet="tb_projeto" />
+          </AssociationSet>
+		  
+		  
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -601,46 +1585,6 @@
                 <ScalarProperty Name="caminho" ColumnName="caminho" />
                 <ScalarProperty Name="nome_arquivo" ColumnName="nome_arquivo" />
                 <ScalarProperty Name="url" ColumnName="url" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_anexo_compra">
-            <EntityTypeMapping TypeName="db_agesModel.tb_anexo_compra">
-              <MappingFragment StoreEntitySet="tb_anexo_compra">
-                <ScalarProperty Name="id_anexo" ColumnName="id_anexo" />
-                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_anexo_empresa">
-            <EntityTypeMapping TypeName="db_agesModel.tb_anexo_empresa">
-              <MappingFragment StoreEntitySet="tb_anexo_empresa">
-                <ScalarProperty Name="id_anexo" ColumnName="id_anexo" />
-                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_anexo_fatura">
-            <EntityTypeMapping TypeName="db_agesModel.tb_anexo_fatura">
-              <MappingFragment StoreEntitySet="tb_anexo_fatura">
-                <ScalarProperty Name="id_anexo" ColumnName="id_anexo" />
-                <ScalarProperty Name="id_fatura" ColumnName="id_fatura" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_anexo_orcamento">
-            <EntityTypeMapping TypeName="db_agesModel.tb_anexo_orcamento">
-              <MappingFragment StoreEntitySet="tb_anexo_orcamento">
-                <ScalarProperty Name="id_anexo" ColumnName="id_anexo" />
-                <ScalarProperty Name="id_orcamento" ColumnName="id_orcamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tb_anexo_projeto">
-            <EntityTypeMapping TypeName="db_agesModel.tb_anexo_projeto">
-              <MappingFragment StoreEntitySet="tb_anexo_projeto">
-                <ScalarProperty Name="id_anexo" ColumnName="id_anexo" />
-                <ScalarProperty Name="id_projeto" ColumnName="id_projeto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -865,7 +1809,52 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+		  <AssociationSetMapping Name="tb_anexo_compra" TypeName="db_agesModel.tb_anexo_compra" StoreEntitySet="tb_anexo_compra">
+            <EndProperty Name="tb_compra">
+              <ScalarProperty Name="id" ColumnName="id_compra" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+		  
+		  <AssociationSetMapping Name="tb_anexo_fatura" TypeName="db_agesModel.tb_anexo_fatura" StoreEntitySet="tb_anexo_fatura">
+            <EndProperty Name="tb_fatura">
+              <ScalarProperty Name="id" ColumnName="id_fatura" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+		  
+		  <AssociationSetMapping Name="tb_anexo_empresa" TypeName="db_agesModel.tb_anexo_empresa" StoreEntitySet="tb_anexo_empresa">
+            <EndProperty Name="tb_empresa">
+              <ScalarProperty Name="id" ColumnName="id_empresa" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+		  
+		  <AssociationSetMapping Name="tb_anexo_orcamento" TypeName="db_agesModel.tb_anexo_orcamento" StoreEntitySet="tb_anexo_orcamento">
+            <EndProperty Name="tb_orcamento">
+              <ScalarProperty Name="id" ColumnName="id_orcamento" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+		  
+		  <AssociationSetMapping Name="tb_anexo_projeto" TypeName="db_agesModel.tb_anexo_projeto" StoreEntitySet="tb_anexo_projeto">
+            <EndProperty Name="tb_projeto">
+              <ScalarProperty Name="id" ColumnName="id_projeto" />
+            </EndProperty>
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
+          </AssociationSetMapping>
+		  
+		  </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
@@ -881,7 +1870,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

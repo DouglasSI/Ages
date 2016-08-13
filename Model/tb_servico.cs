@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_servico
     {
+        public tb_servico()
+        {
+            this.tb_orcamento_servico = new HashSet<tb_orcamento_servico>();
+            this.tb_projeto_servico = new HashSet<tb_projeto_servico>();
+        }
         public int id { get; set; }
         public int id_usuario { get; set; }
         public decimal valor { get; set; }

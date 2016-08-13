@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_fatura
     {
+        public tb_fatura()
+        {
+            this.tb_compra = new HashSet<tb_compra>();
+        }
+     
         public int id { get; set; }
         public int id_usuario { get; set; }
         public int id_forma_pagamento { get; set; }
@@ -30,6 +35,7 @@ namespace Model
         public decimal valor_pendente { get; set; }
         public bool is_aditivo { get; set; }
         public bool autorizado { get; set; }
+
         public virtual ICollection<tb_compra> tb_compra { get; set; }
         public virtual tb_forma_pagamento tb_forma_pagamento { get; set; }
         public virtual tb_orcamento tb_orcamento { get; set; }

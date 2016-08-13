@@ -14,6 +14,10 @@ namespace Model
     
     public partial class tb_mantenedora
     {
+        public tb_mantenedora()
+        {
+            this.tb_campi = new HashSet<tb_campi>();
+        }
         public int id { get; set; }
         public int id_endereco { get; set; }
         public int id_contato { get; set; }
@@ -25,7 +29,6 @@ namespace Model
         public string cnpj { get; set; }
         public string inscricao_estadual { get; set; }
         public string inscricao_municipal { get; set; }
-
         public virtual ICollection<tb_campi> tb_campi { get; set; }
         public virtual tb_contato tb_contato { get; set; }
         public virtual tb_endereco tb_endereco { get; set; }

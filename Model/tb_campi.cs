@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_campi
     {
+
+        public tb_campi()
+        {
+            this.tb_projeto = new HashSet<tb_projeto>();
+        }
         public int id { get; set; }
         public int id_endereco { get; set; }
         public int id_contato { get; set; }
@@ -27,6 +32,7 @@ namespace Model
         public string cnpj { get; set; }
         public string inscricao_estadual { get; set; }
         public string inscricao_municipal { get; set; }
+
         public virtual ICollection<tb_projeto> tb_projeto { get; set; }
         public virtual tb_contato tb_contato { get; set; }
         public virtual tb_endereco tb_endereco { get; set; }

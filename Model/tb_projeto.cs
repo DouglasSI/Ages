@@ -14,6 +14,11 @@ namespace Model
     
     public partial class tb_projeto
     {
+        public tb_projeto()
+        {
+            this.tb_orcamento = new HashSet<tb_orcamento>();
+            this.tb_projeto_servico = new HashSet<tb_projeto_servico>();
+        }
         public int id { get; set; }
         public int id_usuario { get; set; }
         public int id_status { get; set; }
@@ -21,7 +26,6 @@ namespace Model
         public string titulo { get; set; }
         public string anotacao { get; set; }
         public decimal valor_estimado { get; set; }
-
         public virtual tb_campi tb_campi { get; set; }
         public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }
         public virtual ICollection<tb_projeto_servico> tb_projeto_servico { get; set; }

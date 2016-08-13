@@ -73,21 +73,6 @@
     <Compile Include="tb_anexo.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
-    <Compile Include="tb_anexo_compra.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_anexo_empresa.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_anexo_fatura.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_anexo_orcamento.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tb_anexo_projeto.cs">
-      <DependentUpon>Banco.tt</DependentUpon>
-    </Compile>
     <Compile Include="tb_campi.cs">
       <DependentUpon>Banco.tt</DependentUpon>
     </Compile>
