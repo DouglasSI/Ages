@@ -11,9 +11,9 @@ namespace Servico.Manter
     { 
         public Manter_Orcamento_Servico()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public void cadastrar(tb_orcamento_servico objeto)
         {
             

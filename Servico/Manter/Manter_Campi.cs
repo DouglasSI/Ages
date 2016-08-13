@@ -11,9 +11,9 @@ namespace Servico.Manter
     {
         public Manter_Campi()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public List<tb_campi> obterCampis()
         {
             List<tb_campi> campis =entidade.tb_campi.ToList();
@@ -29,7 +29,7 @@ namespace Servico.Manter
         }
         public void editar(tb_campi objeto)
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_campi.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

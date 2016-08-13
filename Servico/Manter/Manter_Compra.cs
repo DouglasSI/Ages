@@ -11,9 +11,9 @@ namespace Servico.Manter
     {
          public Manter_Compra()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public List<tb_compra> obterCompras()
         {
             return entidade.tb_compra.ToList();
@@ -24,7 +24,7 @@ namespace Servico.Manter
         }
         public void editar(tb_compra objeto)
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_compra.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

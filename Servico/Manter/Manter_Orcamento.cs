@@ -12,9 +12,9 @@ namespace Servico.Manter
 
         public Manter_Orcamento()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
 
         public List<tb_orcamento> obterOrcamentos(int id_projeto)
         {
@@ -36,7 +36,7 @@ namespace Servico.Manter
         public void editarStatus(tb_orcamento orcamento,  int id_status)
         {
             
-            using (Entities context = new Entities())
+            using (db_agesEntities2 context = new db_agesEntities2())
             {
                 tb_orcamento orc = new tb_orcamento()
                 {

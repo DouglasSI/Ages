@@ -47,7 +47,7 @@ namespace Web_Ages.Models
    
           public override string[] GetRolesForUser(string username)
           {
-              Model.Entities db = new Model.Entities();
+              Model.db_agesEntities2 db = new Model.db_agesEntities2();
    
               string sRoles = db.tb_usuario.Where(p => p.email == username).FirstOrDefault().perfil;
               string[] retorno = { sRoles };

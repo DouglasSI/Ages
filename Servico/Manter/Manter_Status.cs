@@ -11,9 +11,9 @@ namespace Servico.Manter
     {
         public Manter_Status()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public tb_status_projeto obterById(int id)
         {
             return entidade.tb_status_projeto.Where(f => f.id.Equals(id) ).FirstOrDefault();

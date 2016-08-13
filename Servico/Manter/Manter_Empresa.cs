@@ -11,9 +11,9 @@ namespace Servico.Manter
     {
         public Manter_Empresa()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public string getFantasiaById(int id)
         {
             return entidade.tb_empresa.Where(f => f.id.Equals(id) ).FirstOrDefault().nome_fantasia.ToUpper();
@@ -29,7 +29,7 @@ namespace Servico.Manter
         }
         public void editar(tb_empresa objeto)
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_empresa.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

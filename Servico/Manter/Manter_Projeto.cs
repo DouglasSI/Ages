@@ -11,9 +11,9 @@ namespace Servico.Manter
     {
         public Manter_Projeto()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
        
         public List<tb_projeto> obterPropostas()
         {
@@ -48,7 +48,7 @@ namespace Servico.Manter
         public void editarStatus(tb_projeto proj, int id_status)
         {
 
-            using (Entities context = new Entities())
+            using (db_agesEntities2 context = new db_agesEntities2())
             {
                 tb_projeto pr = new tb_projeto()
                 {
@@ -72,7 +72,7 @@ namespace Servico.Manter
      
         public void editar(tb_projeto objeto)
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_projeto.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;
@@ -83,7 +83,7 @@ namespace Servico.Manter
             tb_projeto p = obterProjeto(id_projeto);
             p.id_status = id_status;
 
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_projeto.Attach(p);
             var entry = entidade.Entry(p);
             entry.State = System.Data.Entity.EntityState.Modified;

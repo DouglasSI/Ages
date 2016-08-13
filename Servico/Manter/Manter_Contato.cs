@@ -12,9 +12,9 @@ namespace Servico.Manter
         
          public Manter_Contato()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public List<tb_contato> obterContatos()
         {
             return entidade.tb_contato.ToList();
@@ -28,7 +28,7 @@ namespace Servico.Manter
         }
         public void editar(tb_contato objeto)
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
             entidade.tb_contato.Attach(objeto);
             var entry = entidade.Entry(objeto);
             entry.State = System.Data.Entity.EntityState.Modified;

@@ -10,14 +10,14 @@ namespace Servico
 {
     public class Manter_
     {
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         public Manter_()
         {
-            //entidade = new Entities();
+            //entidade = new db_agesEntities1();
         }
         public void PersistirGrupo( tb_orcamento grupo)
         {
-            using (Entities context = new Entities())
+            using (db_agesEntities2 context = new db_agesEntities2())
               {
                   //new Manter_Orcamento(context).cadastrar(grupo);
                 tb_orcamento orc =  
@@ -76,7 +76,7 @@ namespace Servico
         }
         public void PersistirFatura(tb_fatura objeto)
         {
-            using (Entities enty = new Entities())
+            using (db_agesEntities2 enty = new db_agesEntities2())
             {
                 tb_fatura fatura = new tb_fatura()
                 {
@@ -104,7 +104,7 @@ namespace Servico
         }
         public int PersistirCompra( tb_compra compra)
         {
-            using (Entities context = new Entities())
+            using (db_agesEntities2 context = new db_agesEntities2())
             {
                 tb_fatura fat = context.tb_fatura.Where(f => f.id.Equals(compra.id_fatura)).FirstOrDefault();
                 if (fat.valor_pendente < compra.valor)
@@ -123,7 +123,7 @@ namespace Servico
         public tb_anexo PersistirAnexo(tb_anexo anexo, tipo N, int id)
         {
 
-            using (Entities contexts = new Entities())
+            using (db_agesEntities2 contexts = new db_agesEntities2())
             {
                 tb_anexo anex = new tb_anexo() 
                 {  

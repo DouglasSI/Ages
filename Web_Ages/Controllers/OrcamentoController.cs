@@ -14,7 +14,7 @@ namespace Web_Ages.Controllers
 {
     public class OrcamentoController : Controller
     {
-        private Entities db = new Entities();
+        private db_agesEntities2 db = new db_agesEntities2();
 
         // GET: Orcamento
         public ActionResult Index()

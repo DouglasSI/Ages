@@ -12,14 +12,14 @@ namespace Servico.Manter
     {
         public Manter_Fatura()
         {
-            entidade = new Entities();
+            entidade = new db_agesEntities2();
         }
-        private Entities entidade;
+        private db_agesEntities2 entidade;
         
         public void autorizar(tb_fatura fat)
         {
 
-            using (Entities context = new Entities())
+            using (db_agesEntities2 context = new db_agesEntities2())
             {
                 tb_fatura fatura = new tb_fatura()
                 {
