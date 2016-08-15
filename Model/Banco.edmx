@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="anotacao" Type="varchar" MaxLength="1000" />
@@ -64,7 +64,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_endereco" Type="int" Nullable="false" />
           <Property Name="id_contato" Type="int" Nullable="false" />
           <Property Name="id_mantenedora" Type="int" Nullable="false" />
@@ -82,7 +82,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_fatura" Type="int" Nullable="false" />
           <Property Name="anotacao" Type="varchar" MaxLength="1000" />
           <Property Name="data_compra" Type="datetime" Precision="0" />
@@ -92,7 +92,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="telefone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="fax" Type="varchar" MaxLength="20" />
           <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
@@ -103,7 +103,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_endereco" Type="int" Nullable="false" />
           <Property Name="id_contato" Type="int" Nullable="false" />
           <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
@@ -117,7 +117,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="logradouro" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="numero" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="complemento" Type="varchar" MaxLength="100" />
@@ -130,7 +130,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="id_forma_pagamento" Type="int" Nullable="false" />
           <Property Name="id_orcamento" Type="int" Nullable="false" />
@@ -151,7 +151,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descricao" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="ativo" Type="bool" Nullable="false" />
           <Property Name="banco" Type="varchar" MaxLength="50" />
@@ -163,14 +163,14 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_mantenedora">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_endereco" Type="int" Nullable="false" />
           <Property Name="id_contato" Type="int" Nullable="false" />
           <Property Name="num_inscricao" Type="varchar" MaxLength="20" Nullable="false" />
@@ -186,7 +186,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="id_status" Type="int" Nullable="false" />
           <Property Name="id_empresa" Type="int" Nullable="false" />
@@ -209,7 +209,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="id_status" Type="int" Nullable="false" />
           <Property Name="id_campi" Type="int" Nullable="false" />
@@ -232,7 +232,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
           <Property Name="valor" Type="decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
@@ -243,21 +243,21 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descricao" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_status_projeto">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descricao" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_usuario">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nome" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="senha" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="id_funcao" Type="int" Nullable="false" />
@@ -266,8 +266,7 @@
           <Property Name="perfil" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="sobrenome" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        
-		<Association Name="fk_ac_1">
+        <Association Name="fk_ac_1">
           <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
           <End Role="tb_anexo_compra" Type="Self.tb_anexo_compra" Multiplicity="*" />
           <ReferentialConstraint>
@@ -291,33 +290,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        
-		<Association Name="fk_af_1">
-          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
-          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_anexo">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tb_anexo_fatura">
-              <PropertyRef Name="id_anexo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_af_2">
-          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
-          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tb_fatura">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="tb_anexo_fatura">
-              <PropertyRef Name="id_fatura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-		
-		<Association Name="fk_ae_1">
+        <Association Name="fk_ae_1">
           <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
           <End Role="tb_anexo_empresa" Type="Self.tb_anexo_empresa" Multiplicity="*" />
           <ReferentialConstraint>
@@ -341,8 +314,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-		
-		<Association Name="fk_ao_1">
+        <Association Name="fk_af_1">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_anexo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_anexo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_af_2">
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="1" />
+          <End Role="tb_anexo_fatura" Type="Self.tb_anexo_fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_fatura">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_anexo_fatura">
+              <PropertyRef Name="id_fatura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ao_1">
           <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
           <End Role="tb_anexo_orcamento" Type="Self.tb_anexo_orcamento" Multiplicity="*" />
           <ReferentialConstraint>
@@ -366,8 +362,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-		
-		<Association Name="fk_ap_1">
+        <Association Name="fk_ap_1">
           <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="1" />
           <End Role="tb_anexo_projeto" Type="Self.tb_anexo_projeto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -391,9 +386,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-		
-		
-		<Association Name="fk_campi_projeto">
+        <Association Name="fk_campi_projeto">
           <End Role="tb_campi" Type="Self.tb_campi" Multiplicity="1" />
           <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
           <ReferentialConstraint>
@@ -693,9 +686,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--  -->
-        <!--  -->
-		<EntityContainer Name="db_agesModelStoreContainer">
+        <EntityContainer Name="db_agesModelStoreContainer">
           <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_anexo_compra" EntityType="Self.tb_anexo_compra" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_anexo_empresa" EntityType="Self.tb_anexo_empresa" Schema="db_ages" store:Type="Tables" />
@@ -719,8 +710,7 @@
           <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" Schema="db_ages" store:Type="Tables" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="db_ages" store:Type="Tables" />
-		  
-		  <AssociationSet Name="fk_ac_1" Association="Self.fk_ac_1">
+          <AssociationSet Name="fk_ac_1" Association="Self.fk_ac_1">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
           </AssociationSet>
@@ -728,17 +718,7 @@
             <End Role="tb_compra" EntitySet="tb_compra" />
             <End Role="tb_anexo_compra" EntitySet="tb_anexo_compra" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="fk_af_1" Association="Self.fk_af_1">
-            <End Role="tb_anexo" EntitySet="tb_anexo" />
-            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
-          </AssociationSet>
-          <AssociationSet Name="fk_af_2" Association="Self.fk_af_2">
-            <End Role="tb_fatura" EntitySet="tb_fatura" />
-            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
-          </AssociationSet>
-		  
-		  <AssociationSet Name="fk_ae_1" Association="Self.fk_ae_1">
+          <AssociationSet Name="fk_ae_1" Association="Self.fk_ae_1">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
           </AssociationSet>
@@ -746,8 +726,15 @@
             <End Role="tb_empresa" EntitySet="tb_empresa" />
             <End Role="tb_anexo_empresa" EntitySet="tb_anexo_empresa" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="fk_ao_1" Association="Self.fk_ao_1">
+          <AssociationSet Name="fk_af_1" Association="Self.fk_af_1">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_af_2" Association="Self.fk_af_2">
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+            <End Role="tb_anexo_fatura" EntitySet="tb_anexo_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ao_1" Association="Self.fk_ao_1">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
           </AssociationSet>
@@ -755,8 +742,7 @@
             <End Role="tb_orcamento" EntitySet="tb_orcamento" />
             <End Role="tb_anexo_orcamento" EntitySet="tb_anexo_orcamento" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="fk_ap_1" Association="Self.fk_ap_1">
+          <AssociationSet Name="fk_ap_1" Association="Self.fk_ap_1">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
           </AssociationSet>
@@ -764,7 +750,6 @@
             <End Role="tb_projeto" EntitySet="tb_projeto" />
             <End Role="tb_anexo_projeto" EntitySet="tb_anexo_projeto" />
           </AssociationSet>
-		  		  
           <AssociationSet Name="fk_campi_projeto" Association="Self.fk_campi_projeto">
             <End Role="tb_campi" EntitySet="tb_campi" />
             <End Role="tb_projeto" EntitySet="tb_projeto" />
@@ -875,7 +860,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
@@ -885,14 +870,18 @@
           <Property Name="caminho" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nome_arquivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="url" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_anexo" FromRole="tb_anexo" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_compra" Relationship="Self.tb_anexo_compra" FromRole="tb_anexo" ToRole="tb_compra" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.tb_anexo_empresa" FromRole="tb_anexo" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.tb_anexo_fatura" FromRole="tb_anexo" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.tb_anexo_orcamento" FromRole="tb_anexo" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.tb_anexo_projeto" FromRole="tb_anexo" ToRole="tb_projeto" />
         </EntityType>
-
-		
         <EntityType Name="tb_campi">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_endereco" Type="Int32" Nullable="false" />
           <Property Name="id_contato" Type="Int32" Nullable="false" />
           <Property Name="id_mantenedora" Type="Int32" Nullable="false" />
@@ -905,33 +894,42 @@
           <Property Name="cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_campi_projeto" FromRole="tb_campi" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_campi" FromRole="tb_campi" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_campi" FromRole="tb_campi" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_mantenedora_campi" FromRole="tb_campi" ToRole="tb_mantenedora" />
         </EntityType>
         <EntityType Name="tb_compra">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_fatura" Type="Int32" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="data_compra" Type="DateTime" />
           <Property Name="valor" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_fatura_compra" FromRole="tb_compra" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_compra" FromRole="tb_compra" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_contato">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="site" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_contato_campi" FromRole="tb_contato" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_contato_empresa" FromRole="tb_contato" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_contato_mantenedora" FromRole="tb_contato" ToRole="tb_mantenedora" />
         </EntityType>
         <EntityType Name="tb_empresa">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_endereco" Type="Int32" Nullable="false" />
           <Property Name="id_contato" Type="Int32" Nullable="false" />
           <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
@@ -940,12 +938,16 @@
           <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="atividade_principal" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_empresa" FromRole="tb_empresa" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_empresa_orcamento" FromRole="tb_empresa" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_empresa" FromRole="tb_empresa" ToRole="tb_endereco" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_empresa" FromRole="tb_empresa" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_endereco">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="logradouro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="numero" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="complemento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -953,12 +955,15 @@
           <Property Name="bairro" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_endereco_campi" FromRole="tb_endereco" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_endereco_empresa" FromRole="tb_endereco" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_mantenedora" Relationship="Self.fk_endereco_mantenedora" FromRole="tb_endereco" ToRole="tb_mantenedora" />
         </EntityType>
         <EntityType Name="tb_fatura">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <Property Name="id_forma_pagamento" Type="Int32" Nullable="false" />
           <Property Name="id_orcamento" Type="Int32" Nullable="false" />
@@ -974,31 +979,38 @@
           <Property Name="valor_pendente" Type="Decimal" Nullable="false" />
           <Property Name="is_aditivo" Type="Boolean" Nullable="false" />
           <Property Name="autorizado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tb_compra" Relationship="Self.fk_fatura_compra" FromRole="tb_fatura" ToRole="tb_compra" />
+          <NavigationProperty Name="tb_forma_pagamento" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_fatura" ToRole="tb_forma_pagamento" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_orcamento_fatura" FromRole="tb_fatura" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_fatura" FromRole="tb_fatura" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_fatura" FromRole="tb_fatura" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descricao" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ativo" Type="Boolean" Nullable="false" />
           <Property Name="banco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="agencia" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="conta_corrente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="digito" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_forma_pagamento_fatura" FromRole="tb_forma_pagamento" ToRole="tb_fatura" />
         </EntityType>
         <EntityType Name="tb_funcao">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_funcao_usuario" FromRole="tb_funcao" ToRole="tb_usuario" />
         </EntityType>
         <EntityType Name="tb_mantenedora">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_endereco" Type="Int32" Nullable="false" />
           <Property Name="id_contato" Type="Int32" Nullable="false" />
           <Property Name="num_inscricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1009,18 +1021,28 @@
           <Property Name="cnpj" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="inscricao_estadual" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="inscricao_municipal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_mantenedora_campi" FromRole="tb_mantenedora" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_contato" Relationship="Self.fk_contato_mantenedora" FromRole="tb_mantenedora" ToRole="tb_contato" />
+          <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_mantenedora" FromRole="tb_mantenedora" ToRole="tb_endereco" />
         </EntityType>
         <EntityType Name="tb_orcamento">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <Property Name="id_status" Type="Int32" Nullable="false" />
           <Property Name="id_empresa" Type="Int32" Nullable="false" />
           <Property Name="id_projeto" Type="Int32" Nullable="false" />
           <Property Name="valor" Type="Decimal" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_empresa" Relationship="Self.fk_empresa_orcamento" FromRole="tb_orcamento" ToRole="tb_empresa" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_orcamento_fatura" FromRole="tb_orcamento" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_orcamento_servico" Relationship="Self.fk_os_orcamento" FromRole="tb_orcamento" ToRole="tb_orcamento_servico" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_projeto_orcamento" FromRole="tb_orcamento" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_status_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_orcamento" ToRole="tb_status_orcamento" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_orcamento" FromRole="tb_orcamento" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_orcamento" FromRole="tb_orcamento" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_orcamento_servico">
           <Key>
@@ -1032,18 +1054,26 @@
           <Property Name="data_cadastro" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="valor" Type="Decimal" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_os_orcamento" FromRole="tb_orcamento_servico" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_os_servico" FromRole="tb_orcamento_servico" ToRole="tb_servico" />
         </EntityType>
         <EntityType Name="tb_projeto">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <Property Name="id_status" Type="Int32" Nullable="false" />
           <Property Name="id_campi" Type="Int32" Nullable="false" />
           <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
           <Property Name="valor_estimado" Type="Decimal" Nullable="false" />
+          <NavigationProperty Name="tb_campi" Relationship="Self.fk_campi_projeto" FromRole="tb_projeto" ToRole="tb_campi" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_projeto_orcamento" FromRole="tb_projeto" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_projeto" FromRole="tb_projeto" ToRole="tb_projeto_servico" />
+          <NavigationProperty Name="tb_status_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_projeto" ToRole="tb_status_projeto" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_projeto" FromRole="tb_projeto" ToRole="tb_usuario" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_projeto" FromRole="tb_projeto" ToRole="tb_anexo" />
         </EntityType>
         <EntityType Name="tb_projeto_servico">
           <Key>
@@ -1055,37 +1085,44 @@
           <Property Name="data_cadastro" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="valor_limite" Type="Decimal" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_ps_projeto" FromRole="tb_projeto_servico" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_ps_servico" FromRole="tb_projeto_servico" ToRole="tb_servico" />
         </EntityType>
         <EntityType Name="tb_servico">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
           <Property Name="valor" Type="Decimal" Nullable="false" />
           <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="data_cadastro" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="tb_orcamento_servico" Relationship="Self.fk_os_servico" FromRole="tb_servico" ToRole="tb_orcamento_servico" />
+          <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_servico" FromRole="tb_servico" ToRole="tb_projeto_servico" />
+          <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_servico" FromRole="tb_servico" ToRole="tb_usuario" />
         </EntityType>
         <EntityType Name="tb_status_orcamento">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_status_orcamento" ToRole="tb_orcamento" />
         </EntityType>
         <EntityType Name="tb_status_projeto">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_status_projeto" ToRole="tb_projeto" />
         </EntityType>
         <EntityType Name="tb_usuario">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="senha" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="id_funcao" Type="Int32" Nullable="false" />
@@ -1093,8 +1130,14 @@
           <Property Name="ativo" Type="Boolean" Nullable="false" />
           <Property Name="perfil" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="sobrenome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tb_anexo" Relationship="Self.fk_usuario_anexo" FromRole="tb_usuario" ToRole="tb_anexo" />
+          <NavigationProperty Name="tb_fatura" Relationship="Self.fk_usuario_fatura" FromRole="tb_usuario" ToRole="tb_fatura" />
+          <NavigationProperty Name="tb_funcao" Relationship="Self.fk_funcao_usuario" FromRole="tb_usuario" ToRole="tb_funcao" />
+          <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_usuario_orcamento" FromRole="tb_usuario" ToRole="tb_orcamento" />
+          <NavigationProperty Name="tb_projeto" Relationship="Self.fk_usuario_projeto" FromRole="tb_usuario" ToRole="tb_projeto" />
+          <NavigationProperty Name="tb_servico" Relationship="Self.fk_usuario_servico" FromRole="tb_usuario" ToRole="tb_servico" />
         </EntityType>
-		<Association Name="fk_usuario_anexo">
+        <Association Name="fk_usuario_anexo">
           <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
           <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1394,34 +1437,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-
-		<Association Name="tb_anexo_compra">
-          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
-          <End Type="db_agesModel.tb_compra" Role="tb_compra" Multiplicity="*" />
+        <Association Name="tb_anexo_compra">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
         </Association>
-		
-		<Association Name="tb_anexo_fatura">
-          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
-          <End Type="db_agesModel.tb_fatura" Role="tb_fatura" Multiplicity="*" />
+        <Association Name="tb_anexo_empresa">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="*" />
         </Association>
-		
-		<Association Name="tb_anexo_empresa">
-          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
-          <End Type="db_agesModel.tb_empresa" Role="tb_empresa" Multiplicity="*" />
+        <Association Name="tb_anexo_fatura">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <End Role="tb_fatura" Type="Self.tb_fatura" Multiplicity="*" />
         </Association>
-		
-		<Association Name="tb_anexo_orcamento">
-          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
-          <End Type="db_agesModel.tb_orcamento" Role="tb_orcamento" Multiplicity="*" />
+        <Association Name="tb_anexo_orcamento">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <End Role="tb_orcamento" Type="Self.tb_orcamento" Multiplicity="*" />
         </Association>
-		
-		<Association Name="tb_anexo_projeto">
-          <End Type="db_agesModel.tb_anexo" Role="tb_anexo" Multiplicity="*" />
-          <End Type="db_agesModel.tb_projeto" Role="tb_projeto" Multiplicity="*" />
+        <Association Name="tb_anexo_projeto">
+          <End Role="tb_anexo" Type="Self.tb_anexo" Multiplicity="*" />
+          <End Role="tb_projeto" Type="Self.tb_projeto" Multiplicity="*" />
         </Association>
-		
         <EntityContainer Name="db_agesEntities2" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" />          
+          <EntitySet Name="tb_anexo" EntityType="Self.tb_anexo" />
           <EntitySet Name="tb_campi" EntityType="Self.tb_campi" />
           <EntitySet Name="tb_compra" EntityType="Self.tb_compra" />
           <EntitySet Name="tb_contato" EntityType="Self.tb_contato" />
@@ -1439,7 +1476,7 @@
           <EntitySet Name="tb_status_orcamento" EntityType="Self.tb_status_orcamento" />
           <EntitySet Name="tb_status_projeto" EntityType="Self.tb_status_projeto" />
           <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" />
-		  <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
+          <AssociationSet Name="fk_usuario_anexo" Association="Self.fk_usuario_anexo">
             <End Role="tb_usuario" EntitySet="tb_usuario" />
             <End Role="tb_anexo" EntitySet="tb_anexo" />
           </AssociationSet>
@@ -1539,32 +1576,26 @@
             <End Role="tb_usuario" EntitySet="tb_usuario" />
             <End Role="tb_servico" EntitySet="tb_servico" />
           </AssociationSet>
-          <AssociationSet Name="tb_anexo_compra" Association="db_agesModel.tb_anexo_compra">
+          <AssociationSet Name="tb_anexo_compra" Association="Self.tb_anexo_compra">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_compra" EntitySet="tb_compra" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="tb_anexo_fatura" Association="db_agesModel.tb_anexo_fatura">
-            <End Role="tb_anexo" EntitySet="tb_anexo" />
-            <End Role="tb_fatura" EntitySet="tb_fatura" />
-          </AssociationSet>
-		  
-		  <AssociationSet Name="tb_anexo_empresa" Association="db_agesModel.tb_anexo_empresa">
+          <AssociationSet Name="tb_anexo_empresa" Association="Self.tb_anexo_empresa">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_empresa" EntitySet="tb_empresa" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="tb_anexo_orcamento" Association="db_agesModel.tb_anexo_orcamento">
+          <AssociationSet Name="tb_anexo_fatura" Association="Self.tb_anexo_fatura">
+            <End Role="tb_anexo" EntitySet="tb_anexo" />
+            <End Role="tb_fatura" EntitySet="tb_fatura" />
+          </AssociationSet>
+          <AssociationSet Name="tb_anexo_orcamento" Association="Self.tb_anexo_orcamento">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_orcamento" EntitySet="tb_orcamento" />
           </AssociationSet>
-		  
-		  <AssociationSet Name="tb_anexo_projeto" Association="db_agesModel.tb_anexo_projeto">
+          <AssociationSet Name="tb_anexo_projeto" Association="Self.tb_anexo_projeto">
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_projeto" EntitySet="tb_projeto" />
           </AssociationSet>
-		  
-		  
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -1809,52 +1840,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-		  <AssociationSetMapping Name="tb_anexo_compra" TypeName="db_agesModel.tb_anexo_compra" StoreEntitySet="tb_anexo_compra">
+          <AssociationSetMapping Name="tb_anexo_compra" TypeName="db_agesModel.tb_anexo_compra" StoreEntitySet="tb_anexo_compra">
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
             <EndProperty Name="tb_compra">
               <ScalarProperty Name="id" ColumnName="id_compra" />
             </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_empresa" TypeName="db_agesModel.tb_anexo_empresa" StoreEntitySet="tb_anexo_empresa">
             <EndProperty Name="tb_anexo">
               <ScalarProperty Name="id" ColumnName="id_anexo" />
             </EndProperty>
-          </AssociationSetMapping>
-		  
-		  <AssociationSetMapping Name="tb_anexo_fatura" TypeName="db_agesModel.tb_anexo_fatura" StoreEntitySet="tb_anexo_fatura">
-            <EndProperty Name="tb_fatura">
-              <ScalarProperty Name="id" ColumnName="id_fatura" />
-            </EndProperty>
-            <EndProperty Name="tb_anexo">
-              <ScalarProperty Name="id" ColumnName="id_anexo" />
-            </EndProperty>
-          </AssociationSetMapping>
-		  
-		  <AssociationSetMapping Name="tb_anexo_empresa" TypeName="db_agesModel.tb_anexo_empresa" StoreEntitySet="tb_anexo_empresa">
             <EndProperty Name="tb_empresa">
               <ScalarProperty Name="id" ColumnName="id_empresa" />
             </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_fatura" TypeName="db_agesModel.tb_anexo_fatura" StoreEntitySet="tb_anexo_fatura">
             <EndProperty Name="tb_anexo">
               <ScalarProperty Name="id" ColumnName="id_anexo" />
             </EndProperty>
+            <EndProperty Name="tb_fatura">
+              <ScalarProperty Name="id" ColumnName="id_fatura" />
+            </EndProperty>
           </AssociationSetMapping>
-		  
-		  <AssociationSetMapping Name="tb_anexo_orcamento" TypeName="db_agesModel.tb_anexo_orcamento" StoreEntitySet="tb_anexo_orcamento">
+          <AssociationSetMapping Name="tb_anexo_orcamento" TypeName="db_agesModel.tb_anexo_orcamento" StoreEntitySet="tb_anexo_orcamento">
+            <EndProperty Name="tb_anexo">
+              <ScalarProperty Name="id" ColumnName="id_anexo" />
+            </EndProperty>
             <EndProperty Name="tb_orcamento">
               <ScalarProperty Name="id" ColumnName="id_orcamento" />
             </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="tb_anexo_projeto" TypeName="db_agesModel.tb_anexo_projeto" StoreEntitySet="tb_anexo_projeto">
             <EndProperty Name="tb_anexo">
               <ScalarProperty Name="id" ColumnName="id_anexo" />
             </EndProperty>
-          </AssociationSetMapping>
-		  
-		  <AssociationSetMapping Name="tb_anexo_projeto" TypeName="db_agesModel.tb_anexo_projeto" StoreEntitySet="tb_anexo_projeto">
             <EndProperty Name="tb_projeto">
               <ScalarProperty Name="id" ColumnName="id_projeto" />
             </EndProperty>
-            <EndProperty Name="tb_anexo">
-              <ScalarProperty Name="id" ColumnName="id_anexo" />
-            </EndProperty>
           </AssociationSetMapping>
-		  
-		  </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
