@@ -1,47 +1,48 @@
 
 
 CREATE TABLE tb_anexo (
-    id serial NOT NULL,
-    id_usuario integer NOT NULL,
+    id INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     anotacao VARCHAR(1000),
     data_cadastro DATETIME DEFAULT now() NOT NULL,
-    tamanho integer DEFAULT 0 NOT NULL,
+    tamanho INTEGER DEFAULT 0 NOT NULL,
     tipo VARCHAR(100)  NOT NULL,
     caminho VARCHAR(1000)  NOT NULL,
     nome_arquivo VARCHAR(1000),
     url VARCHAR(1000)
 );
 
+
 CREATE TABLE tb_anexo_compra (
-    id_anexo integer NOT NULL,
-    id_compra integer NOT NULL
+    id_anexo INTEGER NOT NULL,
+    id_compra INTEGER NOT NULL
 );
 
 CREATE TABLE tb_anexo_empresa (
-    id_anexo integer NOT NULL,
-    id_empresa integer NOT NULL
+    id_anexo INTEGER NOT NULL,
+    id_empresa INTEGER NOT NULL
 );
 CREATE TABLE tb_anexo_fatura (
-    id_anexo integer NOT NULL,
-    id_fatura integer NOT NULL
+    id_anexo INTEGER NOT NULL,
+    id_fatura INTEGER NOT NULL
 );
 
 CREATE TABLE tb_anexo_orcamento (
-    id_anexo integer NOT NULL,
-    id_orcamento integer NOT NULL
+    id_anexo INTEGER NOT NULL,
+    id_orcamento INTEGER NOT NULL
 );
 
 CREATE TABLE tb_anexo_projeto (
-    id_anexo integer NOT NULL,
-    id_projeto integer NOT NULL
+    id_anexo INTEGER NOT NULL,
+    id_projeto INTEGER NOT NULL
 );
 
 CREATE TABLE tb_campi (
-    id serial NOT NULL,
-    id_endereco integer NOT NULL,
-    id_contato integer NOT NULL,
-    id_mantenedora integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_endereco INTEGER NOT NULL,
+    id_contato INTEGER NOT NULL,
+    id_mantenedora INTEGER NOT NULL,
     num_inscricao VARCHAR(20) NOT NULL,
     razao_social VARCHAR(75) NOT NULL,
     nome_fantasia VARCHAR(75) NOT NULL,
@@ -54,15 +55,15 @@ CREATE TABLE tb_campi (
 );
 
 CREATE TABLE tb_compra (
-    id serial NOT NULL,
-    id_fatura integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_fatura INTEGER NOT NULL,
     anotacao VARCHAR(1000),
     data_compra DATETIME,
     valor numeric(10,4) NOT NULL
 );
 
 CREATE TABLE tb_contato (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     telefone VARCHAR(20) NOT NULL,
     fax VARCHAR(20),
     celular VARCHAR(20) NOT NULL,
@@ -71,9 +72,9 @@ CREATE TABLE tb_contato (
 );
 
 CREATE TABLE tb_empresa (
-    id serial NOT NULL,
-    id_endereco integer NOT NULL,
-    id_contato integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_endereco INTEGER NOT NULL,
+    id_contato INTEGER NOT NULL,
     razao_social VARCHAR(75) NOT NULL,
     nome_fantasia VARCHAR(75) NOT NULL,
     cnpj VARCHAR(20) NOT NULL,
@@ -83,7 +84,7 @@ CREATE TABLE tb_empresa (
 );
 
 CREATE TABLE tb_endereco (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     logradouro VARCHAR(100) NOT NULL,
     numero VARCHAR(10) NOT NULL,
     complemento VARCHAR(100),
@@ -94,10 +95,10 @@ CREATE TABLE tb_endereco (
 );
 
 CREATE TABLE tb_fatura (
-    id serial NOT NULL,
-    id_usuario integer NOT NULL,
-    id_forma_pagamento integer NOT NULL,
-    id_orcamento integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_usuario INTEGER NOT NULL,
+    id_forma_pagamento INTEGER NOT NULL,
+    id_orcamento INTEGER NOT NULL,
     data_pagamento DATETIME,
     data_prevista DATETIME NOT NULL,
     titulo VARCHAR(100) NOT NULL,
@@ -113,7 +114,7 @@ CREATE TABLE tb_fatura (
 );
 
 CREATE TABLE tb_forma_pagamento (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     descricao VARCHAR(75) NOT NULL,
     ativo boolean DEFAULT true NOT NULL,
     banco VARCHAR(50),
@@ -123,15 +124,15 @@ CREATE TABLE tb_forma_pagamento (
 );
 
 CREATE TABLE tb_funcao (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     nome VARCHAR(50) NOT NULL
    
 );
 
 CREATE TABLE tb_mantenedora (
-    id serial NOT NULL,
-    id_endereco integer NOT NULL,
-    id_contato integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_endereco INTEGER NOT NULL,
+    id_contato INTEGER NOT NULL,
     num_inscricao VARCHAR(20) NOT NULL,
     razao_social VARCHAR(75) NOT NULL,
     nome_fantasia VARCHAR(75) NOT NULL,
@@ -143,29 +144,29 @@ CREATE TABLE tb_mantenedora (
 );
 
 CREATE TABLE tb_orcamento (
-    id serial NOT NULL,
-    id_usuario integer NOT NULL,
-    id_status integer NOT NULL,
-    id_empresa integer NOT NULL,
-    id_projeto integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_usuario INTEGER NOT NULL,
+    id_status INTEGER NOT NULL,
+    id_empresa INTEGER NOT NULL,
+    id_projeto INTEGER NOT NULL,
     valor numeric(10,4) NOT NULL,
     anotacao VARCHAR(500)
 );
 
 
 CREATE TABLE tb_orcamento_servico (
-    id_orcamento integer NOT NULL,
-    id_servico integer NOT NULL,
+    id_orcamento INTEGER NOT NULL,
+    id_servico INTEGER NOT NULL,
     data_cadastro DATETIME DEFAULT now() NOT NULL,
     valor numeric(10,4) NOT NULL,
     anotacao VARCHAR(500)
 );
 
 CREATE TABLE tb_projeto (
-    id serial NOT NULL,
-    id_usuario integer NOT NULL,
-    id_status integer NOT NULL,
-    id_campi integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_usuario INTEGER NOT NULL,
+    id_status INTEGER NOT NULL,
+    id_campi INTEGER NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     anotacao text,
     valor_estimado numeric(10,4) NOT NULL
@@ -173,8 +174,8 @@ CREATE TABLE tb_projeto (
 
 
 CREATE TABLE tb_projeto_servico (
-    id_projeto integer NOT NULL,
-    id_servico integer NOT NULL,
+    id_projeto INTEGER NOT NULL,
+    id_servico INTEGER NOT NULL,
     data_cadastro DATETIME DEFAULT now() NOT NULL,
     valor_limite numeric(10,4) NOT NULL,
     anotacao VARCHAR(500)
@@ -183,8 +184,8 @@ CREATE TABLE tb_projeto_servico (
 
 
 CREATE TABLE tb_servico (
-    id serial NOT NULL,
-    id_usuario integer NOT NULL,
+    id INTEGER NOT NULL ,
+    id_usuario INTEGER NOT NULL,
     valor numeric(10,4) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     anotacao VARCHAR(1000) NOT NULL,
@@ -194,23 +195,23 @@ CREATE TABLE tb_servico (
 
 
 CREATE TABLE tb_status_orcamento (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     descricao VARCHAR(20) NOT NULL
 );
 
 
 CREATE TABLE tb_status_projeto (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     descricao VARCHAR(20) NOT NULL
 );
 
 
 
 CREATE TABLE tb_usuario (
-    id serial NOT NULL,
+    id INTEGER NOT NULL ,
     nome VARCHAR(100) NOT NULL,
     senha VARCHAR(1000) NOT NULL,
-    id_funcao integer NOT NULL,
+    id_funcao INTEGER NOT NULL,
     email VARCHAR(100) NOT NULL,
     ativo boolean DEFAULT true NOT NULL,
     perfil VARCHAR(20) NOT NULL,
@@ -285,6 +286,7 @@ ALTER TABLE  tb_projeto_servico
 
 ALTER TABLE  tb_anexo
     ADD CONSTRAINT tb_anexo_pkey PRIMARY KEY (id);
+    ALTER TABLE tb_anexo MODIFY COLUMN id INTEGER auto_increment;
 
 
 --
@@ -294,7 +296,7 @@ ALTER TABLE  tb_anexo
 
 ALTER TABLE  tb_campi
     ADD CONSTRAINT tb_campi_pkey PRIMARY KEY (id);
-
+ALTER TABLE tb_campi MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2109 (class 2606 OID 31792)
@@ -303,7 +305,7 @@ ALTER TABLE  tb_campi
 
 ALTER TABLE  tb_compra
     ADD CONSTRAINT tb_compra_pkey PRIMARY KEY (id);
-
+ALTER TABLE tb_compra MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2087 (class 2606 OID 31574)
@@ -312,7 +314,7 @@ ALTER TABLE  tb_compra
 
 ALTER TABLE  tb_contato
     ADD CONSTRAINT tb_contato_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_contato MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2093 (class 2606 OID 31623)
@@ -321,7 +323,7 @@ ALTER TABLE  tb_contato
 
 ALTER TABLE  tb_empresa
     ADD CONSTRAINT tb_empresa_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_empresa MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2085 (class 2606 OID 31566)
@@ -330,7 +332,7 @@ ALTER TABLE  tb_empresa
 
 ALTER TABLE  tb_endereco
     ADD CONSTRAINT tb_endereco_pkey PRIMARY KEY (id);
-
+   ALTER TABLE tb_endereco MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2107 (class 2606 OID 31766)
@@ -339,7 +341,7 @@ ALTER TABLE  tb_endereco
 
 ALTER TABLE  tb_fatura
     ADD CONSTRAINT tb_fatura_pkey PRIMARY KEY (id);
-
+   ALTER TABLE tb_fatura MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2105 (class 2606 OID 31753)
@@ -348,7 +350,7 @@ ALTER TABLE  tb_fatura
 
 ALTER TABLE  tb_forma_pagamento
     ADD CONSTRAINT tb_forma_pagamento_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_forma_pagamento MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2075 (class 2606 OID 31509)
@@ -357,7 +359,7 @@ ALTER TABLE  tb_forma_pagamento
 
 ALTER TABLE  tb_funcao
     ADD CONSTRAINT tb_funcao_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_funcao MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2089 (class 2606 OID 31582)
@@ -366,7 +368,7 @@ ALTER TABLE  tb_funcao
 
 ALTER TABLE  tb_mantenedora
     ADD CONSTRAINT tb_mantenedora_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_mantenedora MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2097 (class 2606 OID 31670)
@@ -375,6 +377,7 @@ ALTER TABLE  tb_mantenedora
 
 ALTER TABLE  tb_orcamento
     ADD CONSTRAINT tb_orcamento_pkey PRIMARY KEY (id);
+    ALTER TABLE tb_orcamento MODIFY COLUMN id INTEGER auto_increment;
 
 
 --
@@ -384,7 +387,7 @@ ALTER TABLE  tb_orcamento
 
 ALTER TABLE  tb_projeto
     ADD CONSTRAINT tb_projeto_pkey PRIMARY KEY (id);
-
+   ALTER TABLE tb_projeto MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2099 (class 2606 OID 31702)
@@ -393,7 +396,7 @@ ALTER TABLE  tb_projeto
 
 ALTER TABLE  tb_servico
     ADD CONSTRAINT tb_servico_pkey PRIMARY KEY (id);
-
+    ALTER TABLE tb_servico MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2083 (class 2606 OID 31558)
@@ -402,7 +405,7 @@ ALTER TABLE  tb_servico
 
 ALTER TABLE  tb_status_orcamento
     ADD CONSTRAINT tb_status_orcamento_pkey PRIMARY KEY (id);
-
+   ALTER TABLE tb_status_orcamento MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2081 (class 2606 OID 31550)
@@ -411,7 +414,7 @@ ALTER TABLE  tb_status_orcamento
 
 ALTER TABLE  tb_status_projeto
     ADD CONSTRAINT tb_status_projeto_pkey PRIMARY KEY (id);
-
+   ALTER TABLE tb_status_projeto MODIFY COLUMN id INTEGER auto_increment;
 
 --
 -- TOC entry 2077 (class 2606 OID 31520)
@@ -420,6 +423,7 @@ ALTER TABLE  tb_status_projeto
 
 ALTER TABLE  tb_usuario
     ADD CONSTRAINT tb_usuario_pkey PRIMARY KEY (id);
+    ALTER TABLE tb_usuario MODIFY COLUMN id INTEGER auto_increment;
 
 
 --
@@ -737,5 +741,4 @@ ALTER TABLE  tb_servico
     ADD CONSTRAINT fk_usuario_servico FOREIGN KEY (id_usuario) REFERENCES tb_usuario(id);
 
 
-	
 
