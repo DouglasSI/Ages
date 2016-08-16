@@ -1,5 +1,8 @@
 ﻿@model Model.tb_servico
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
+<script type="text/javascript" src="@Url.Content("~/Scripts/MascaraValidacao.js")"></script>
+<script src="~/Scripts/MascaraValidacao.js"></script>
+<script src="~/Scripts/MascaraValidacao.js" type=text/javascript></script>
 
 <div class="small-nav">
     <div>
@@ -61,7 +64,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.data_cadastro, "Data de cadastro", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.data_cadastro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.data_cadastro, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidaData(this);", @onKeyPress = "MascaraData(this);" } })
                     @Html.ValidationMessageFor(model => model.data_cadastro, "", new { @class = "text-danger" })
                 </div>
             </div>
