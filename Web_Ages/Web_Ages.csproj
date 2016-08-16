@@ -332,8 +332,6 @@
     <Content Include="Views\Orcamento\Create.cshtml" />
     <Content Include="Views\Orcamento\Delete.cshtml" />
     <Content Include="Views\Orcamento\Details.cshtml" />
-    <Content Include="Views\Orcamento\Edit.cshtml" />
-    <Content Include="Views\Orcamento\Index.cshtml" />
     <Content Include="Views\Orcamento\CreateServico.cshtml" />
     <Content Include="Views\Orcamento\ListaServicosOrcamento.cshtml" />
     <Content Include="Views\Orcamento\CreateFatura.cshtml" />

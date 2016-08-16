@@ -52,7 +52,7 @@ namespace Web_Ages.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "TI")]
-        public ActionResult Create([Bind(Include = "nome,senha,id_funcao,email,perfil,sobrenome")] tb_usuario tb_usuario)
+        public ActionResult Create([Bind(Include = "id,nome,senha,id_funcao,email,perfil,sobrenome")] tb_usuario tb_usuario)
         {
             if (ModelState.IsValid)
             {

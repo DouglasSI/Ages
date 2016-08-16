@@ -9,19 +9,13 @@ using System.Web.Mvc;
 using Model;
 using Servico.Manter;
 using System.Web.Helpers;
+using System.IO;
+using Servico;
 
 namespace Web_Ages.Controllers
 {
     public class OrcamentoController : Controller
     {
-        private db_agesEntities2 db = new db_agesEntities2();
-
-        // GET: Orcamento
-        public ActionResult Index()
-        {
-            var tb_orcamento = db.tb_orcamento.Include(t => t.tb_empresa).Include(t => t.tb_projeto).Include(t => t.tb_status_orcamento).Include(t => t.tb_usuario);
-            return View(tb_orcamento.ToList());
-        }
 
         // GET: Orcamento/Details/5
         public ActionResult Details(int? id)
@@ -31,8 +25,8 @@ namespace Web_Ages.Controllers
 
                 return RedirectToAction("Projetos");
             }
-            
-            tb_orcamento  orc = new Manter_Orcamento().obterOrcamento((int)id);
+
+            tb_orcamento orc = new Manter_Orcamento().obterOrcamento((int)id);
             orc.tb_projeto = new Manter_Projeto().obterProjeto(orc.id_projeto);
             orc.tb_projeto.tb_campi = new Manter_Campi().obterCampi(orc.tb_projeto.id_campi);
             orc.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.id_usuario);
@@ -40,9 +34,9 @@ namespace Web_Ages.Controllers
             //orc.tb_fatura = new Manter_Fatura().ObterFaturasporOrcamento((int)orc.id);
             //orc.tb_orcamento_servico = new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)orc.id);
 
-           return  View(orc);
-            
-           
+            return View(orc);
+
+
         }
         [HttpPost]
         public ActionResult Details(tb_orcamento orcamento)
@@ -52,21 +46,21 @@ namespace Web_Ages.Controllers
             {
 
                 new Manter_Orcamento().editarStatus(orc, 2);
-                return RedirectToAction("Details", "Projeto", new { id = orc. id_projeto });
+                return RedirectToAction("Details", "Projeto", new { id = orc.id_projeto });
             }
             else
                 if (Request.Form["rejeitar"] != null)
-            {
-                new Manter_Orcamento().editarStatus(orc, 3);
-                return RedirectToAction("Details", "Projeto", new { id = orc. id_projeto });
-            }
+                {
+                    new Manter_Orcamento().editarStatus(orc, 3);
+                    return RedirectToAction("Details", "Projeto", new { id = orc.id_projeto });
+                }
             return View(orcamento);
         }
         public ActionResult EnviarParaDetailsProjeto(int? id)
         {
-            return RedirectToAction("Details", "Projeto", new {id = id});
+            return RedirectToAction("Details", "Projeto", new { id = id });
         }
-      
+
         // GET: Orcamento/Create
         public ActionResult Create(int? id_projeto)
         {
@@ -126,7 +120,7 @@ namespace Web_Ages.Controllers
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
 
             return PartialView();
-            
+
         }
         [HttpPost]
         public ActionResult CreateFatura(tb_fatura tb_fatura)
@@ -138,10 +132,10 @@ namespace Web_Ages.Controllers
 
                 tb_fatura.is_aditivo = false;
                 tb_fatura.data_cadastro = DateTime.Now;
-                
+
                 Model.Super.SuperOrcamento.orcamento.tb_fatura.Add(tb_fatura);
                 @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
-                
+
                 return ListarFaturas();
             }
             return ListarFaturas();
@@ -153,8 +147,8 @@ namespace Web_Ages.Controllers
             return PartialView("ListarFaturas");
 
         }
-        
-        public void RemoverFatura( int id)
+
+        public void RemoverFatura(int id)
         {
             foreach (tb_fatura ft in ((List<tb_fatura>)ViewBag.faturas))
                 if (ft.id == id)
@@ -206,7 +200,7 @@ namespace Web_Ages.Controllers
         // POST: Orcamento/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
         // GET: Orcamento/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -214,15 +208,16 @@ namespace Web_Ages.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tb_orcamento tb_orcamento = db.tb_orcamento.Find(id);
+            tb_orcamento tb_orcamento = new Manter_Orcamento().obterOrcamento((int)id);
             if (tb_orcamento == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_empresa = new SelectList(db.tb_empresa, "id", "razao_social", tb_orcamento.id_empresa);
-            ViewBag.id_projeto = new SelectList(db.tb_projeto, "id", "titulo", tb_orcamento.id_projeto);
-            ViewBag.id_status = new SelectList(db.tb_status_orcamento, "id", "descricao", tb_orcamento.id_status);
-            ViewBag.id_usuario = new SelectList(db.tb_usuario, "id", "nome", tb_orcamento.id_usuario);
+            ViewBag.id_empresa = new SelectList(new List<tb_empresa>() { new Manter_Empresa().obterEmpresa(tb_orcamento.id_empresa) }, "id", "razao_social", tb_orcamento.id_empresa);
+            ViewBag.id_projeto = new SelectList(new List<tb_projeto> { new Manter_Projeto().obterProjeto(tb_orcamento.id_projeto) });
+
+            ViewBag.id_status = new SelectList(new List<tb_status_orcamento>() { new Manter_Status().obterByIdOrcamento(tb_orcamento.id_status) }, "id_status", "descricao");
+            ViewBag.id_usuario = new SelectList(new List<tb_usuario>() { new Manter_Usuario().obterUsuario(User.Identity.Name) }, "id_usuario", "nome");
             return View(tb_orcamento);
         }
 
@@ -235,14 +230,17 @@ namespace Web_Ages.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tb_orcamento).State = EntityState.Modified;
-                db.SaveChanges();
+                new Manter_Orcamento().editar(tb_orcamento);
+
                 return RedirectToAction("Index");
             }
-            ViewBag.id_empresa = new SelectList(db.tb_empresa, "id", "razao_social", tb_orcamento.id_empresa);
-            ViewBag.id_projeto = new SelectList(db.tb_projeto, "id", "titulo", tb_orcamento.id_projeto);
-            ViewBag.id_status = new SelectList(db.tb_status_orcamento, "id", "descricao", tb_orcamento.id_status);
-            ViewBag.id_usuario = new SelectList(db.tb_usuario, "id", "nome", tb_orcamento.id_usuario);
+            ViewBag.id_empresa = new SelectList(new List<tb_empresa>() { new Manter_Empresa().obterEmpresa(tb_orcamento.id_empresa) }, "id", "razao_social", tb_orcamento.id_empresa);
+            ViewBag.id_projeto = new SelectList(new List<tb_projeto>  { new Manter_Projeto().obterProjeto(tb_orcamento.id_projeto)});
+
+            ViewBag.id_status = new SelectList(new List<tb_status_orcamento>() { new Manter_Status().obterByIdOrcamento(tb_orcamento.id_status) }, "id_status", "descricao");
+            ViewBag.id_usuario = new SelectList(new List<tb_usuario>() { new Manter_Usuario().obterUsuario(User.Identity.Name) }, "id_usuario", "nome");
+
+
             return View(tb_orcamento);
         }
 
@@ -251,14 +249,16 @@ namespace Web_Ages.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Listar");
             }
-            tb_orcamento tb_orcamento = db.tb_orcamento.Find(id);
+            tb_orcamento tb_orcamento = new Manter_Orcamento().obterOrcamento((int)id);
+
             if (tb_orcamento == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Listar");
             }
             return View(tb_orcamento);
+
         }
 
         // POST: Orcamento/Delete/5
@@ -267,9 +267,9 @@ namespace Web_Ages.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             int id_projeto = 0;
-            foreach (var item in new Manter_Fatura().ObterFaturasporOrcamento((int) id ))
+            foreach (var item in new Manter_Fatura().ObterFaturasporOrcamento((int)id))
             {
-                
+
                 new Manter_Fatura().remover((int)item.id_orcamento);
             }
             foreach (var item in new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)id))
@@ -278,8 +278,8 @@ namespace Web_Ages.Controllers
             }
             tb_orcamento os = new Manter_Orcamento().obterOrcamento((int)id);
             id_projeto = os.id_projeto;
-           
-            new Manter_Orcamento().remover((int) id);
+
+            new Manter_Orcamento().remover((int)id);
             return RedirectToAction("Details", "Projeto", new { id = id_projeto });
         }
 
@@ -287,33 +287,126 @@ namespace Web_Ages.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+              
             }
             base.Dispose(disposing);
         }
 
         public ActionResult CreateAnexo()
         {
-            Model.Super.SuperAnexo.clearAnexos();
+            if (Models.TempAnexo.models == null)
+                Models.TempAnexo.models = new List<Models.ViewModel>();
+
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+
             return PartialView();
         }
         [HttpPost]
-        public ActionResult CreateAnexo(tb_anexo tb_anexo)
+        public ActionResult CreateAnexo(Models.ViewModel modelo)
         {
-
-            if (ModelState.IsValid)
+            if (Models.TempAnexo.models == null)
+                Models.TempAnexo.models = new List<Models.ViewModel>();
+            if (Request.Files.Count > 0)
             {
-                tb_anexo.data_cadastro = DateTime.Now;
-                tb_anexo.tb_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
-                tb_anexo.id_usuario = tb_anexo.tb_usuario.id;
-                Model.Super.SuperAnexo.anexos.Add(tb_anexo);
-                return ListarAnexos();
+                HttpPostedFileBase varr = Request.Files[0];
+                Models.TempAnexo.model = new Models.ViewModel()
+                {
+                    file = varr,
+                };
+                string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
+
+                string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
+                Models.TempAnexo.model.tb_anexo = new tb_anexo()
+                {
+                    titulo = DateTime.Now.ToShortDateString().Replace('/', '_') + DateTime.Now.ToShortTimeString().Replace('/', '_') + "_" + fileName,
+                    nome_arquivo = fileName,
+                    caminho = directory,
+                    tamanho = Models.TempAnexo.model.file.ContentLength,
+                    tipo = Models.TempAnexo.model.file.FileName.Split('.')[Models.TempAnexo.model.file.FileName.Split('.').Length - 1],
+                    tb_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name),
+                    data_cadastro = DateTime.Now,
+                };
+                Models.TempAnexo.model.tb_anexo.id_usuario = Models.TempAnexo.model.tb_anexo.tb_usuario.id;
+                Models.TempAnexo.models.Add(Models.TempAnexo.model);
             }
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return ListarAnexos();
         }
+        [HttpGet]
+        public ActionResult CreateAloneAnexo(int? id, Servico.Manter_.tipo tipo)
+        {
+
+            Models.TempAnexo.models = new List<Models.ViewModel>();
+            Models.TempAnexo.model = new Models.ViewModel()
+            {
+                id = (int)id,
+                tipo = tipo,
+            };
+
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult CreateAloneAnexo(Models.ViewModel modelo)
+        {
+            if (modelo.file == null)
+                return View();
+            if (Models.TempAnexo.models == null)
+                Models.TempAnexo.models = new List<Models.ViewModel>();
+            if (Models.TempAnexo.model == null)
+                Models.TempAnexo.model = new Models.ViewModel();
+
+            Models.TempAnexo.model.file = modelo.file;
+
+            string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
+
+            string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
+            Models.TempAnexo.model.tb_anexo = new tb_anexo()
+            {
+                titulo = DateTime.Now.ToShortDateString().Replace('/', '_') + DateTime.Now.ToShortTimeString().Replace('/', '_') + "_" + fileName,
+                nome_arquivo = fileName,
+                caminho = directory,
+                tamanho = Models.TempAnexo.model.file.ContentLength,
+                tipo = Models.TempAnexo.model.file.FileName.Split('.')[Models.TempAnexo.model.file.FileName.Split('.').Length - 1],
+                tb_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name),
+                data_cadastro = DateTime.Now,
+            };
+            Models.TempAnexo.model.tb_anexo.id_usuario = Models.TempAnexo.model.tb_anexo.tb_usuario.id;
+
+            using (Stream inputStream = Models.TempAnexo.model.file.InputStream)
+            {
+                MemoryStream memoryStream = inputStream as MemoryStream;
+                if (memoryStream == null)
+                {
+                    memoryStream = new MemoryStream();
+                    inputStream.CopyTo(memoryStream);
+                }
+                string cont = "/" + Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
+                FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+
+                Directory.CreateDirectory(Path.GetDirectoryName(file.Name));
+                memoryStream.WriteTo(file);
+                file.Close();
+                memoryStream.Close();
+            }
+            new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id);
+
+            Models.TempAnexo.models.Add(new Models.ViewModel()
+            {
+                tb_anexo = Models.TempAnexo.model.tb_anexo,
+            });
+            Models.TempAnexo.model.file = null;
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            return View();
+        }
+
         public ActionResult ListarAnexos()
         {
-            @ViewBag.tb_anexo = Model.Super.SuperAnexo.anexos;
+            if (Models.TempAnexo.models == null)
+                Models.TempAnexo.models = new List<Models.ViewModel>();
+
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return PartialView("ListarAnexos");
 
         }
