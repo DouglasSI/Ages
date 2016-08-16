@@ -1,23 +1,22 @@
 ﻿@model Model.tb_usuario
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
     <div>
-        <h4>tb_usuario</h4>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Lista de Usuários", "Index")
+            <span>&gt;</span>
+            Visualização
+        </a>
+    </div>
+</div>
         <hr />
+<div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.nome)
+                Nome:
             </dt>
 
             <dd>
@@ -25,7 +24,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.senha)
+                Senha:
             </dt>
 
             <dd>
@@ -33,7 +32,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.email)
+                E-mail:
             </dt>
 
             <dd>
@@ -41,7 +40,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ativo)
+                Ativo:
             </dt>
 
             <dd>
@@ -49,7 +48,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.perfil)
+                Perfil:
             </dt>
 
             <dd>
@@ -57,7 +56,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.sobrenome)
+                Sobrenome:
             </dt>
 
             <dd>
@@ -65,7 +64,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.tb_funcao.nome)
+                Função:
             </dt>
 
             <dd>
@@ -74,9 +73,5 @@
 
         </dl>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+    
+

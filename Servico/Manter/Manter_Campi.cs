@@ -22,6 +22,12 @@ namespace Servico.Manter
 
             return campis;
         }
+
+        public List<tb_campi> ObterCampistwo()
+        {
+            List<tb_campi> campis = entidade.tb_campi.ToList();
+            return campis;
+        }
         public void cadastrar(tb_campi objeto)
         {
             entidade.tb_campi.Add(objeto);

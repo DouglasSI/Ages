@@ -17,7 +17,7 @@ namespace Web_Ages.Controllers
         // GET: Campi
         public ActionResult Index()
         {
-            return PartialView(new Manter_Campi().obterCampis());
+            return PartialView(new Manter_Campi().ObterCampistwo());
         }
 
         // GET: Campi/Details/5

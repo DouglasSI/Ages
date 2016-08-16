@@ -1,122 +1,173 @@
 ﻿@model Model.tb_campi
-
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<div class="small-nav">
     <div>
-        <h4>tb_campi</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.num_inscricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.num_inscricao)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.razao_social)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.razao_social)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.nome_fantasia)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.nome_fantasia)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.atividade_principal)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.atividade_principal)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.atividade_secundaria)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.atividade_secundaria)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.natureza_juridica)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.natureza_juridica)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.cnpj)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.cnpj)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.inscricao_estadual)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.inscricao_estadual)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.inscricao_municipal)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.inscricao_municipal)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_contato.telefone)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_contato.telefone)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_endereco.logradouro)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_endereco.logradouro)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.tb_mantenedora.num_inscricao)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.tb_mantenedora.num_inscricao)
-            </dd>
-    
-        </dl>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Lista de Campis", "Index")
+            <span>&gt;</span>
+            Visualização
+        </a>
     </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-</body>
-</html>
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            Número de inscrição:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.num_inscricao)
+        </dd>
+
+        <dt>
+            Razão social:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.razao_social)
+        </dd>
+
+        <dt>
+            Nome fantasia:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome_fantasia)
+        </dd>
+
+        <dt>
+            Atividade principal:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.atividade_principal)
+        </dd>
+
+        <dt>
+            Atividade secundária:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.atividade_secundaria)
+        </dd>
+
+        <dt>
+            CNPJ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cnpj)
+        </dd>
+
+        <dt>
+            Inscrição estadual:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inscricao_estadual)
+        </dd>
+
+        <dt>
+            Inscrição municipal:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inscricao_municipal)
+        </dd>
+
+
+
+        <dt>
+            Telefone:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_contato.telefone)
+        </dd>
+        <dt>
+            Celular:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_contato.celular)
+        </dd>
+        <dt>
+            E-mail:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_contato.email)
+        </dd>
+        <dt>
+            Site:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_contato.site)
+        </dd>
+        <dt>
+            Fax:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_contato.fax)
+        </dd>
+
+
+
+        <dt>
+            Logradouro:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.logradouro)
+        </dd>
+        <dt>
+            Número:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.numero)
+        </dd>
+        <dt>
+            Complemento:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.complemento)
+        </dd>
+        <dt>
+            Bairro:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.bairro)
+        </dd>
+        <dt>
+            CEP:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.cep)
+        </dd>
+        <dt>
+            Município:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.municipio)
+        </dd>
+        <dt>
+            UF:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tb_endereco.uf)
+        </dd>
+
+
+    </dl>
+</div>
+
