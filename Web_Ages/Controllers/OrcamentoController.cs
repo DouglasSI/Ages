@@ -62,6 +62,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Orcamento/Create
+        [Authorize(Roles = "INFRA")]
         public ActionResult Create(int? id_projeto)
         {
 
@@ -81,6 +82,7 @@ namespace Web_Ages.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Create(Model.tb_orcamento tb_orcamento)
         {
 
@@ -108,13 +110,15 @@ namespace Web_Ages.Controllers
             }
             return View(tb_orcamento);
         }
-
+        [Authorize(Roles = "INFRA")]
         public ActionResult CreateServico()
         {
 
             ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
             return PartialView();
         }
+
+        [Authorize(Roles = "INFRA")]
         public ActionResult CreateFatura()
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
@@ -123,6 +127,7 @@ namespace Web_Ages.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "INFRA")]
         public ActionResult CreateFatura(tb_fatura tb_fatura)
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
@@ -148,13 +153,18 @@ namespace Web_Ages.Controllers
 
         }
 
+
+        [Authorize(Roles = "INFRA")]
         public void RemoverFatura(int id)
+
         {
             foreach (tb_fatura ft in ((List<tb_fatura>)ViewBag.faturas))
                 if (ft.id == id)
                     ((List<tb_fatura>)ViewBag.faturas).Remove(ft);
         }
+
         [HttpPost]
+        [Authorize(Roles = "INFRA")]
         public ActionResult CreateServico(tb_orcamento_servico tb_orcamento_servico)
         {
 
@@ -202,6 +212,7 @@ namespace Web_Ages.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
 
         // GET: Orcamento/Edit/5
+        [Authorize(Roles = "INFRA")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -226,6 +237,7 @@ namespace Web_Ages.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_usuario,id_status,id_empresa,id_projeto,valor,anotacao")] tb_orcamento tb_orcamento)
         {
             if (ModelState.IsValid)
@@ -245,6 +257,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Orcamento/Delete/5
+        [Authorize(Roles = "INFRA")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -264,6 +277,7 @@ namespace Web_Ages.Controllers
         // POST: Orcamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "INFRA")]
         public ActionResult DeleteConfirmed(int id)
         {
             int id_projeto = 0;
