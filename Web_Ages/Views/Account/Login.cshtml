@@ -28,15 +28,15 @@
 
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "E-mail", autofocus = true } })
+                    <div>
+                        E-mail:
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { } })
                         @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                     </div>
 
-                    <div style="margin-bottom: 25px" class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                        @Html.EditorFor(model => model.senha, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha" } })
+                    <div>
+                        Senha:
+                        @Html.PasswordFor(model => model.senha, new { htmlAttributes = new { @class = "form-control input-lg", placeholder = "Senha" } })
                         @Html.ValidationMessageFor(model => model.senha, "", new { @class = "text-danger" })
                     </div>
 

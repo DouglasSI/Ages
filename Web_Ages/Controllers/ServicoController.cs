@@ -36,6 +36,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Servico/Create
+        [Authorize(Roles = "INFRA")]
         public ActionResult Create()
         {
             ViewBag.id_usuario = new SelectList(new List<tb_usuario>() { new Manter_Usuario().obterUsuario(User.Identity.Name) }, "id", "nome");
@@ -46,7 +47,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+        [Authorize(Roles = "INFRA")]
         public ActionResult Create([Bind(Include = "id,id_usuario,valor,titulo,anotacao,data_cadastro")] tb_servico tb_servico)
         {
             if (ModelState.IsValid)
@@ -60,6 +61,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Servico/Edit/5
+        [Authorize(Roles = "INFRA")]
         public ActionResult Edit(int? id)
         {
 
@@ -82,7 +84,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+        [Authorize(Roles = "INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_usuario,valor,titulo,anotacao")] tb_servico tb_servico)
         {
             tb_servico.data_cadastro = DateTime.Now;
@@ -96,6 +98,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Servico/Delete/5
+        [Authorize(Roles = "INFRA")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,6 +116,7 @@ namespace Web_Ages.Controllers
         // POST: Servico/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "INFRA")]
         public ActionResult DeleteConfirmed(int id)
         {
             new Manter_Servico().remover(id);

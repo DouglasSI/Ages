@@ -100,6 +100,7 @@ namespace Web_Ages.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Aditivo(int? id_orcamento)
         {
 
@@ -118,6 +119,7 @@ namespace Web_Ages.Controllers
 
         }
         [HttpPost]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Aditivo(tb_fatura tb_fatura)
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
@@ -159,6 +161,7 @@ namespace Web_Ages.Controllers
 
         }
         [HttpGet]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Autorizar(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -171,6 +174,7 @@ namespace Web_Ages.Controllers
             //return View(fatura);mudanca 02
         }
         [HttpPost]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Autorizar(tb_fatura tb_fatura)
         {
             var param = int.Parse(this.Request.Params["id_fatura"]);
@@ -203,6 +207,7 @@ namespace Web_Ages.Controllers
 
             return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
+        [Authorize(Roles = "INFRA")]
         public ActionResult Material(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -220,6 +225,7 @@ namespace Web_Ages.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "INFRA")]
         public ActionResult Material(tb_compra compra)
         {
             if (Request.Form["bt_submit_1"] != null)
@@ -254,6 +260,7 @@ namespace Web_Ages.Controllers
             }
             return View(compra);
         }
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Baixa(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -436,6 +443,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Projeto/Create
+        [Authorize(Roles = "Diretor")]
         public ActionResult Create()
         {
             ViewBag.id_campi = new SelectList(new Manter_Campi().obterCampis(), "id", "nome_fantasia".ToUpper());
@@ -453,6 +461,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Diretor")]
         public ActionResult Create([Bind(Include = "id,id_usuario,id_status,id_campi,titulo,anotacao,valor_estimado")] tb_projeto tb_projeto)
         {
             if (ModelState.IsValid)
@@ -488,6 +497,7 @@ namespace Web_Ages.Controllers
             return View(tb_projeto);
         }
         // GET: Projeto/Edit/5
+        [Authorize(Roles = "Diretor")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -514,6 +524,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Diretor")]
         public ActionResult Edit([Bind(Include = "id,id_usuario,id_status,id_campi,titulo,anotacao,valor_estimado")] tb_projeto tb_projeto)
         {
             if (ModelState.IsValid)
@@ -551,6 +562,7 @@ namespace Web_Ages.Controllers
             return RedirectToAction("Delete", "Orcamento", new { id });
         }
         // GET: Projeto/Delete/5
+        [Authorize(Roles = "Diretor")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -567,6 +579,7 @@ namespace Web_Ages.Controllers
         // POST: Projeto/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Diretor")]
         public ActionResult DeleteConfirmed(int id)
         {
             new Manter_Projeto().remover(id);
