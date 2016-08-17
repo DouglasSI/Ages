@@ -38,7 +38,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Mantenedora/Create
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Create()
         {
             // tem que ter cadastro de endereco e contato nesta tablea
@@ -50,7 +50,7 @@ namespace Web_Ages.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Create([Bind(Include = "id,id_endereco,id_contato,num_inscricao,razao_social,nome_fantasia,atividade_principal,atividade_secundaria,cnpj,inscricao_estadual,inscricao_municipal,tb_contato,tb_endereco")]  tb_mantenedora tb_mantenedora)
         {
                 if (ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Mantenedora/Edit/5
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,7 +87,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_endereco,id_contato,num_inscricao,razao_social,nome_fantasia,atividade_principal,atividade_secundaria,cnpj,inscricao_estadual,inscricao_municipal,tb_contato,tb_endereco")] tb_mantenedora tb_mantenedora)
         {
             if (ModelState.IsValid)
@@ -101,7 +101,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Mantenedora/Delete/5
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -119,7 +119,7 @@ namespace Web_Ages.Controllers
         // POST: Mantenedora/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult DeleteConfirmed(int id)
         {
             new Manter_Mantenedora().remover(id);

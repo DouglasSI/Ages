@@ -47,7 +47,7 @@
                         @Html.DisplayFor(modelItem => item.data_prevista)
                     </td>
                     <td>
-                        @if (User.IsInRole("Infra"))
+                        @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                         {
                             <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverFatura", new { id = item.id })</a>
                         }

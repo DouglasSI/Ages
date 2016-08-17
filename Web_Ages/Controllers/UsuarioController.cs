@@ -11,12 +11,13 @@ using Servico.Manter;
 
 namespace Web_Ages.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "TI")]
     public class UsuarioController : Controller
     {
  
 
         // GET: Usuario
+        [Authorize(Roles = "TI")]
         public ActionResult Index()
         {
 
@@ -24,6 +25,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: Usuario/Details/5
+        [Authorize(Roles = "TI")]
         public ActionResult Details(int? id)
         {
             if (id == null)

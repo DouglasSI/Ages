@@ -23,7 +23,7 @@
         <p><strong>Você pode adicionar Anexos a esta Proposta</strong></p>
     </div>
 }
-else if (User.IsInRole("Infra"))
+else if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
 {
     <div class="msg msg-ok">
         <p><strong>Você pode adicionar Orçamentos a esta Proposta</strong></p>
@@ -130,7 +130,7 @@ else
                 {
                     Html.AntiForgeryToken();
                     <div class="form-group">
-                        @if (User.IsInRole("Infra"))
+                        @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                         {
                             <div class="col-md-3 offset-3">
                                 <div class="form-actions no-color">
@@ -174,7 +174,7 @@ else
                                         Observação
                                     </th>
                                     <th>
-                                        Valor Estimado
+                                        Valor Ofertado
                                     </th>
                                     <th>
                                         Mantenedora
@@ -208,7 +208,7 @@ else
                                         <td><a href="#">@Html.DisplayFor(modelItem => item.tb_usuario.nome)</a></td>
                                         <td>
                                             <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "DetalheOrcamento", new { id = item.id })</a>
-                                            @if (User.IsInRole("Infra"))
+                                            @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                                             {
                                                 <a href="#" class="ico del">@Html.ActionLink("Excluir", "DeleteOrcamento", new { id = item.id })</a>
                                             }

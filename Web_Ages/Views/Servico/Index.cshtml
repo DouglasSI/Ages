@@ -10,7 +10,7 @@
     </div>
 </div>
 
-@if (User.IsInRole("Infra"))
+@if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
 {
     <div class="box-content">
         <a>
@@ -68,7 +68,7 @@
                             @Html.DisplayFor(modelItem => item.tb_usuario.nome)
                         </td>
                         <td>
-                            @if (User.IsInRole("Infra"))
+                            @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                             {
                                 <a href="#" class="ico edit"> @Html.ActionLink("Editar", "Edit", new { id = item.id }) </a>
                             }

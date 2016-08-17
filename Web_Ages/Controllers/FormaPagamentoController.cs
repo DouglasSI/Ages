@@ -36,6 +36,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: FormaPagamento/Create
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Create()
         {
             return View();
@@ -45,7 +46,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Create([Bind(Include = "id,descricao,banco,agencia,conta_corrente,digito")] tb_forma_pagamento tb_forma_pagamento)
         {
             tb_forma_pagamento.ativo = true;
@@ -60,6 +61,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: FormaPagamento/Edit/5
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Edit(int? id)
         {
 
@@ -79,7 +81,7 @@ namespace Web_Ages.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Edit([Bind(Include = "id,descricao,banco,agencia,conta_corrente,digito,ativo")] tb_forma_pagamento tb_forma_pagamento)
         {
             if (ModelState.IsValid)
@@ -93,6 +95,7 @@ namespace Web_Ages.Controllers
         }
 
         // GET: FormaPagamento/Delete/5
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -110,6 +113,7 @@ namespace Web_Ages.Controllers
         // POST: FormaPagamento/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "FINANCEIRO")]
         public ActionResult DeleteConfirmed(int id)
         {
             new Manter_FormaPagamento().remover(id);

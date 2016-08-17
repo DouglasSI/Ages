@@ -99,7 +99,7 @@
                                                 } @if (User.IsInRole("Diretor"))
                                                 {
                                                     <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "DetailsSomenteVisualizar", new { id = item.id })</a>
-                                                }@if (User.IsInRole("INFRA"))
+                                                }@if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
                                                 {   
                                                      <a href="#" class="ico edit">@Html.ActionLink("Detalhes", "Details", new { id = item.id })</a>
                                                 

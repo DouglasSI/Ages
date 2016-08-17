@@ -31,7 +31,7 @@
                         </td>
 
                         <td>
-                            @if (User.IsInRole("Infra"))
+                            @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                             {
                                 <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverServico", new { id_servico = item.id_servico })</a>
                             }

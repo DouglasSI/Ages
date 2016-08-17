@@ -100,7 +100,7 @@ namespace Web_Ages.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Aditivo(int? id_orcamento)
         {
 
@@ -119,7 +119,7 @@ namespace Web_Ages.Controllers
 
         }
         [HttpPost]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Aditivo(tb_fatura tb_fatura)
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
@@ -161,7 +161,7 @@ namespace Web_Ages.Controllers
 
         }
         [HttpGet]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "DIRETOR-INFRA")]
         public ActionResult Autorizar(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -174,7 +174,7 @@ namespace Web_Ages.Controllers
             //return View(fatura);mudanca 02
         }
         [HttpPost]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "DIRETOR-INFRA")]
         public ActionResult Autorizar(tb_fatura tb_fatura)
         {
             var param = int.Parse(this.Request.Params["id_fatura"]);
@@ -207,7 +207,9 @@ namespace Web_Ages.Controllers
 
             return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
-        [Authorize(Roles = "INFRA")]
+        
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        
         public ActionResult Material(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -225,7 +227,7 @@ namespace Web_Ages.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "INFRA")]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Material(tb_compra compra)
         {
             if (Request.Form["bt_submit_1"] != null)
