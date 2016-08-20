@@ -17,7 +17,20 @@ namespace Servico.Manter
         private db_agesEntities2 entidade;
         public List<tb_usuario> obterUsuarios()
         {
-            return entidade.tb_usuario.ToList();
+            //.Where(x => x.Pilot.StartsWith("A")).OrderBy(x => x.Pilot);
+            using (var context = new db_agesEntities2())
+            {
+
+                var query = from p in context.tb_usuario
+                            join c in context.tb_funcao on p.id_funcao equals c.id
+                            select new { p, c };
+
+                var result = query.ToList();
+
+                
+            }
+
+            return entidade.tb_usuario.AsNoTracking().ToList();
         }
         public tb_usuario obterUsuario(string email, string senha)
         {

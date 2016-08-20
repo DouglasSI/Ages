@@ -49,6 +49,8 @@ namespace Servico.Manter
             }
 
         }
+
+
         public List<tb_fatura> ObterFaturasporOrcamento(int id)
         {
             List<tb_fatura> faturas = entidade.tb_fatura.ToList().Where(f => f.id_orcamento.Equals(id)).ToList();

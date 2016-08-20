@@ -32,7 +32,6 @@ namespace Web_Ages.Controllers
             //ViewBag.Projetos = new Manter_Projeto().obterProjetos();
             return PartialView(new Manter_Projeto().obterProjetos());
         }
-
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -76,7 +75,6 @@ namespace Web_Ages.Controllers
 
             return PartialView("Details");
         }
-
         // GET: Projeto/Details/5
         public ActionResult DetailsOrcamentosdoProjeto(int? id)
         {
@@ -98,7 +96,6 @@ namespace Web_Ages.Controllers
             return RedirectToAction("Aditivo", new { id_orcamento = id_orcamento.id });
 
         }
-
         [HttpGet]
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Aditivo(int? id_orcamento)
@@ -146,8 +143,9 @@ namespace Web_Ages.Controllers
                             memoryStream = new MemoryStream();
                             inputStream.CopyTo(memoryStream);
                         }
-                        string cont = "/" + Manter_.tipo.compra.ToString().ToUpper() + "/";
-                        FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                        
+                        FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos/ADITIVO/"), fileName), FileMode.Create, FileAccess.Write);
+                        model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos/ADITIVO"));
                         memoryStream.WriteTo(file);
                         file.Close();
                         memoryStream.Close();
@@ -197,6 +195,7 @@ namespace Web_Ages.Controllers
                     }
                     string cont = "/" + Manter_.tipo.fatura.ToString().ToUpper() + "/";
                     FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                    model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                     memoryStream.WriteTo(file);
                     file.Close();
                     memoryStream.Close();
@@ -251,10 +250,12 @@ namespace Web_Ages.Controllers
                             }
                             string cont = "/" + Manter_.tipo.compra.ToString().ToUpper() + "/";
                             FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                            model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                             memoryStream.WriteTo(file);
                             file.Close();
                             memoryStream.Close();
                         }
+                        
                         new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.compra, compra.id);
                     }
                     return RedirectToAction("DetailsOrcamentosdoProjeto", "Projeto", new { id = r.id_projeto });
@@ -268,12 +269,53 @@ namespace Web_Ages.Controllers
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
             Models.TempAnexo.models = new List<Models.ViewModel>();
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
-
-            return PartialView(fatura);
+            @ViewBag.tb_fatura = fatura;
+            return PartialView();
 
 
 
             //return View();mudanca
+        }
+        [HttpPost]
+        [Authorize(Roles = "FINANCEIRO")]
+        public ActionResult Baixa(tb_fatura tb_fatura)
+        {
+            if (Models.TempAnexo.models.Count == 0)
+                return PartialView();
+            var param = int.Parse(this.Request.Params["id_fatura"]);
+            tb_fatura = new Manter_Fatura().ObterFatura(param);
+
+            tb_fatura.autorizado = true;
+            tb_fatura.data_pagamento = DateTime.Now;
+            tb_fatura.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name).id;
+            tb_fatura.anotacao += " [ BAIXA => " + tb_fatura.valor_pendente.ToString("0.00") + " ]";
+            tb_fatura.valor_pendente = 0;
+            new Manter_Fatura().autorizar(tb_fatura);
+            tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_fatura.id_orcamento);
+
+            foreach (Models.ViewModel model in Models.TempAnexo.models)
+            {
+                var fileName = Path.GetFileName(model.file.FileName);
+                using (Stream inputStream = model.file.InputStream)
+                {
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    string cont = "/" + Manter_.tipo.fatura.ToString().ToUpper() + "/BAIXA/";
+                    FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos/" + cont), fileName), FileMode.Create, FileAccess.Write);
+                    model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
+                    memoryStream.WriteTo(file);
+                    file.Close();
+                    memoryStream.Close();
+                }
+                new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.fatura, tb_fatura.id);
+            }
+
+
+            return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
         public ActionResult DetailsFaturasServicos(int? id)
         {
@@ -312,7 +354,15 @@ namespace Web_Ages.Controllers
 
         }
 
+        public FileResult Download(int? id)
+        {
+            int _arquivoId = Convert.ToInt32(id);
+            tb_anexo tb_anexo = new Manter_().getAnexo((int)id);
 
+            string contentType = "application/"+tb_anexo.tipo;
+            return File(tb_anexo.caminho + tb_anexo.nome_arquivo, contentType, tb_anexo.nome_arquivo);
+        }
+   
         [HttpGet]
         public ActionResult CreateAnexo()
         {
@@ -444,6 +494,17 @@ namespace Web_Ages.Controllers
 
         }
 
+        public FileResult Image(string tipo)
+        {
+            switch (tipo)
+            {
+                default:
+                    return File(Server.MapPath("~/Content/pic/" + tipo), "image/png");
+            
+            }
+
+            return null;
+        }
         // GET: Projeto/Create
         [Authorize(Roles = "Diretor")]
         public ActionResult Create()

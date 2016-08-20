@@ -15,6 +15,53 @@ namespace Servico
         {
             //entidade = new db_agesEntities1();
         }
+        public tb_anexo getAnexo(int id)
+        {
+            using (db_agesEntities2 contexto = new db_agesEntities2())
+            {
+                return contexto.tb_anexo.Where(r => r.id.Equals( id)).First();
+            }
+            return null;
+        }
+        public List<tb_anexo> getAnexos(int id , tipo tipo)
+        {
+
+            using (db_agesEntities2 contexto = new db_agesEntities2())
+            {
+
+                switch (tipo)
+                {
+                    case tipo.orcamento:
+                        {
+                            List<tb_anexo> tb_anexos  = contexto.tb_anexo.Where(s => s.tb_orcamento.Any(c => c.id == id)).ToList();
+
+                            return tb_anexos;
+                        } break;
+                    case tipo.compra:
+                        {
+                            
+                            
+
+                            
+                        } break;
+                    case tipo.fatura:
+                        {
+                            
+                        } break;
+                    case tipo.empresa:
+                        {
+                            
+                        } break;
+                    
+                    case tipo.projeto:
+                        {
+                            
+                        } break;
+                }
+                return null;
+            }
+            return null;
+        }
         public void PersistirGrupo(tb_orcamento grupo)
         {
             using (db_agesEntities2 context = new db_agesEntities2())
@@ -139,20 +186,31 @@ namespace Servico
                     nome_arquivo = anexo.nome_arquivo,
                     url = "url",
                 };
-                tb_compra c = contexts.tb_compra.Find(id);
-                anex.tb_compra.Add(c);
-                contexts.tb_anexo.Add(anex);
-                contexts.SaveChanges();
-
                 switch (N)
                 {
                     case tipo.compra:
                         {
-                            
-
+                            anex.tb_compra.Add(contexts.tb_compra.Find(id));
+                        } break;
+                    case tipo.fatura:
+                        {
+                            anex.tb_fatura.Add(contexts.tb_fatura.Find(id));
+                        } break;
+                    case tipo.empresa:
+                        {
+                            anex.tb_empresa.Add(contexts.tb_empresa.Find(id));
+                        } break;
+                    case tipo.orcamento:
+                        {
+                            anex.tb_orcamento.Add(contexts.tb_orcamento.Find(id));
+                        } break;
+                    case tipo.projeto:
+                        {
+                            anex.tb_projeto.Add(contexts.tb_projeto.Find(id));
                         } break;
                 }
-
+                contexts.tb_anexo.Add(anex);
+                contexts.SaveChanges();
                 return contexts.tb_anexo.FirstOrDefault();
             };
 

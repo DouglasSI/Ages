@@ -348,10 +348,12 @@
     <Content Include="Views\Projeto\CreateAnexo.cshtml" />
     <Content Include="UploadHandler.ashx" />
     <Content Include="Views\Projeto\CreateAloneAnexo.cshtml" />
+    <Content Include="Views\Projeto\Baixa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="arquivos\" />
+    <Folder Include="Content\pic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
