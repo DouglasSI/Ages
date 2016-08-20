@@ -1,5 +1,11 @@
 ﻿@model List<Web_Ages.Models.ViewModel>
-
+<script>
+    $(document).ready(function () {
+        $(".backup_picture").error(function () {
+            $(this).attr('src', '~/Content/pic/default.png');
+        });
+    });
+</script>
 <div class="col-md-3" style="width: 2%"></div>
 <div class="col-md-3" style="width: 96%">
     <div class="box-head">
@@ -8,6 +14,9 @@
     <div class="table">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
+                <th>
+
+                </th>
                 <th>
                     Título
                 </th>
@@ -18,16 +27,18 @@
                     Criado em
                 </th>
                 <th>
-                    Baixar
+                    Remover
                 </th>
-                <th class="ac">Remover</th>
             </tr>
             @foreach (var item in (List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)
             {
 
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.tb_anexo.titulo)
+                        <img width="64" height="64" src="~/Content/pic/@( item.tb_anexo.tipo + ".png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tb_anexo.nome_arquivo)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.tb_anexo.anotacao)
@@ -36,7 +47,7 @@
                         @Html.DisplayFor(modelItem => item.tb_anexo.data_cadastro)
                     </td>
                     <td>
-                        Download/Visualizar
+                        Remover/@Html.ActionLink("Download", "Download", new { id = item.id })
                     </td>
                 </tr>
             }
