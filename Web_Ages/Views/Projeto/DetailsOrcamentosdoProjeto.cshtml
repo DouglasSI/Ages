@@ -58,20 +58,20 @@
                                     </tr>
                                     @foreach (var itemA in item.tb_anexo)
                                     {
-                                    <tr>
-                                        <td>
-                                            <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + ".png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => itemA.titulo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => itemA.data_cadastro)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Download", "Download", new { id = itemA.id })
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>
+                                                <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + " .png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemA.titulo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemA.data_cadastro)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Download", "Download", new { id = itemA.id })
+                                            </td>
+                                        </tr>
                                     }
                                 </table>
                             </div>
@@ -115,44 +115,44 @@
                                     </tr>
                                     @foreach (var fat in item.tb_fatura.Where(f => !f.is_aditivo))
                                     {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.titulo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.banco)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.tb_forma_pagamento.descricao)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.valor_inicial)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.valor_pendente)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => fat.data_prevista)
-                                        </td>
-                                        <td>
-                                            @if (User.IsInRole("Infra") && !fat.autorizado)
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.titulo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.banco)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.tb_forma_pagamento.descricao)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.valor_inicial)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.valor_pendente)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => fat.data_prevista)
+                                            </td>
+                                            <td>
+                                                @if (User.IsInRole("Infra") && !fat.autorizado)
                                                 {
-                                                <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
                                                 }
                                                 else if (User.IsInRole("Financeiro") && fat.autorizado)
                                                 {
-                                                <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
                                                 }
-                                        </td>
-                                        <td>
-                                            @foreach (Model.tb_anexo anexo in fat.tb_anexo)
+                                            </td>
+                                            <td>
+                                                @foreach (Model.tb_anexo anexo in fat.tb_anexo)
                                                 {
-                                                @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                    @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
 
                                                 }
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>
                                     }
                                 </table>
                             </div>
@@ -162,13 +162,13 @@
                             @using (Html.BeginForm())
                             {
                                 Html.AntiForgeryToken();
-                            <div class="table" style="background-color:white">
-                                <div class="form-actions no-color">
-                                    <input name="orcamento" type="hidden" value=@item.id>
-                                    <input type="submit" name="aditivo" value="Adicionar Aditivo"
-                                           class="btn btn-default" style="background-color:rgb(76, 255, 0)" />
+                                <div class="table" style="background-color:white">
+                                    <div class="form-actions no-color">
+                                        <input name="orcamento" type="hidden" value=@item.id>
+                                        <input type="submit" name="aditivo" value="Adicionar Aditivo"
+                                               class="btn btn-default" style="background-color:rgb(76, 255, 0)" />
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </div>
 
@@ -180,58 +180,70 @@
                                 @foreach (var fat in item.tb_fatura.Where(f => f.is_aditivo))
                                 {
                                     <div class="table">
+                                        <div class="box-head" style="background-color:black">
+                                            <h2 class="left">@fat.titulo</h2>
+                                        </div>
                                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
                                             <tr>
                                                 <th>
-                                                    
-                                                    @Html.DisplayFor(modelItem => fat.titulo)
-                                                </th>
-                                                <th>
-                                                    Banco:
-                                                    @Html.DisplayFor(modelItem => fat.banco)
-                                                </th>
-                                                <th>
                                                     Valor Inicial:
-                                                    @Html.DisplayFor(modelItem => fat.valor_inicial)
                                                 </th>
                                                 <th>
                                                     Valor Pendente:
-                                                    @Html.DisplayFor(modelItem => fat.valor_pendente)
                                                 </th>
                                                 <th>
                                                     Vencimento:
-                                                    @Html.DisplayFor(modelItem => fat.data_prevista)
                                                 </th>
                                                 <th>
-                                                    @if (User.IsInRole("Infra") && !fat.autorizado)
-                                                {
-                                                <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                }
-                                                else if (User.IsInRole("Financeiro") && fat.autorizado)
-                                                {
-                                                <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                }
+                                                    Ação
                                                 </th>
                                                 <th>
                                                     Anexos:
-                                                    @foreach (Model.tb_anexo anexo in fat.tb_anexo)
-                                                    {
-                                                        <br>
-                                                @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
-                                                        
-                                                }
                                                 </th>
                                             </tr>
-                                        </table>
-                                    </div>
-                                    <div class="table">
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                             <tr>
-                                                <div class="box-head" style="background-color:orangered">
-                                                    <h2 class="left">Materiais Nesta Fatura</h2>
-                                                </div>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => fat.valor_inicial)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => fat.valor_pendente)
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => fat.data_prevista)
+
+                                                </td>
+                                                <td>
+                                                    @if (User.IsInRole("Infra") && !fat.autorizado)
+                                                    {
+                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    }
+
+                                                    else if (User.IsInRole("Financeiro") && fat.autorizado)
+                                                    {
+                                                    <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @foreach (Model.tb_anexo anexo in fat.tb_anexo)
+                                                    {
+                                                    <br>
+                                                    @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                    }
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                               
                                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                    <div class="box-head" style="background-color:black">
+                                                        <h2 class="left">Materiais Dessa fatura</h2>
+                                                    </div>
+                                                       
+                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             Anotação
@@ -244,22 +256,23 @@
                                                         </th>
                                                     </tr>
                                                     @foreach (var material in fat.tb_compra)
-                                                        {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => material.anotacao)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => material.valor)
-                                                    </td>
-                                                    <td>
-                                                        ANEXOS
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => material.anotacao)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => material.valor)
+                                                            </td>
+                                                            <td>
+                                                                ANEXOS
 
-                                                    </td>
-                                                </tr>
-                                                        }
+                                                            </td>
+                                                        </tr>
+                                                    }
                                                 </table>
                                             </tr>
+
                                         </table>
                                     </div>
                                 }
@@ -286,20 +299,20 @@
                                     </tr>
                                     @foreach (var serv in item.tb_orcamento_servico)
                                     {
-                                    <tr>
+                                        <tr>
 
-                                        @Html.HiddenFor(modelItem => serv.id_servico)
-                                        @Html.HiddenFor(modelItem => serv.tb_servico.id)
-                                        <td>
-                                            @Html.DisplayFor(modelItem => serv.tb_servico.titulo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => serv.valor)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => serv.anotacao)
-                                        </td>
-                                    </tr>
+                                            @Html.HiddenFor(modelItem => serv.id_servico)
+                                            @Html.HiddenFor(modelItem => serv.tb_servico.id)
+                                            <td>
+                                                @Html.DisplayFor(modelItem => serv.tb_servico.titulo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => serv.valor)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => serv.anotacao)
+                                            </td>
+                                        </tr>
                                     }
                                 </table>
                             </div>
