@@ -36,6 +36,7 @@ namespace Model
         public decimal valor_pendente { get; set; }
         public bool is_aditivo { get; set; }
         public bool autorizado { get; set; }
+        public bool encerrado { get; set; }
     
         public virtual ICollection<tb_compra> tb_compra { get; set; }
         public virtual tb_forma_pagamento tb_forma_pagamento { get; set; }
