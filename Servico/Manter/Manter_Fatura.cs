@@ -39,6 +39,7 @@ namespace Servico.Manter
                     data_pagamento = fat.data_pagamento,
                     data_prevista = fat.data_prevista,
                     autorizado = fat.autorizado,
+                    encerrado = fat.encerrado
                    
                 };
                 context.tb_fatura.Attach(fatura);

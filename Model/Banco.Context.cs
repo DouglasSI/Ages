@@ -6,4 +6,41 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+namespace Model
+{
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
 
+    public partial class db_agesEntities2 : DbContext
+    {
+        public db_agesEntities2()
+            : base("name=db_agesEntities2")
+        {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+
+        public virtual DbSet<tb_anexo> tb_anexo { get; set; }
+        public virtual DbSet<tb_campi> tb_campi { get; set; }
+        public virtual DbSet<tb_compra> tb_compra { get; set; }
+        public virtual DbSet<tb_contato> tb_contato { get; set; }
+        public virtual DbSet<tb_empresa> tb_empresa { get; set; }
+        public virtual DbSet<tb_endereco> tb_endereco { get; set; }
+        public virtual DbSet<tb_fatura> tb_fatura { get; set; }
+        public virtual DbSet<tb_forma_pagamento> tb_forma_pagamento { get; set; }
+        public virtual DbSet<tb_funcao> tb_funcao { get; set; }
+        public virtual DbSet<tb_mantenedora> tb_mantenedora { get; set; }
+        public virtual DbSet<tb_orcamento> tb_orcamento { get; set; }
+        public virtual DbSet<tb_orcamento_servico> tb_orcamento_servico { get; set; }
+        public virtual DbSet<tb_projeto> tb_projeto { get; set; }
+        public virtual DbSet<tb_projeto_servico> tb_projeto_servico { get; set; }
+        public virtual DbSet<tb_servico> tb_servico { get; set; }
+        public virtual DbSet<tb_status_orcamento> tb_status_orcamento { get; set; }
+        public virtual DbSet<tb_status_projeto> tb_status_projeto { get; set; }
+        public virtual DbSet<tb_usuario> tb_usuario { get; set; }
+    }
+}

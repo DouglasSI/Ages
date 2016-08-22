@@ -22,6 +22,10 @@
                     <a href="#">
                         @Html.ActionLink("Bem vindo, " + @HttpContext.Current.User.Identity.Name, "Login", "Account")
                     </a>
+    <span>|</span>
+    <a href="#">
+        @Html.ActionLink("Sair", "LogOut", "Home")
+    </a>
                     }
                     else
                     {
@@ -29,10 +33,7 @@
                         @Html.ActionLink("Login", "Login", "Account")
                     </a>
                     }
-                    <span>|</span>
-                    <a href="#">
-                        @Html.ActionLink("Sair", "LogOut", "Home")
-                    </a>
+                   
                 </div>
             </div>
 
