@@ -280,16 +280,21 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Baixa(tb_fatura tb_fatura)
         {
-            if (Models.TempAnexo.models.Count == 0)
-                return PartialView();
             var param = int.Parse(this.Request.Params["id_fatura"]);
             tb_fatura = new Manter_Fatura().ObterFatura(param);
+
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            @ViewBag.tb_fatura = tb_fatura;
+            if (Models.TempAnexo.models.Count == 0)
+                return PartialView();
+            
 
             tb_fatura.autorizado = true;
             tb_fatura.data_pagamento = DateTime.Now;
             tb_fatura.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name).id;
             tb_fatura.anotacao += " [ BAIXA => " + tb_fatura.valor_pendente.ToString("0.00") + " ]";
             tb_fatura.valor_pendente = 0;
+            tb_fatura.encerrado = true;
             new Manter_Fatura().autorizar(tb_fatura);
             tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_fatura.id_orcamento);
 
@@ -353,10 +358,20 @@ namespace Web_Ages.Controllers
             return RedirectToAction("CreateAloneAnexo", new { id = param, tipo = Manter_.tipo.projeto });
 
         }
+        public void Remover(int? id)
+        {
 
+
+            int _arquivoId = Convert.ToInt32((int)id);
+            Web_Ages.Models.TempAnexo.models.RemoveAt(_arquivoId);
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+
+        }
         public FileResult Download(int? id)
         {
-            int _arquivoId = Convert.ToInt32(id);
+
+        
+            int _arquivoId = Convert.ToInt32((int)id);
             tb_anexo tb_anexo = new Manter_().getAnexo((int)id);
 
             string contentType = "application/"+tb_anexo.tipo;
@@ -388,6 +403,15 @@ namespace Web_Ages.Controllers
                 string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
 
                 string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
+
+
+                //string cont = "/" + Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
+
+
+                //FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                //Models.TempAnexo.model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
+
+
                 Models.TempAnexo.model.tb_anexo = new tb_anexo()
                 {
                     titulo = DateTime.Now.ToShortDateString().Replace('/', '_') + DateTime.Now.ToShortTimeString().Replace('/', '_') + "_" + fileName,
@@ -465,16 +489,16 @@ namespace Web_Ages.Controllers
 
 
                 FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
-
+                Models.TempAnexo.model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                 Directory.CreateDirectory(Path.GetDirectoryName(file.Name));
                 memoryStream.WriteTo(file);
                 file.Close();
                 memoryStream.Close();
             }
-            new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id);
+            
 
             Models.TempAnexo.models.Add(new Models.ViewModel() {
-              tb_anexo = Models.TempAnexo.model.tb_anexo,
+                tb_anexo = new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id),
             }
                 );
             Models.TempAnexo.model.file = null;
@@ -502,8 +526,6 @@ namespace Web_Ages.Controllers
                     return File(Server.MapPath("~/Content/pic/" + tipo), "image/png");
             
             }
-
-            return null;
         }
         // GET: Projeto/Create
         [Authorize(Roles = "Diretor")]

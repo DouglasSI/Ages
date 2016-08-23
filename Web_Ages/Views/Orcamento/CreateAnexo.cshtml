@@ -1,0 +1,69 @@
+﻿@model Web_Ages.Models.ViewModel
+
+<script>
+    $body = $("body");
+    $(document).on({
+        ajaxStart: function () { $body.addClass("loading"); },
+        ajaxStop: function () { $body.removeClass("loading"); }
+    });
+
+    $(document).ready(function () {
+        $("#upload").click(function () {
+            var data = new FormData();
+
+            //Add the Multiple selected files into the data object
+            var files = $("#files").get(0).files;
+            for (i = 0; i < files.length; i++) {
+                data.append("files" + i, files[i]);
+            }
+
+            //Post the data (files) to the server
+            if (files.length > 0) {
+                $.ajax({
+                    type: 'POST',
+                    url: "@Url.Action("CreateAnexo", "Orcamento")",
+
+                    data: data,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $("#incluir").click();
+                    },
+                    error: function () {
+                        alert("An error occurred!");
+                    },
+                });
+            }
+        });
+    });
+</script>
+
+@using (Ajax.BeginForm("CreateAnexo", "Orcamento", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "foda3" }, new { encrtype = "multipart/form-data" }))
+{
+    <div class="form-horizontal col-md-12 ">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <div class="control-label col-md-2" style="width: 2%">
+            </div>
+            <div class="col-md-3" style="width: 81%">
+                <input type='file' id="files" multiple="multiple" />
+            </div>
+
+            <div class="col-md-3" style="width: 15%">
+                <input value="Incluir" class=" btn btn-block" type="button" id="upload" />
+                <input tabindex="-1" value="Incluir" class=" btn btn-block" type="submit" id="incluir" style="position: absolute; left: -9999px; width: 1px; height: 1px;" />
+            </div>
+            <div class="control-label col-md-2" style="width: 1%">
+            </div>
+        </div>
+    </div>
+}
+<div class="form-horizontal col-md-12 ">
+    <div class="form-group" id="foda3">
+        @Html.Partial("ListarAnexos")
+    </div>
+</div>
+
+

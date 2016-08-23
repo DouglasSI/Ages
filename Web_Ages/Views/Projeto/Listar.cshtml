@@ -55,13 +55,7 @@
                                             Valor Estimado
                                         </th>
                                         <th>
-                                            Mantenedora
-                                        </th>
-                                        <th>
-                                            Campi
-                                        </th>
-                                        <th>
-                                            Situação
+                                            Mantenedora - Campi
                                         </th>
                                         <th>
                                             Criado por
@@ -82,13 +76,8 @@
                                                 @Html.DisplayFor(modelItem => item.valor_estimado)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.tb_campi.tb_mantenedora.nome_fantasia)
-                                            </td>
-                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tb_campi.tb_mantenedora.nome_fantasia) - 
                                                 @Html.DisplayFor(modelItem => item.tb_campi.nome_fantasia)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.tb_status_projeto.descricao)
                                             </td>
                                             <td><a href="#">@Html.DisplayFor(modelItem => item.tb_usuario.nome)</a></td>
                                             <td>

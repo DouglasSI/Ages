@@ -17,12 +17,12 @@
                     <th class="ac">Remover</th>
                 </tr>
 
-                @foreach (var item in (List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico)
-                {
+               @for (int i = 0; i < ((List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico).Count; i++)
+               {
+                   var item = ((List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico)[i];
                     <tr>
 
-                        @Html.HiddenFor(modelItem => item.id_servico)
-                        @Html.HiddenFor(modelItem => item.tb_servico.id)
+                       
                         <td>
                             @Html.DisplayFor(modelItem => item.tb_servico.titulo)
                         </td>
@@ -31,9 +31,13 @@
                         </td>
 
                         <td>
+                          
                             @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                             {
-                                <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverServico", new { id_servico = item.id_servico })</a>
+                                <a href="#" class="ico del">
+                                    @Ajax.ActionLink("Excluir", "RemoverServico", "Orcamento", new { id = i}, new AjaxOptions() { UpdateTargetId = "foda2", InsertionMode = InsertionMode.Replace })
+                                </a>
+                                ;
                             }
                         </td>
                     </tr>

@@ -7,7 +7,7 @@
             <span>&gt;</span>
             @if (Model.id_status == 1)
             {
-            @Html.ActionLink("Lista de Propostas ", "Listar")}
+                @Html.ActionLink("Lista de Propostas ", "Listar")}
             else if (Model.id_status == 2)
             { @Html.ActionLink("Lista de Propostas (Em Análise) ", "Listar")}
 
@@ -80,8 +80,8 @@ else
                 @Html.Label(Model.tb_campi.nome_fantasia, new { @class = "form-control" })
             </div>
         </div>
-        <hr />  
-        <div class="form-group" id="foda2">            
+        <hr />
+        <div class="form-group" id="foda2">
             <div class="col-md-3" style="width: 100%">
                 <div class="box-head">
                     <h2 class="left">Itens Anexados</h2>
@@ -101,22 +101,21 @@ else
                             <th>
                                 Baixar
                             </th>
-                            <th class="ac">Remover</th>
                         </tr>
-                        @foreach (var item in (List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)
+                        @foreach (var item in Model.tb_anexo)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.tb_anexo.titulo)
+                                    @Html.DisplayFor(modelItem => item.titulo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.tb_anexo.anotacao)
+                                    @Html.DisplayFor(modelItem => item.anotacao)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.tb_anexo.data_cadastro)
+                                    @Html.DisplayFor(modelItem => item.data_cadastro)
                                 </td>
                                 <td>
-                                    Download/Visualizar
+                                    <p>  @Html.ActionLink("Download", "Download", new { id = item.id })</p>
                                 </td>
                             </tr>
                         }
@@ -349,11 +348,10 @@ else
                         </div>
                     </div>
                 }
-
             }
             <hr />
         </div>
-    </div>   
+    </div>
 }
 
 

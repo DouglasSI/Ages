@@ -21,7 +21,7 @@ namespace Servico
             {
                 return contexto.tb_anexo.Where(r => r.id.Equals( id)).First();
             }
-            return null;
+
         }
         public List<tb_anexo> getAnexos(int id , tipo tipo)
         {

@@ -31,9 +31,9 @@ namespace Web_Ages.Controllers
             orc.tb_projeto.tb_campi = new Manter_Campi().obterCampi(orc.tb_projeto.id_campi);
             orc.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.id_usuario);
             orc.tb_projeto.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.tb_projeto.id_usuario);
-            //orc.tb_fatura = new Manter_Fatura().ObterFaturasporOrcamento((int)orc.id);
-            //orc.tb_orcamento_servico = new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)orc.id);
-
+           // orc.tb_fatura = new Manter_Fatura().ObterFaturasporOrcamento((int)orc.id);
+            orc.tb_orcamento_servico = new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)orc.id);
+            
             return View(orc);
 
 
@@ -78,6 +78,10 @@ namespace Web_Ages.Controllers
             ViewBag.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
 
             @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
+
+
+            Models.TempAnexo.models = new List<Models.ViewModel>();
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return PartialView();
         }
         [HttpPost]
@@ -105,6 +109,9 @@ namespace Web_Ages.Controllers
                     tb_orcamento.tb_orcamento_servico = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
                     tb_orcamento.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
                     m.PersistirGrupo(tb_orcamento);
+
+                    foreach (Models.ViewModel model in Models.TempAnexo.models) 
+                    m.PersistirAnexo(model.tb_anexo , Manter_.tipo.orcamento, tb_orcamento.id);
                     return RedirectToAction("Details", "Projeto", new { id = tb_orcamento.id_projeto });
                 }
             }
@@ -122,7 +129,7 @@ namespace Web_Ages.Controllers
         public ActionResult CreateFatura()
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
-
+            @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
             return PartialView();
 
         }
@@ -133,6 +140,10 @@ namespace Web_Ages.Controllers
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
             if (ModelState.IsValid)
             {
+                if (Request.Form["bt_submit_1"] != null)
+                {
+
+                }
                 tb_fatura.tb_forma_pagamento = new Manter_FormaPagamento().obterFormaPagamento(tb_fatura.id_forma_pagamento);
 
                 tb_fatura.is_aditivo = false;
@@ -153,14 +164,35 @@ namespace Web_Ages.Controllers
 
         }
 
-
-        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
-        public void RemoverFatura(int id)
-
+        public FileResult Download(int? id)
         {
-            foreach (tb_fatura ft in ((List<tb_fatura>)ViewBag.faturas))
-                if (ft.id == id)
-                    ((List<tb_fatura>)ViewBag.faturas).Remove(ft);
+
+
+            int _arquivoId = Convert.ToInt32((int)id);
+            tb_anexo tb_anexo = new Manter_().getAnexo((int)id);
+
+            string contentType = "application/" + tb_anexo.tipo;
+            return File(tb_anexo.caminho + tb_anexo.nome_arquivo, contentType, tb_anexo.nome_arquivo);
+        }
+        public ActionResult Remover(int? id)
+        {
+
+
+            int _arquivoId = Convert.ToInt32((int)id);
+            Web_Ages.Models.TempAnexo.models.RemoveAt(_arquivoId);
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            return ListarAnexos();
+
+        }
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult RemoverFatura(int id)
+        {
+            ((List<tb_fatura>)
+                Model.Super.SuperOrcamento.orcamento.tb_fatura).RemoveAt(id);
+            @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
+              @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
+           // return PartialView("CreateFatura");
+             return ListarFaturas();
         }
 
         [HttpPost]
@@ -397,21 +429,26 @@ namespace Web_Ages.Controllers
                     inputStream.CopyTo(memoryStream);
                 }
                 string cont = "/" + Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
-                FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
 
+
+                FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                Models.TempAnexo.model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                 Directory.CreateDirectory(Path.GetDirectoryName(file.Name));
                 memoryStream.WriteTo(file);
                 file.Close();
                 memoryStream.Close();
             }
-            new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id);
+
 
             Models.TempAnexo.models.Add(new Models.ViewModel()
             {
-                tb_anexo = Models.TempAnexo.model.tb_anexo,
-            });
+                tb_anexo = new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id),
+            }
+                );
             Models.TempAnexo.model.file = null;
+
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+
             return View();
         }
 

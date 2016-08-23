@@ -28,8 +28,10 @@
                 </th>
                 <th class="ac">Remover</th>
             </tr>
-            @foreach (var item in (List<Model.tb_fatura>)@ViewBag.tb_fatura)
+            @for (int i = 0; i < ( (List<Model.tb_fatura>)@ViewBag.tb_fatura).Count;i++ )
+            
             {
+                var item =  ((List<Model.tb_fatura>)@ViewBag.tb_fatura)[i];
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.titulo)
@@ -49,7 +51,10 @@
                     <td>
                         @if (User.IsInRole("Infra") || User.IsInRole("DIRETOR-INFRA"))
                         {
-                            <a href="#" class="ico del">@Html.ActionLink("Excluir", "RemoverFatura", new { id = item.id })</a>
+                            <a href="#" class="ico del">
+                        @Ajax.ActionLink("Excluir", "RemoverFatura", "Orcamento"
+                        , new { id = i }, new AjaxOptions() { UpdateTargetId = "foda2", InsertionMode = InsertionMode.Replace }) </a>
+                            ;
                         }
                     </td>
                 </tr>
