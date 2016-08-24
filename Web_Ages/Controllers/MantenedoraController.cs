@@ -90,11 +90,13 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_endereco,id_contato,num_inscricao,razao_social,nome_fantasia,atividade_principal,atividade_secundaria,cnpj,inscricao_estadual,inscricao_municipal,tb_contato,tb_endereco")] tb_mantenedora tb_mantenedora)
         {
+            tb_mantenedora tb_mantenedoratwo = new Manter_Mantenedora().obterMantenedora((int)tb_mantenedora.id);
             if (ModelState.IsValid)
             {
-                tb_mantenedora.id_contato = new Manter_Contato().cadastrar(tb_mantenedora.tb_contato).id;
-                tb_mantenedora.id_endereco = new Manter_Endereco().cadastrar(tb_mantenedora.tb_endereco).id;
-                new Manter_Mantenedora().editar(tb_mantenedora);
+                new Manter_Contato().editar(tb_mantenedora.tb_contato, tb_mantenedoratwo.id_contato);
+                new Manter_Endereco().editar(tb_mantenedora.tb_endereco, tb_mantenedoratwo.id_endereco);
+                new Manter_Mantenedora().editar(tb_mantenedora, tb_mantenedoratwo.id_endereco, tb_mantenedoratwo.id_contato);
+                
                 return RedirectToAction("Index");
             }
             return View(tb_mantenedora);

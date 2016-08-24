@@ -25,15 +25,31 @@ namespace Servico.Manter
             entidade.SaveChanges();
             return cont;
         }
-        public void editar(tb_endereco objeto)
+        public void editar(tb_endereco objeto, int id)
         {
-            entidade = new db_agesEntities2();
-            entidade.tb_endereco.Attach(objeto);
-            var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            
-            entidade.SaveChanges();
+
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_endereco end = new tb_endereco()
+                {
+                    id = id,
+                    logradouro = objeto.logradouro,
+                    numero = objeto.numero,
+                    complemento = objeto.complemento,
+                    cep= objeto.cep,
+                    bairro = objeto.bairro,
+                    municipio = objeto.municipio,
+                    uf = objeto.uf,
+
+                };
+                context.tb_endereco.Attach(end);
+                var entry = context.Entry(end);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
         }
+       
         public tb_endereco obterEndereco(object filtro)
         {
             return entidade.tb_endereco.Where(f => f.id.Equals(filtro)).FirstOrDefault();

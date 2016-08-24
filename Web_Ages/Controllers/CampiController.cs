@@ -90,13 +90,14 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_endereco,id_contato,id_mantenedora,num_inscricao,razao_social,nome_fantasia,atividade_principal,atividade_secundaria,natureza_juridica,cnpj,inscricao_estadual,inscricao_municipal,tb_contato,tb_endereco")] tb_campi tb_campi)
         {
+            tb_campi  tb_campitwo = new Manter_Campi().obterCampi((int)tb_campi.id);
             if (ModelState.IsValid)
             {
 
-                new Manter_Contato().editar(tb_campi.tb_contato);
-                new Manter_Endereco().editar(tb_campi.tb_endereco);
+                new Manter_Contato().editar(tb_campi.tb_contato,tb_campitwo.id_contato);
+                new Manter_Endereco().editar(tb_campi.tb_endereco, tb_campitwo.id_endereco);
                 
-                new Manter_Campi().editar(tb_campi);
+                new Manter_Campi().editar(tb_campi,tb_campitwo.id_endereco,tb_campitwo.id_contato);
                 return RedirectToAction("Index");
             }
             

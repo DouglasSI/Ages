@@ -27,15 +27,36 @@ namespace Servico.Manter
             entidade.tb_empresa.Add(objeto);
             entidade.SaveChanges();
         }
-        public void editar(tb_empresa objeto)
+        public void editar(tb_empresa objeto, int id_end, int id_cont)
         {
-            entidade = new db_agesEntities2();
-            entidade.tb_empresa.Attach(objeto);
-            var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
 
-            entidade.SaveChanges();
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_empresa emp = new tb_empresa()
+                {
+                    id = objeto.id,
+                    id_endereco = id_end,
+                    id_contato = id_cont,
+
+                    
+                    razao_social = objeto.razao_social,
+                    nome_fantasia = objeto.nome_fantasia,
+                    atividade_principal = objeto.atividade_principal,
+                    
+
+                    cnpj = objeto.cnpj,
+                    inscricao_estadual = objeto.inscricao_estadual,
+                    inscricao_municipal = objeto.inscricao_municipal,
+
+                };
+                context.tb_empresa.Attach(emp);
+                var entry = context.Entry(emp);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
         }
+
         public void remover(int id)
         {
 

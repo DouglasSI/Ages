@@ -27,14 +27,36 @@ namespace Servico.Manter
             entidade.tb_mantenedora.Add(objeto);
             entidade.SaveChanges();
         }
-        public void editar(tb_mantenedora objeto)
+        public void editar(tb_mantenedora objeto, int id_end, int id_cont)
         {
-            entidade = new db_agesEntities2();
-            entidade.tb_mantenedora.Attach(objeto);
-            var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            entidade.SaveChanges();
+
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_mantenedora mantenedora = new tb_mantenedora()
+                {
+                    id = objeto.id,
+                    id_endereco = id_end,
+                    id_contato = id_cont,
+                    
+                    num_inscricao = objeto.num_inscricao,
+                    razao_social = objeto.razao_social,
+                    nome_fantasia = objeto.nome_fantasia,
+                    atividade_principal = objeto.atividade_principal,
+                    atividade_secundaria = objeto.atividade_secundaria,
+                    
+                    cnpj = objeto.cnpj,
+                    inscricao_estadual = objeto.inscricao_estadual,
+                    inscricao_municipal = objeto.inscricao_municipal,
+
+                };
+                context.tb_mantenedora.Attach(mantenedora);
+                var entry = context.Entry(mantenedora);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
         }
+       
         public void remover(int id)
         {
 

@@ -33,14 +33,36 @@ namespace Servico.Manter
             entidade.tb_campi.Add(objeto);
             entidade.SaveChanges();
         }
-        public void editar(tb_campi objeto)
+        public void editar(tb_campi objeto, int id_end, int id_cont)
         {
-            entidade = new db_agesEntities2();
-            entidade.tb_campi.Attach(objeto);
-            var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            entidade.SaveChanges();
+
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_campi campi = new tb_campi()
+                {
+                    id = objeto.id,
+                    id_endereco= id_end,
+                    id_contato = id_cont,
+                    id_mantenedora = objeto.id_mantenedora,
+                    num_inscricao = objeto.num_inscricao,
+                    razao_social = objeto.razao_social,
+                    nome_fantasia = objeto.nome_fantasia,
+                    atividade_principal= objeto.atividade_principal,
+                    atividade_secundaria = objeto.atividade_secundaria,
+                    natureza_juridica = objeto.natureza_juridica,
+                    cnpj = objeto.cnpj,
+                    inscricao_estadual = objeto.inscricao_estadual,
+                    inscricao_municipal= objeto.inscricao_municipal,
+
+                };
+                context.tb_campi.Attach(campi);
+                var entry = context.Entry(campi);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
         }
+       
         public tb_campi obterCampi(int filtro)
         {
             tb_campi tb_campi  = entidade.tb_campi.Where(f => f.id.Equals(filtro)).FirstOrDefault();

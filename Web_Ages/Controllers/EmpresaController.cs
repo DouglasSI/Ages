@@ -86,12 +86,14 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Edit([Bind(Include = "id,id_endereco,id_contato,razao_social,nome_fantasia,cnpj,inscricao_estadual,inscricao_municipal,atividade_principal,tb_contato,tb_endereco")] tb_empresa tb_empresa)
         {
+            tb_empresa tb_empresatwo = new Manter_Empresa().obterEmpresa((int)tb_empresa.id);
             if (ModelState.IsValid)
             {
-                tb_empresa.id_contato = new Manter_Contato().cadastrar(tb_empresa.tb_contato).id;
-                tb_empresa.id_endereco = new Manter_Endereco().cadastrar(tb_empresa.tb_endereco).id;
-               
-                new Manter_Empresa().editar(tb_empresa);
+                new Manter_Contato().editar(tb_empresa.tb_contato, tb_empresatwo.id_contato);
+                new Manter_Endereco().editar(tb_empresa.tb_endereco, tb_empresatwo.id_endereco);
+
+
+                new Manter_Empresa().editar(tb_empresa, tb_empresatwo.id_endereco, tb_empresatwo.id_contato);
                 return RedirectToAction("Index");
             }
             return View(tb_empresa);
