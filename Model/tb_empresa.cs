@@ -18,6 +18,7 @@ namespace Model
         {
             this.tb_orcamento = new HashSet<tb_orcamento>();
             this.tb_anexo = new HashSet<tb_anexo>();
+            this.tb_compra = new HashSet<tb_compra>();
         }
     
         public int id { get; set; }
@@ -34,5 +35,6 @@ namespace Model
         public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }
         public virtual tb_endereco tb_endereco { get; set; }
         public virtual ICollection<tb_anexo> tb_anexo { get; set; }
+        public virtual ICollection<tb_compra> tb_compra { get; set; }
     }
 }

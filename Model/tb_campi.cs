@@ -23,7 +23,6 @@ namespace Model
         public int id_endereco { get; set; }
         public int id_contato { get; set; }
         public int id_mantenedora { get; set; }
-        public string num_inscricao { get; set; }
         public string razao_social { get; set; }
         public string nome_fantasia { get; set; }
         public string atividade_principal { get; set; }

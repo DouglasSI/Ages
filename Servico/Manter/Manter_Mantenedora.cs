@@ -38,7 +38,7 @@ namespace Servico.Manter
                     id_endereco = id_end,
                     id_contato = id_cont,
                     
-                    num_inscricao = objeto.num_inscricao,
+                    
                     razao_social = objeto.razao_social,
                     nome_fantasia = objeto.nome_fantasia,
                     atividade_principal = objeto.atividade_principal,

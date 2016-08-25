@@ -28,6 +28,11 @@ namespace Model
         public string titulo { get; set; }
         public string anotacao { get; set; }
         public decimal valor_estimado { get; set; }
+        public System.DateTime data_criacao { get; set; }
+        public Nullable<System.DateTime> data_analise { get; set; }
+        public Nullable<System.DateTime> data_aprovacao { get; set; }
+        public Nullable<System.DateTime> data_conclusao { get; set; }
+        public Nullable<System.DateTime> data_suspenso { get; set; }
     
         public virtual tb_campi tb_campi { get; set; }
         public virtual ICollection<tb_orcamento> tb_orcamento { get; set; }

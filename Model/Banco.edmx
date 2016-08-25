@@ -68,7 +68,6 @@
           <Property Name="id_endereco" Type="int" Nullable="false" />
           <Property Name="id_contato" Type="int" Nullable="false" />
           <Property Name="id_mantenedora" Type="int" Nullable="false" />
-          <Property Name="num_inscricao" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="nome_fantasia" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="atividade_principal" Type="varchar" MaxLength="75" Nullable="false" />
@@ -87,6 +86,11 @@
           <Property Name="anotacao" Type="varchar" MaxLength="1000" />
           <Property Name="data_compra" Type="datetime" Precision="0" />
           <Property Name="valor" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="data_autorizacao" Type="datetime" Precision="0" />
+          <Property Name="data_pagamento" Type="datetime" Precision="0" />
+          <Property Name="autorizado" Type="bool" Nullable="false" />
+          <Property Name="encerrado" Type="bool" Nullable="false" />
+          <Property Name="id_empresa" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_contato">
           <Key>
@@ -147,6 +151,7 @@
           <Property Name="is_aditivo" Type="bool" Nullable="false" />
           <Property Name="autorizado" Type="bool" Nullable="false" />
           <Property Name="encerrado" Type="bool" Nullable="false" />
+          <Property Name="data_autorizacao" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
@@ -174,7 +179,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_endereco" Type="int" Nullable="false" />
           <Property Name="id_contato" Type="int" Nullable="false" />
-          <Property Name="num_inscricao" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="razao_social" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="nome_fantasia" Type="varchar" MaxLength="75" Nullable="false" />
           <Property Name="atividade_principal" Type="varchar" MaxLength="75" Nullable="false" />
@@ -194,6 +198,9 @@
           <Property Name="id_projeto" Type="int" Nullable="false" />
           <Property Name="valor" Type="decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="anotacao" Type="varchar" MaxLength="500" />
+          <Property Name="data_criacao" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_analise" Type="datetime" Precision="0" />
+          <Property Name="data_conclusao" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="tb_orcamento_servico">
           <Key>
@@ -217,6 +224,11 @@
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="anotacao" Type="text" />
           <Property Name="valor_estimado" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="data_criacao" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data_analise" Type="datetime" Precision="0" />
+          <Property Name="data_aprovacao" Type="datetime" Precision="0" />
+          <Property Name="data_conclusao" Type="datetime" Precision="0" />
+          <Property Name="data_suspenso" Type="datetime" Precision="0" />
         </EntityType>
         <EntityType Name="tb_projeto_servico">
           <Key>
@@ -396,6 +408,18 @@
             </Principal>
             <Dependent Role="tb_projeto">
               <PropertyRef Name="id_campi" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ce">
+          <End Role="tb_empresa" Type="Self.tb_empresa" Multiplicity="1" />
+          <End Role="tb_compra" Type="Self.tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_empresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -755,6 +779,10 @@
             <End Role="tb_campi" EntitySet="tb_campi" />
             <End Role="tb_projeto" EntitySet="tb_projeto" />
           </AssociationSet>
+          <AssociationSet Name="fk_ce" Association="Self.fk_ce">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
           <AssociationSet Name="fk_contato_campi" Association="Self.fk_contato_campi">
             <End Role="tb_contato" EntitySet="tb_contato" />
             <End Role="tb_campi" EntitySet="tb_campi" />
@@ -885,7 +913,6 @@
           <Property Name="id_endereco" Type="Int32" Nullable="false" />
           <Property Name="id_contato" Type="Int32" Nullable="false" />
           <Property Name="id_mantenedora" Type="Int32" Nullable="false" />
-          <Property Name="num_inscricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nome_fantasia" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="atividade_principal" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
@@ -910,6 +937,12 @@
           <Property Name="valor" Type="Decimal" Nullable="false" />
           <NavigationProperty Name="tb_fatura" Relationship="Self.fk_fatura_compra" FromRole="tb_compra" ToRole="tb_fatura" />
           <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_compra" FromRole="tb_compra" ToRole="tb_anexo" />
+          <Property Name="data_autorizacao" Type="DateTime" />
+          <Property Name="data_pagamento" Type="DateTime" />
+          <Property Name="autorizado" Type="Boolean" Nullable="false" />
+          <Property Name="encerrado" Type="Boolean" Nullable="false" />
+          <Property Name="id_empresa" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tb_empresa" Relationship="db_agesModel.fk_ce" FromRole="tb_compra" ToRole="tb_empresa" />
         </EntityType>
         <EntityType Name="tb_contato">
           <Key>
@@ -942,6 +975,7 @@
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_empresa_orcamento" FromRole="tb_empresa" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_endereco" Relationship="Self.fk_endereco_empresa" FromRole="tb_empresa" ToRole="tb_endereco" />
           <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_empresa" FromRole="tb_empresa" ToRole="tb_anexo" />
+          <NavigationProperty Name="tb_compra" Relationship="db_agesModel.fk_ce" FromRole="tb_empresa" ToRole="tb_compra" />
         </EntityType>
         <EntityType Name="tb_endereco">
           <Key>
@@ -985,6 +1019,7 @@
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_fatura" FromRole="tb_fatura" ToRole="tb_usuario" />
           <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_fatura" FromRole="tb_fatura" ToRole="tb_anexo" />
           <Property Name="encerrado" Type="Boolean" Nullable="false" />
+          <Property Name="data_autorizacao" Type="DateTime" />
         </EntityType>
         <EntityType Name="tb_forma_pagamento">
           <Key>
@@ -1014,7 +1049,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_endereco" Type="Int32" Nullable="false" />
           <Property Name="id_contato" Type="Int32" Nullable="false" />
-          <Property Name="num_inscricao" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="razao_social" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="nome_fantasia" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="atividade_principal" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
@@ -1044,6 +1078,9 @@
           <NavigationProperty Name="tb_status_orcamento" Relationship="Self.fk_status_orcamento" FromRole="tb_orcamento" ToRole="tb_status_orcamento" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_orcamento" FromRole="tb_orcamento" ToRole="tb_usuario" />
           <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_orcamento" FromRole="tb_orcamento" ToRole="tb_anexo" />
+          <Property Name="data_criacao" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_analise" Type="DateTime" />
+          <Property Name="data_conclusao" Type="DateTime" />
         </EntityType>
         <EntityType Name="tb_orcamento_servico">
           <Key>
@@ -1075,6 +1112,11 @@
           <NavigationProperty Name="tb_status_projeto" Relationship="Self.fk_status_projeto" FromRole="tb_projeto" ToRole="tb_status_projeto" />
           <NavigationProperty Name="tb_usuario" Relationship="Self.fk_usuario_projeto" FromRole="tb_projeto" ToRole="tb_usuario" />
           <NavigationProperty Name="tb_anexo" Relationship="Self.tb_anexo_projeto" FromRole="tb_projeto" ToRole="tb_anexo" />
+          <Property Name="data_criacao" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data_analise" Type="DateTime" />
+          <Property Name="data_aprovacao" Type="DateTime" />
+          <Property Name="data_conclusao" Type="DateTime" />
+          <Property Name="data_suspenso" Type="DateTime" />
         </EntityType>
         <EntityType Name="tb_projeto_servico">
           <Key>
@@ -1597,7 +1639,23 @@
             <End Role="tb_anexo" EntitySet="tb_anexo" />
             <End Role="tb_projeto" EntitySet="tb_projeto" />
           </AssociationSet>
+          <AssociationSet Name="fk_ce" Association="db_agesModel.fk_ce">
+            <End Role="tb_empresa" EntitySet="tb_empresa" />
+            <End Role="tb_compra" EntitySet="tb_compra" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="fk_ce">
+          <End Type="db_agesModel.tb_empresa" Role="tb_empresa" Multiplicity="1" />
+          <End Type="db_agesModel.tb_compra" Role="tb_compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tb_empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="tb_compra">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1627,7 +1685,6 @@
                 <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
                 <ScalarProperty Name="id_contato" ColumnName="id_contato" />
                 <ScalarProperty Name="id_mantenedora" ColumnName="id_mantenedora" />
-                <ScalarProperty Name="num_inscricao" ColumnName="num_inscricao" />
                 <ScalarProperty Name="razao_social" ColumnName="razao_social" />
                 <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
                 <ScalarProperty Name="atividade_principal" ColumnName="atividade_principal" />
@@ -1642,6 +1699,11 @@
           <EntitySetMapping Name="tb_compra">
             <EntityTypeMapping TypeName="db_agesModel.tb_compra">
               <MappingFragment StoreEntitySet="tb_compra">
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="encerrado" ColumnName="encerrado" />
+                <ScalarProperty Name="autorizado" ColumnName="autorizado" />
+                <ScalarProperty Name="data_pagamento" ColumnName="data_pagamento" />
+                <ScalarProperty Name="data_autorizacao" ColumnName="data_autorizacao" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_fatura" ColumnName="id_fatura" />
                 <ScalarProperty Name="anotacao" ColumnName="anotacao" />
@@ -1694,6 +1756,7 @@
           <EntitySetMapping Name="tb_fatura">
             <EntityTypeMapping TypeName="db_agesModel.tb_fatura">
               <MappingFragment StoreEntitySet="tb_fatura">
+                <ScalarProperty Name="data_autorizacao" ColumnName="data_autorizacao" />
                 <ScalarProperty Name="encerrado" ColumnName="encerrado" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
@@ -1741,7 +1804,6 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_endereco" ColumnName="id_endereco" />
                 <ScalarProperty Name="id_contato" ColumnName="id_contato" />
-                <ScalarProperty Name="num_inscricao" ColumnName="num_inscricao" />
                 <ScalarProperty Name="razao_social" ColumnName="razao_social" />
                 <ScalarProperty Name="nome_fantasia" ColumnName="nome_fantasia" />
                 <ScalarProperty Name="atividade_principal" ColumnName="atividade_principal" />
@@ -1755,6 +1817,9 @@
           <EntitySetMapping Name="tb_orcamento">
             <EntityTypeMapping TypeName="db_agesModel.tb_orcamento">
               <MappingFragment StoreEntitySet="tb_orcamento">
+                <ScalarProperty Name="data_conclusao" ColumnName="data_conclusao" />
+                <ScalarProperty Name="data_analise" ColumnName="data_analise" />
+                <ScalarProperty Name="data_criacao" ColumnName="data_criacao" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_status" ColumnName="id_status" />
@@ -1779,6 +1844,11 @@
           <EntitySetMapping Name="tb_projeto">
             <EntityTypeMapping TypeName="db_agesModel.tb_projeto">
               <MappingFragment StoreEntitySet="tb_projeto">
+                <ScalarProperty Name="data_suspenso" ColumnName="data_suspenso" />
+                <ScalarProperty Name="data_conclusao" ColumnName="data_conclusao" />
+                <ScalarProperty Name="data_aprovacao" ColumnName="data_aprovacao" />
+                <ScalarProperty Name="data_analise" ColumnName="data_analise" />
+                <ScalarProperty Name="data_criacao" ColumnName="data_criacao" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_status" ColumnName="id_status" />

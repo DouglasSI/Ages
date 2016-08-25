@@ -53,6 +53,7 @@
         <AssociationConnector Association="db_agesModel.tb_anexo_fatura" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.tb_anexo_orcamento" ManuallyRouted="false" />
         <AssociationConnector Association="db_agesModel.tb_anexo_projeto" ManuallyRouted="false" />
+        <AssociationConnector Association="db_agesModel.fk_ce" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

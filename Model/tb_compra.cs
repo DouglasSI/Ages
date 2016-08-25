@@ -24,8 +24,14 @@ namespace Model
         public string anotacao { get; set; }
         public Nullable<System.DateTime> data_compra { get; set; }
         public decimal valor { get; set; }
+        public Nullable<System.DateTime> data_autorizacao { get; set; }
+        public Nullable<System.DateTime> data_pagamento { get; set; }
+        public bool autorizado { get; set; }
+        public bool encerrado { get; set; }
+        public int id_empresa { get; set; }
     
         public virtual tb_fatura tb_fatura { get; set; }
         public virtual ICollection<tb_anexo> tb_anexo { get; set; }
+        public virtual tb_empresa tb_empresa { get; set; }
     }
 }

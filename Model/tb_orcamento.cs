@@ -28,6 +28,9 @@ namespace Model
         public int id_projeto { get; set; }
         public decimal valor { get; set; }
         public string anotacao { get; set; }
+        public System.DateTime data_criacao { get; set; }
+        public Nullable<System.DateTime> data_analise { get; set; }
+        public Nullable<System.DateTime> data_conclusao { get; set; }
     
         public virtual tb_empresa tb_empresa { get; set; }
         public virtual ICollection<tb_fatura> tb_fatura { get; set; }

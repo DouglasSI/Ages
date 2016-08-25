@@ -37,6 +37,7 @@ namespace Model
         public bool is_aditivo { get; set; }
         public bool autorizado { get; set; }
         public bool encerrado { get; set; }
+        public Nullable<System.DateTime> data_autorizacao { get; set; }
     
         public virtual ICollection<tb_compra> tb_compra { get; set; }
         public virtual tb_forma_pagamento tb_forma_pagamento { get; set; }
