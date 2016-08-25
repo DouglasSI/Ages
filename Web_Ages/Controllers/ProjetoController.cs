@@ -129,8 +129,7 @@ namespace Web_Ages.Controllers
                 tb_fatura.tb_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
                 tb_fatura.id_usuario = tb_fatura.tb_usuario.id;
 
-                new Manter_().PersistirFatura(tb_fatura);
-                tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_fatura.id_orcamento);
+                
 
                 foreach (Models.ViewModel model in Models.TempAnexo.models)
                 {
@@ -143,15 +142,18 @@ namespace Web_Ages.Controllers
                             memoryStream = new MemoryStream();
                             inputStream.CopyTo(memoryStream);
                         }
-                        
+
                         FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos/ADITIVO/"), fileName), FileMode.Create, FileAccess.Write);
-                        model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos/ADITIVO"));
+                        model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos/ADITIVO/"));
                         memoryStream.WriteTo(file);
                         file.Close();
                         memoryStream.Close();
                     }
-                    new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.fatura, tb_fatura.id);
+                    tb_fatura.tb_anexo.Add(model.tb_anexo);
                 }
+                new Manter_().PersistirFatura(tb_fatura);
+                tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_fatura.id_orcamento);
+
                 return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
             }
             return View();
@@ -206,9 +208,9 @@ namespace Web_Ages.Controllers
 
             return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
-        
+
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
-        
+
         public ActionResult Material(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
@@ -255,7 +257,7 @@ namespace Web_Ages.Controllers
                             file.Close();
                             memoryStream.Close();
                         }
-                        
+
                         new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.compra, compra.id);
                     }
                     return RedirectToAction("DetailsOrcamentosdoProjeto", "Projeto", new { id = r.id_projeto });
@@ -287,7 +289,7 @@ namespace Web_Ages.Controllers
             @ViewBag.tb_fatura = tb_fatura;
             if (Models.TempAnexo.models.Count == 0)
                 return PartialView();
-            
+
 
             tb_fatura.autorizado = true;
             tb_fatura.data_pagamento = DateTime.Now;
@@ -358,26 +360,27 @@ namespace Web_Ages.Controllers
             return RedirectToAction("CreateAloneAnexo", new { id = param, tipo = Manter_.tipo.projeto });
 
         }
-        public void Remover(int? id)
+        public ActionResult Remover(int? id)
         {
 
 
             int _arquivoId = Convert.ToInt32((int)id);
             Web_Ages.Models.TempAnexo.models.RemoveAt(_arquivoId);
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            return ListarAnexos();
 
         }
         public FileResult Download(int? id)
         {
 
-        
+
             int _arquivoId = Convert.ToInt32((int)id);
             tb_anexo tb_anexo = new Manter_().getAnexo((int)id);
 
-            string contentType = "application/"+tb_anexo.tipo;
+            string contentType = "application/" + tb_anexo.tipo;
             return File(tb_anexo.caminho + tb_anexo.nome_arquivo, contentType, tb_anexo.nome_arquivo);
         }
-   
+
         [HttpGet]
         public ActionResult CreateAnexo()
         {
@@ -401,17 +404,7 @@ namespace Web_Ages.Controllers
                     file = varr,
                 };
                 string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
-
                 string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
-
-
-                //string cont = "/" + Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
-
-
-                //FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
-                //Models.TempAnexo.model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
-
-
                 Models.TempAnexo.model.tb_anexo = new tb_anexo()
                 {
                     titulo = DateTime.Now.ToShortDateString().Replace('/', '_') + DateTime.Now.ToShortTimeString().Replace('/', '_') + "_" + fileName,
@@ -459,11 +452,8 @@ namespace Web_Ages.Controllers
                 Models.TempAnexo.models = new List<Models.ViewModel>();
             if (Models.TempAnexo.model == null)
                 Models.TempAnexo.model = new Models.ViewModel();
-
             Models.TempAnexo.model.file = modelo.file;
-
             string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
-
             string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
             Models.TempAnexo.model.tb_anexo = new tb_anexo()
             {
@@ -476,7 +466,6 @@ namespace Web_Ages.Controllers
                 data_cadastro = DateTime.Now,
             };
             Models.TempAnexo.model.tb_anexo.id_usuario = Models.TempAnexo.model.tb_anexo.tb_usuario.id;
-
             using (Stream inputStream = Models.TempAnexo.model.file.InputStream)
             {
                 MemoryStream memoryStream = inputStream as MemoryStream;
@@ -485,9 +474,7 @@ namespace Web_Ages.Controllers
                     memoryStream = new MemoryStream();
                     inputStream.CopyTo(memoryStream);
                 }
-                string cont = "/" +  Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
-
-
+                string cont = "/" + Models.TempAnexo.model.tipo.ToString().ToUpper() + "/";
                 FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
                 Models.TempAnexo.model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                 Directory.CreateDirectory(Path.GetDirectoryName(file.Name));
@@ -495,14 +482,13 @@ namespace Web_Ages.Controllers
                 file.Close();
                 memoryStream.Close();
             }
-            
-
-            Models.TempAnexo.models.Add(new Models.ViewModel() {
+            Models.TempAnexo.models.Add(new Models.ViewModel()
+            {
                 tb_anexo = new Manter_().PersistirAnexo(Models.TempAnexo.model.tb_anexo, Models.TempAnexo.model.tipo, Models.TempAnexo.model.id),
             }
                 );
             Models.TempAnexo.model.file = null;
-            
+
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
 
             return View();
@@ -524,17 +510,17 @@ namespace Web_Ages.Controllers
             {
                 default:
                     return File(Server.MapPath("~/Content/pic/" + tipo), "image/png");
-            
+
             }
         }
         // GET: Projeto/Create
+        [HttpGet]
         [Authorize(Roles = "Diretor")]
         public ActionResult Create()
         {
             ViewBag.id_campi = new SelectList(new Manter_Campi().obterCampis(), "id", "nome_fantasia".ToUpper());
-            ViewBag.id_status = new SelectList(new List<tb_status_projeto>() { new Manter_Status().obterById(1) }, "id", "descricao");
-            ViewBag.id_usuario = new SelectList(new List<tb_usuario>() { new Manter_Usuario().obterUsuario(User.Identity.Name) }, "id", "nome");
-
+            ViewBag.id_status = new Manter_Status().obterById(1);
+            ViewBag.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
             Models.TempAnexo.models = new List<Models.ViewModel>();
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
 
@@ -547,10 +533,16 @@ namespace Web_Ages.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "Diretor")]
-        public ActionResult Create([Bind(Include = "id,id_usuario,id_status,id_campi,titulo,anotacao,valor_estimado")] tb_projeto tb_projeto)
+        public ActionResult Create( tb_projeto tb_projeto)
         {
-            if (ModelState.IsValid)
+            #region if
+            if (Request.Form["projeto"] != null && ModelState.IsValid)
             {
+
+                tb_projeto.id_status = 1;
+                tb_projeto.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name).id;
+                
+                
                 new Manter_Projeto().cadastrar(tb_projeto);
                 foreach (Models.ViewModel model in Models.TempAnexo.models)
                 {
@@ -565,6 +557,7 @@ namespace Web_Ages.Controllers
                         }
                         string cont = "/" + Manter_.tipo.projeto.ToString().ToUpper() + "/";
                         FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                        model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
                         memoryStream.WriteTo(file);
                         file.Close();
                         memoryStream.Close();
@@ -573,10 +566,13 @@ namespace Web_Ages.Controllers
                 }
                 return RedirectToAction("Listar");
             }
+            #endregion
             ViewBag.id_campi = new SelectList(new Manter_Campi().obterCampis(), "id", "nome_fantasia".ToUpper());
-            ViewBag.id_status = new SelectList(new List<tb_status_projeto>() { new Manter_Status().obterById(1) }, "id_status", "descricao");
-            ViewBag.id_usuario = new SelectList(new List<tb_usuario>() { new Manter_Usuario().obterUsuario(User.Identity.Name) }, "id_usuario", "nome");
+            ViewBag.id_status = new Manter_Status().obterById(1);
+            ViewBag.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
 
+            
+            
 
 
             return View(tb_projeto);

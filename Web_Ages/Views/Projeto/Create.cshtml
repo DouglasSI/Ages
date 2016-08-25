@@ -1,6 +1,7 @@
 ﻿@model Model.tb_projeto
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
-
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.1.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 <div class="small-nav">
     <div>
         <a href="#">
@@ -12,33 +13,31 @@
         </a>
     </div>
 </div>
-<div class=" form-horizontal col-md-12">
+<div class="form-horizontal col-md-12"  style=" background-color:rgb(255, 255, 255)">
     <div class="msg msg-ok">
         <p><strong>Você está criando uma Proposta de Projeto!</strong></p>
     </div>
     <hr />
-
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         using (Html.BeginForm())
         {
+            Html.ValidationSummary(true, "", new { @class = "text-danger" });
             Html.AntiForgeryToken();
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-horizontal col-md-12 ">
                 <div class="form-group">
                     <div class="control-label col-md-2" style="width: 15%">
                         @Html.LabelFor(model => model.id_usuario, "Responsável")
                     </div>
                     <div class="col-md-3" style="width: 55%">
-                        @Html.DropDownList("id_usuario", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                        @Html.LabelFor(model => model.id_usuario, ((Model.tb_usuario)@ViewBag.id_usuario).nome, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
                     </div>
                     <div class="control-label col-md-2" style="width: 10%">
                         @Html.LabelFor(model => model.id_status, "Situação")
                     </div>
                     <div class="col-md-3" style="width: 20%">
-                        @Html.DropDownList("id_status", null, htmlAttributes: new { @class = "form-control", @readonly = "true" })
+                        @Html.LabelFor(model => model.id_status, ((Model.tb_status_projeto)@ViewBag.id_status).descricao, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -79,18 +78,23 @@
                 <div class="form-group">
                     <div class="col-md-3" style="width: 15%"></div>
                     <div class="col-md-3 col-lg-offset-9" style="padding:1px ">
-                        <input type="submit" value="Salvar Esta Proposta" class="btn btn-block" />
+                        <input type="submit" value="Salvar Esta Proposta" class="btn btn-block" id="projeto" name="projeto" />
                     </div>
                 </div>
-                <div class="form-group">
-                    <hr />
-                    <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
-                        @{Html.RenderPartial("CreateAnexo");}
-                    </div>
-                </div>
-                <div class="form-group">.
-                </div>
+
             </div>
         }
+        <div class="form-horizontal col-md-12 ">
+
+            <div class="form-group">
+                <hr />
+                <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                    @{Html.RenderPartial("CreateAnexo");}
+                </div>
+            </div>
+            <div class="form-group">
+                .
+            </div>
+        </div>
     }
 </div>

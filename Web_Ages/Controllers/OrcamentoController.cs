@@ -65,7 +65,7 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Create(int? id_projeto)
         {
-
+            Model.Super.SuperOrcamento.orcamento = new tb_orcamento();
             @ViewBag.tb_orcamento_servico = new List<tb_orcamento_servico>();
             @ViewBag.tb_fatura = new List<tb_fatura>();
             ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
@@ -77,15 +77,15 @@ namespace Web_Ages.Controllers
             ViewBag.id_status = new Manter_Status().obterByIdOrcamento(1);
             ViewBag.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
 
-            @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
+            @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
 
 
             Models.TempAnexo.models = new List<Models.ViewModel>();
+
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return PartialView();
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult Create(Model.tb_orcamento tb_orcamento)
         {
@@ -108,10 +108,31 @@ namespace Web_Ages.Controllers
                     tb_orcamento.id_status = 1;
                     tb_orcamento.tb_orcamento_servico = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
                     tb_orcamento.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
-                    m.PersistirGrupo(tb_orcamento);
 
-                    foreach (Models.ViewModel model in Models.TempAnexo.models) 
-                    m.PersistirAnexo(model.tb_anexo , Manter_.tipo.orcamento, tb_orcamento.id);
+                    foreach (Models.ViewModel model in Models.TempAnexo.models)
+                    {
+                        var fileName = Path.GetFileName(model.file.FileName);
+                        using (Stream inputStream = model.file.InputStream)
+                        {
+                            MemoryStream memoryStream = inputStream as MemoryStream;
+                            if (memoryStream == null)
+                            {
+                                memoryStream = new MemoryStream();
+                                inputStream.CopyTo(memoryStream);
+                            }
+                            string cont = "/" + Manter_.tipo.orcamento.ToString().ToUpper() + "/";
+                            FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                            model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
+                            
+                            memoryStream.WriteTo(file);
+                            file.Close();
+                            memoryStream.Close();
+                        }
+                        tb_orcamento.tb_anexo.Add(model.tb_anexo);
+                    }
+                    m.PersistirGrupo(tb_orcamento);
+                        
+                    
                     return RedirectToAction("Details", "Projeto", new { id = tb_orcamento.id_projeto });
                 }
             }
@@ -120,7 +141,7 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult CreateServico()
         {
-
+            
             ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
             return PartialView();
         }
@@ -129,6 +150,7 @@ namespace Web_Ages.Controllers
         public ActionResult CreateFatura()
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
+            Model.Super.SuperOrcamento.orcamento.tb_fatura.Clear();
             @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
             return PartialView();
 
@@ -342,9 +364,7 @@ namespace Web_Ages.Controllers
         {
             if (Models.TempAnexo.models == null)
                 Models.TempAnexo.models = new List<Models.ViewModel>();
-
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
-
             return PartialView();
         }
         [HttpPost]
@@ -360,7 +380,6 @@ namespace Web_Ages.Controllers
                     file = varr,
                 };
                 string fileName = Path.GetFileName(Models.TempAnexo.model.file.FileName);
-
                 string directory = Server.MapPath("~/App_Data/Anexos/"); //change ths to your actual upload folder
                 Models.TempAnexo.model.tb_anexo = new tb_anexo()
                 {
@@ -373,7 +392,9 @@ namespace Web_Ages.Controllers
                     data_cadastro = DateTime.Now,
                 };
                 Models.TempAnexo.model.tb_anexo.id_usuario = Models.TempAnexo.model.tb_anexo.tb_usuario.id;
+                
                 Models.TempAnexo.models.Add(Models.TempAnexo.model);
+                
             }
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return ListarAnexos();

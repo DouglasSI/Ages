@@ -338,7 +338,6 @@
     <Content Include="Views\Orcamento\ListarFaturas.cshtml" />
     <Content Include="Views\Projeto\DetailsSomenteVisualizar.cshtml" />
     <Content Include="Views\Projeto\DetailsOrcamentosdoProjeto.cshtml" />
-    <Content Include="Views\Projeto\DetailsFaturasServicos.cshtml" />
     <Content Include="Views\Projeto\Material.cshtml" />
     <Content Include="Views\Projeto\Aditivo.cshtml" />
     <Content Include="Views\Projeto\Autorizar.cshtml" />
@@ -349,6 +348,8 @@
     <Content Include="UploadHandler.ashx" />
     <Content Include="Views\Projeto\CreateAloneAnexo.cshtml" />
     <Content Include="Views\Projeto\Baixa.cshtml" />
+    <Content Include="Views\Orcamento\CreateAnexo.cshtml" />
+    <Content Include="Views\Orcamento\ListarAnexos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

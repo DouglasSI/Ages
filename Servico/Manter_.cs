@@ -113,6 +113,10 @@ namespace Servico
                     });
                     context.SaveChanges();
                 }
+                foreach (tb_anexo ff in grupo.tb_anexo)
+                {
+                    PersistirAnexo(ff, tipo.orcamento, orc.id);
+                }
                 tb_projeto p = context.tb_projeto.Where(f => f.id.Equals(orc.id_projeto)).FirstOrDefault();
                 p.id_status = 2;
 
@@ -144,11 +148,13 @@ namespace Servico
                     data_cadastro = DateTime.Now,
                     conta = objeto.conta
                 };
-
                 enty.tb_fatura.Add(fatura);
                 enty.SaveChanges();
 
-
+                foreach (tb_anexo ff in objeto.tb_anexo)
+                {
+                    PersistirAnexo(ff, tipo.fatura, fatura.id);
+                }
             }
         }
         public int PersistirCompra(tb_compra compra)

@@ -13,19 +13,18 @@
         </a>
     </div>
 </div>
-<div class="form-horizontal col-md-12 " style="background-color:rgb(255, 255, 255)">
-    @if (HttpContext.Current.User.Identity.IsAuthenticated) 
+<div class="form-horizontal col-md-12" style="background-color:rgb(255, 255, 255)">
+    <div class="msg msg-ok">
+        <p><strong>Crie um Novo Orçamento com Serviços e Faturas!</strong></p>
+    </div>
+    <hr />
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         using (Html.BeginForm())
         {
-            <div class="form-horizontal col-md-12 ">
-                <div class="msg msg-ok">
-                    <p><strong>Crie um Novo orçamento com Serviços e Faturas!</strong></p>
-                </div>
-                
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.AntiForgeryToken()
+            Html.ValidationSummary(true, "", new { @class = "text-danger" });
+            Html.AntiForgeryToken();
+            <div class="form-horizontal col-md-12 ">              
                 <div class="form-group">
                     <div class="control-label col-md-2" style="width: 15%">
                         @Html.LabelFor(model => model.id_usuario, "Registrado por")
@@ -48,7 +47,6 @@
                         @Html.LabelFor(model => model.valor, "R$ " + ((Model.tb_projeto)@ViewBag.id_projeto).valor_estimado.ToString("0.00").ToUpper(), new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.id_status, "", new { @class = "text-danger" })
                     </div>
-
                 </div>
                 <div class="form-group">
                     <div class="control-label col-md-2" style="width: 15%">

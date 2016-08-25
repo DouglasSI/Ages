@@ -28,7 +28,7 @@
                 </th>
                 <th class="ac">Remover</th>
             </tr>
-            @for (int i = 0; i < ( (List<Model.tb_fatura>)@ViewBag.tb_fatura).Count;i++ )
+            @for (int i = 0; i < ( (List<Model.tb_fatura>)@ViewBag.tb_fatura).ToList().Count;i++ )
             
             {
                 var item =  ((List<Model.tb_fatura>)@ViewBag.tb_fatura)[i];

@@ -27,23 +27,24 @@
                     Criado em
                 </th>
 
-               @if (((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo).Count > 0 &&
-                      ((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)[0].id != 0)
-               {
-                <th>
-                    Download
-                </th>
-               }
-               else
-               {
-                <th>
-                    Remover
-                </th>
-
-               }
-
+                @if (((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo).Count > 0)
+                {
+                    if (((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)[0].id != 0)
+                    {
+                        <th>
+                            Download
+                        </th>
+                    }
+                    else
+                    {
+                        <th>
+                            Remover
+                        </th>
+                    }
+                }
             </tr>
-            @for(int i = 0; i <  ((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo).Count;i++){
+            @for (int i = 0; i < ((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo).Count; i++)
+            {
                 var item = ((List<Web_Ages.Models.ViewModel>)@ViewBag.tb_anexo)[i];
                 <tr>
                     <td>
@@ -67,13 +68,14 @@
                     else
                     {
                         <td>
-                            <p>  @Html.ActionLink("Remover", "Remover", new { id = i })</p>
+                            <a href="#" class="ico del">
+                                @Ajax.ActionLink("Excluir", "Remover", "Projeto"
+                        , new { id = i }, new AjaxOptions() { UpdateTargetId = "foda2", InsertionMode = InsertionMode.Replace })
+                            </a>
                         </td>
                     }
                 </tr>
             }
-          
-
         </table>
     </div>
 </div>
