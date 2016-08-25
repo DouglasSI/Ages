@@ -37,27 +37,29 @@
                                 </h2>
                             </div>
                         </div>
-                        <div class="box" style="background-color:white">
-                            <div class="box-head" style="background-color:black">
-                                <h2 class="left">Itens Anexados</h2>
-                            </div>
-                            <div class="table">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <th>
-                                            Título
-                                        </th>
-                                        <th>
-                                            Anotação
-                                        </th>
-                                        <th>
-                                            Criado em
-                                        </th>
-                                        <th>
-                                            Baixar
-                                        </th>
-                                    </tr>
-                                    @foreach (var itemA in item.tb_anexo)
+
+                        <div class="box-content" style="background-color:white">
+                            <div class="box">
+                                <div class="box-head" style="background-color:black">
+                                    <h2 class="left">Itens Anexados</h2>
+                                </div>
+                                <div class="table">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th>
+                                                Título
+                                            </th>
+                                            <th>
+                                                Anotação
+                                            </th>
+                                            <th>
+                                                Criado em
+                                            </th>
+                                            <th>
+                                                Baixar
+                                            </th>
+                                        </tr>
+                                        @foreach (var itemA in item.tb_anexo)
                                     {
                                         <tr>
                                             <td>
@@ -74,18 +76,22 @@
                                             </td>
                                         </tr>
                                     }
-                                </table>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="box" style="background-color:white">
-                            <div class="box-head" style="background-color:black">
-                                <h2 class="left">
-                                    Faturas
-                                </h2>
-                            </div>
-                            <div class="box-content" style="background-color:white">
-                                @foreach (var fat in item.tb_fatura.Where(f => !f.is_aditivo))
-                                {
+
+
+                        <div class="box-content" style="background-color:white">
+                            <div class="box" style="background-color:white">
+                                <div class="box-head" style="background-color:black">
+                                    <h2 class="left">
+                                        Faturas
+                                    </h2>
+                                </div>
+                                <div class="box-content" style="background-color:white">
+                                    @foreach (var fat in item.tb_fatura.Where(f => !f.is_aditivo))
+                                    {
                                     <div class="box">
                                         <div class=" box-head" style="background-color:darkblue">
                                             <h2 class="left">Descricao da Fatura - @fat.titulo</h2>
@@ -103,14 +109,14 @@
                                                     Vencimento:
                                                 </th>
                                                 @if (!fat.encerrado)
-                                                {
-                                                    if ((User.IsInRole("Infra") && !fat.autorizado) || (User.IsInRole("Financeiro") && fat.autorizado))
                                                     {
-                                                        <th>
-                                                            Ação
-                                                        </th>
+                                                        if ((User.IsInRole("Infra") && !fat.autorizado) || (User.IsInRole("Financeiro") && fat.autorizado))
+                                                        {
+                                                    <th>
+                                                        Ação
+                                                    </th>
+                                                        }
                                                     }
-                                                }
                                                 <th>
                                                     Anexos:
                                                 </th>
@@ -127,45 +133,31 @@
                                                     @Html.DisplayFor(modelItem => fat.data_prevista)
 
                                                 </td>
-
-
-
-
                                                 @if (!fat.encerrado)
-                                                {
-                                                    if ((User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA")) && !fat.autorizado)
                                                     {
-                                                        <td>
+                                                        if (User.IsInRole("Infra") && !fat.autorizado)
+                                                        {
+                                                    <td>
 
-                                                            <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    </td>
+                                                        }
+
+                                                        else if (User.IsInRole("Financeiro") && fat.autorizado)
+                                                        {
+                                                    <td>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    </td>
+                                                        }
                                                     }
-                                                    if (User.IsInRole("DIRETOR-INFRA") && !fat.autorizado)
-                                                    {
-                                                        <td>
-                                                            <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
-                                                    }
-
-
-
-
-                                                    else if (User.IsInRole("Financeiro") && fat.autorizado)
-                                                    {
-                                                        <td>
-
-                                                            <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
-                                                    }
-
-                                                }
                                                 <td>
                                                     @foreach (Model.tb_anexo anexo in fat.tb_anexo)
-                                                    {
+                                                        {
 
                                                         @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
                                                         <br>
-                                                    }
+                                                        }
                                                 </td>
                                             </tr>
 
@@ -176,7 +168,7 @@
                                             </div>
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 @foreach (var material in fat.tb_compra)
-                                                {
+                                                    {
                                                     <tr>
                                                         <td>
                                                             @Html.DisplayFor(modelItem => material.anotacao)
@@ -185,51 +177,45 @@
                                                             @Html.DisplayFor(modelItem => material.valor)
                                                         </td>
                                                         <td>
-                                                            ANEXOS
+                                                            @Html.DisplayFor(modelItem => material.data_compra.Value.ToShortDateString())
                                                         </td>
-
-                                                        
-                                                        @if (User.IsInRole("DIRETOR-INFRA") )
-                                                        {
-                                                            <td>
-                                                                Ações:
-                                                                <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                            </td>
-                                                        }
-
-
-
+                                                        <td>
+                                                            @foreach (Model.tb_anexo anexo in material  .tb_anexo)
+                                                            {
+                                                                @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                                <br>
+                                                            }
+                                                        </td>
                                                     </tr>
-                                                }
+                                                    }
                                             </table>
                                         </div>
                                     </div>
-                                }
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div class="box" style="background-color:white">
-                            <div class="box-head" style="background-color:black">
-                                <h2 class="left">Aditivos</h2>
-                            </div>
-                            <div class="box-content" style="background-color:whitesmoke">
-                                @using (Html.BeginForm())
-                                {
-                                    Html.AntiForgeryToken();
-                                    if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                        <div class="box-content" style="background-color:white">
+                            <div class="box" style="background-color:white">
+                                <div class="box-head" style="background-color:black">
+                                    <h2 class="left">Aditivos</h2>
+                                </div>
+                                <div class="box-content" style="background-color:whitesmoke">
+                                    @using (Html.BeginForm())
                                     {
-                                        <div class="table" style="background-color:transparent">
-                                            <div class="form-actions no-color">
-                                                <input name="orcamento" type="hidden" value=@item.id>
-                                                <input type="submit" name="aditivo" value="Adicionar Aditivo"
-                                                       class="btn btn-default" style="background-color:darkblue; color:white" />
-                                            </div>
+                                        Html.AntiForgeryToken();
+                                    <div class="table" style="background-color:transparent">
+                                        <div class="form-actions no-color">
+                                            <input name="orcamento" type="hidden" value=@item.id>
+                                            <input type="submit" name="aditivo" value="Adicionar Aditivo"
+                                                   class="btn btn-default" style="background-color:darkblue; color:white" />
                                         </div>
+                                    </div>
                                     }
-                                }
-                            </div>
-                            <div class="box-content" style="background-color:white">
-                                @foreach (var fat in item.tb_fatura.Where(f => f.is_aditivo))
-                                {
+                                </div>
+                                <div class="box-content" style="background-color:white">
+                                    @foreach (var fat in item.tb_fatura.Where(f => f.is_aditivo))
+                                    {
                                     <div class="box">
                                         <div class=" box-head" style="background-color:darkblue">
                                             <h2 class="left">Descricao do Aditivo - @fat.titulo</h2>
@@ -247,14 +233,14 @@
                                                     Vencimento:
                                                 </th>
                                                 @if (!fat.encerrado)
-                                                {
-                                                    if ((User.IsInRole("Infra") && !fat.autorizado) || (User.IsInRole("Financeiro") && fat.autorizado))
                                                     {
-                                                        <th>
-                                                            Ação
-                                                        </th>
+                                                        if ((User.IsInRole("Infra") && !fat.autorizado) || (User.IsInRole("Financeiro") && fat.autorizado))
+                                                        {
+                                                    <th>
+                                                        Ação
+                                                    </th>
+                                                        }
                                                     }
-                                                }
                                                 <th>
                                                     Anexos:
                                                 </th>
@@ -269,55 +255,45 @@
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => fat.data_prevista)
-
-
                                                 </td>
-
                                                 @if (!fat.encerrado)
-                                                {
-                                                    if ((User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA")) && !fat.autorizado)
                                                     {
-                                                        <td>
+                                                        if (User.IsInRole("Infra") && !fat.autorizado)
+                                                        {
+                                                    <td>
 
-                                                            <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    </td>
+                                                        }
+
+                                                        else if (User.IsInRole("Financeiro") && fat.autorizado)
+                                                        {
+                                                    <td>
+                                                        <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                    </td>
+                                                        }
                                                     }
-                                                    if (User.IsInRole("DIRETOR-INFRA") && !fat.autorizado)
-                                                    {
-                                                        <td>
-                                                            <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
-                                                    }
-
-
-                                                    else if (User.IsInRole("Financeiro") && fat.autorizado)
-                                                    {
-                                                        <td>
-                                                            <a href="#" class="ico del">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        </td>
-                                                    }
-
-
-                                                }
                                                 <td>
                                                     @foreach (Model.tb_anexo anexo in fat.tb_anexo)
-                                                    {
+                                                        {
 
                                                         @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
                                                         <br>
-                                                    }
+                                                        }
                                                 </td>
                                             </tr>
 
-                                        </table>
+                                            </table>                                        
                                         <div class="table" style="background-color:white ; width:50%">
                                             <div class="box-head">
                                                 <h2 class="left" width="50%">Materiais Dessa fatura</h2>
                                             </div>
                                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                 @foreach (var material in fat.tb_compra)
-                                                {
+                                                    {
                                                     <tr>
+
                                                         <td>
                                                             @Html.DisplayFor(modelItem => material.anotacao)
                                                         </td>
@@ -325,45 +301,47 @@
                                                             @Html.DisplayFor(modelItem => material.valor)
                                                         </td>
                                                         <td>
-                                                            ANEXOS
+                                                            @Html.DisplayFor(modelItem => material.data_compra)
                                                         </td>
-                                                        
-                                                        @if (User.IsInRole("DIRETOR-INFRA"))
-                                                        {
-                                                            <td>
-                                                                Ações:
-                                                                <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                            </td>
-                                                        }
+                                                        <td>
+                                                            @foreach (Model.tb_anexo anexo in material.tb_anexo)
+                                                            {
+                                                                @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                                <br>
+                                                            }
+                                                        </td>
                                                     </tr>
-                                                }
+                                                    }
                                             </table>
                                         </div>
                                     </div>
-                                }
+                                    }
+                                </div>
                             </div>
                         </div>
-                        <div class="box" style="background-color:white">
-                            <div class="box-head" style="background-color:black">
-                                <h2 class="left">
-                                    Serviços
-                                </h2>
-                            </div>
-                            <div class="table">
 
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                    <tr>
-                                        <th>
-                                            Serviço
-                                        </th>
-                                        <th>
-                                            Valor
-                                        </th>
-                                        <th>
-                                            Anotação
-                                        </th>
-                                    </tr>
-                                    @foreach (var serv in item.tb_orcamento_servico)
+                        <div class="box-content" style="background-color:white">
+                            <div class="box" style="background-color:white">
+                                <div class="box-head" style="background-color:black">
+                                    <h2 class="left">
+                                        Serviços
+                                    </h2>
+                                </div>
+                                <div class="table">
+
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <th>
+                                                Serviço
+                                            </th>
+                                            <th>
+                                                Valor
+                                            </th>
+                                            <th>
+                                                Anotação
+                                            </th>
+                                        </tr>
+                                        @foreach (var serv in item.tb_orcamento_servico)
                                     {
                                         <tr>
 
@@ -372,7 +350,7 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => serv.tb_servico.titulo)
                                             </td>
-                                            <td>
+                                                        <td>
                                                 @Html.DisplayFor(modelItem => serv.valor)
                                             </td>
                                             <td>
@@ -380,7 +358,8 @@
                                             </td>
                                         </tr>
                                     }
-                                </table>
+                                    </table>
+                                 </div>
                             </div>
                         </div>
                     </div>
