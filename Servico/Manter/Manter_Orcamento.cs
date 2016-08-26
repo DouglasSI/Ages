@@ -66,8 +66,9 @@ namespace Servico.Manter
         }
         public void remover(int id)
         {
-
-            entidade.tb_orcamento.Remove(obterOrcamento(id));
+            tb_orcamento orcamento = obterOrcamento(id);
+            entidade.tb_anexo.RemoveRange(orcamento.tb_anexo);
+            entidade.tb_orcamento.Remove(orcamento);
             entidade.SaveChanges();
         }
         public tb_orcamento obterOrcamento(int filtro)

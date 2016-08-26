@@ -1,5 +1,6 @@
 ﻿@model Model.tb_projeto
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
+
 <div class="small-nav">
     <div>
         <a href="#">
@@ -21,8 +22,7 @@
 @if (HttpContext.Current.User.Identity.IsAuthenticated)
 {
     using (Html.BeginForm())
-    {
-        
+    {        
         Html.AntiForgeryToken();
         <div class="form-horizontal col-md-12 ">
             <div class="form-horizontal">
@@ -83,7 +83,57 @@
                 </div>
             </div>
         </div>
-    }
-    
+    <div class="form-horizontal col-md-12">
+        <div class="form-group" id="foda2">
+            <div class="col-md-3" style="width: 100%">
+                <div class="box-head">
+                    <h2 class="left">Itens Anexados</h2>
+                </div>
+                <div class="table">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>
+                                Título
+                            </th>
+                            <th>
+                                Anotação
+                            </th>
+                            <th>
+                                Criado em
+                            </th>
+                            <th>
+                                Baixar
+                            </th>
+                        </tr>
+                        @foreach (var itemA in Model.tb_anexo)
+                        {
+                            <tr>
+                                <td>
+                                    <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + ".png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemA.titulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemA.data_cadastro)
+                                </td>
+                                <td>
+                                    <a href="#" class="ico del">
+                                        @Ajax.ActionLink("Excluir", "RemoverAnexoProjeto", "Projeto"
+                        , new { id = itemA.id ,  id_projeto = Model.id }, new AjaxOptions() { UpdateTargetId = "foda2", InsertionMode = InsertionMode.Replace })
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="form-horizontal col-md-12">
 
+                <hr />
+                <br><br><br><br>
+            </div>
+        </div>
+    </div>
+    }
 }

@@ -165,6 +165,7 @@ namespace Web_Ages.Controllers
         public ActionResult Autorizar(int? id_fatura)
         {
             tb_fatura fatura = new Manter_Fatura().ObterFatura((int)id_fatura);
+            
             @ViewBag.tb_fatura = fatura;
 
             Models.TempAnexo.models = new List<Models.ViewModel>();
@@ -208,6 +209,60 @@ namespace Web_Ages.Controllers
 
             return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
+       
+        [HttpGet]
+        [Authorize(Roles = "DIRETOR-INFRA")]
+        public ActionResult AutorizarMaterial(int? id_material)
+        {
+            tb_compra  compra = new Manter_Compra().obterCompraInt((int)id_material);
+            @ViewBag.tb_compra = compra;
+            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
+            Models.TempAnexo.models = new List<Models.ViewModel>();
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+
+            return PartialView();
+            //return View(fatura);mudanca 02
+        }
+        [HttpPost]
+        [Authorize(Roles = "DIRETOR-INFRA")]
+        public ActionResult AutorizarMaterial(tb_compra tb_compra)
+        {
+                var param = int.Parse(this.Request.Params["id_material"]);
+                tb_compra = new Manter_Compra().obterCompraInt(param);
+           
+                tb_compra.autorizado = true;
+                tb_compra.data_autorizacao = DateTime.Now;
+                new Manter_Compra().editar(tb_compra);
+                tb_orcamento r = new Manter_Orcamento().obterOrcamento((int)tb_compra.tb_fatura.id);
+                ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
+                foreach (Models.ViewModel model in Models.TempAnexo.models)
+                {
+                    var fileName = Path.GetFileName(model.file.FileName);
+                    using (Stream inputStream = model.file.InputStream)
+                    {
+                        MemoryStream memoryStream = inputStream as MemoryStream;
+                        if (memoryStream == null)
+                        {
+                            memoryStream = new MemoryStream();
+                            inputStream.CopyTo(memoryStream);
+                        }
+                        string cont = "/" + Manter_.tipo.compra.ToString().ToUpper() + "/";
+                        FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont), fileName), FileMode.Create, FileAccess.Write);
+                        model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
+                        memoryStream.WriteTo(file);
+                        file.Close();
+                        memoryStream.Close();
+                    }
+                    new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.compra, tb_compra.id);
+                }
+                return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
+            
+
+
+            
+
+           
+        }
 
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
 
@@ -217,6 +272,7 @@ namespace Web_Ages.Controllers
             @ViewBag.tb_fatura = fatura;
             Models.TempAnexo.models = new List<Models.ViewModel>();
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
             return PartialView();
         }
         public async Task SaveFileContentsAsync(string filePath, Stream stream)
@@ -264,6 +320,69 @@ namespace Web_Ages.Controllers
                 }
             }
             return View(compra);
+        }
+
+        [Authorize(Roles = "FINANCEIRO")]
+        public ActionResult BaixaMaterial(int? id_material)
+        {
+            tb_compra compra = new Manter_Compra().obterCompraInt((int)id_material);
+            Models.TempAnexo.models = new List<Models.ViewModel>();
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            @ViewBag.tb_compra = compra;
+            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
+            return PartialView();
+
+
+
+            
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "FINANCEIRO")]
+        public ActionResult BaixaMaterial(tb_compra tb_compra)
+        {
+            var param = int.Parse(this.Request.Params["id_material"]);
+            tb_compra = new Manter_Compra().obterCompraInt(param);
+
+            @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            @ViewBag.tb_compra = tb_compra;
+            ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
+            if (Models.TempAnexo.models.Count == 0)
+                return PartialView();
+
+
+            tb_compra.autorizado = true;
+            tb_compra.data_pagamento = DateTime.Now;
+            
+            tb_compra.anotacao += " [ BAIXA => " + tb_compra.valor.ToString("0.00") + " ]";
+            
+            tb_compra.encerrado = true;
+            new Manter_Compra().editar(tb_compra);
+            tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_compra.tb_fatura.id_orcamento);
+
+            foreach (Models.ViewModel model in Models.TempAnexo.models)
+            {
+                var fileName = Path.GetFileName(model.file.FileName);
+                using (Stream inputStream = model.file.InputStream)
+                {
+                    MemoryStream memoryStream = inputStream as MemoryStream;
+                    if (memoryStream == null)
+                    {
+                        memoryStream = new MemoryStream();
+                        inputStream.CopyTo(memoryStream);
+                    }
+                    string cont = "/" + Manter_.tipo.compra.ToString().ToUpper() + "/BAIXA/";
+                    FileStream file = new FileStream(Path.Combine(Server.MapPath("~/App_Data/Anexos/" + cont), fileName), FileMode.Create, FileAccess.Write);
+                    model.tb_anexo.caminho = Path.Combine(Server.MapPath("~/App_Data/Anexos" + cont));
+                    memoryStream.WriteTo(file);
+                    file.Close();
+                    memoryStream.Close();
+                }
+                new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.compra, tb_compra.id);
+            }
+
+
+            return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
         }
         [Authorize(Roles = "FINANCEIRO")]
         public ActionResult Baixa(int? id_fatura)
@@ -363,11 +482,20 @@ namespace Web_Ages.Controllers
         public ActionResult Remover(int? id)
         {
 
-
+            
             int _arquivoId = Convert.ToInt32((int)id);
             Web_Ages.Models.TempAnexo.models.RemoveAt(_arquivoId);
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
             return ListarAnexos();
+
+        }
+        public ActionResult RemoverAnexoProjeto(int? id, int id_projeto )
+        {
+            new Manter_().removerAnexoProjeto((int)id);
+            tb_projeto tb_projeto = new Manter_Projeto().obterProjeto(id_projeto);
+            return RedirectToAction("Edit", new { id = id_projeto });
+            
+
 
         }
         public FileResult Download(int? id)

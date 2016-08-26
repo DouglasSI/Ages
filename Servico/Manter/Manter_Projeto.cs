@@ -91,8 +91,11 @@ namespace Servico.Manter
         }
         public void remover(int id)
         {
+            tb_projeto proposta = obterProjeto(id);
+            entidade.tb_anexo.RemoveRange(proposta.tb_anexo);
+            entidade.tb_orcamento.RemoveRange(proposta.tb_orcamento);
+            entidade.tb_projeto.Remove(proposta);
 
-            entidade.tb_projeto.Remove(obterProjeto(id));
             entidade.SaveChanges();
         }
         public tb_projeto obterProjeto(int filtro)

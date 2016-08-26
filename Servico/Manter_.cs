@@ -23,6 +23,14 @@ namespace Servico
             }
 
         }
+        public void removerAnexoProjeto(int id)
+        {
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                context.tb_anexo.Remove(context.tb_anexo.Find(id));
+                context.SaveChanges();
+            }
+        }
         public List<tb_anexo> getAnexos(int id , tipo tipo)
         {
 
