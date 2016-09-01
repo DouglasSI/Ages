@@ -145,82 +145,101 @@
         </div>
         <div class="form-horizontal" style="padding-bottom:inherit">
             <div class=" form-horizontal col-md-12" style="padding-bottom:inherit ; background-color:rgba(251, 251, 251, 0.75)">
-                <hr />
-                <div class="form-horizontal col-md-3" style="width: 33%">
-
-                    <div class="col-md-3" style="width: 5%"></div>
-                    <div class="col-md-3" style="width: 90%">
-                        <div class="box-head">
-                            <h2 class="left">Serviços</h2>
-                        </div>
-                        <div class="table">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <th>
-                                        Serviço
-                                    </th>
-                                    <th>
-                                        Observação
-                                    </th>
-                                    <th>
-                                        Valor
-                                    </th>
-                                </tr>
-
-                                @foreach (var item in Model.tb_orcamento_servico)
-                                {
+               
+                <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                    <hr />
+                    <div class="col-md-3" style="width: 100%">
+                       
+                        @if (Model.tb_orcamento_servico.Count == 0)
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Não Contém Serviços</h2>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Serviços</h2>
+                            </div>
+                            <div class="table">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-
-                                        @Html.HiddenFor(modelItem => item.id_servico)
-                                        @Html.HiddenFor(modelItem => item.tb_servico.id)
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.tb_servico.titulo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.anotacao)
-                                        </td>
-
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.valor)
-                                        </td>
-
+                                        <th>
+                                            Serviço
+                                        </th>
+                                        <th>
+                                            Observação
+                                        </th>
+                                        <th>
+                                            Valor
+                                        </th>
                                     </tr>
-                                }
-                            </table>
-                        </div>
+
+                                    @foreach (var item in Model.tb_orcamento_servico)
+                                    {
+                                        <tr>
+
+                                            @Html.HiddenFor(modelItem => item.id_servico)
+                                            @Html.HiddenFor(modelItem => item.tb_servico.id)
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.tb_servico.titulo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.anotacao)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.valor)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        }
                     </div>
                 </div>
-                <div class="form-horizontal col-md-9" style="width: 67%">
-                    <div class="col-md-3" style="width: 2%"></div>
-                    <div class="col-md-3" style="width: 96%">
-                        <div class="box-head">
-                            <h2 class="left">Faturas</h2>
-                        </div>
-                        <div class="table">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
 
-                                    <th>
-                                        Título
-                                    </th>
+                <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                    <hr />
+                    <div class="col-md-3" style="width: 100%">
+                       
+                        @if (Model.tb_fatura.Count == 0)
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Não Contém Faturas</h2>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Faturas</h2>
+                            </div>
+                            <div class="table">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <tr>
 
-                                    <th>
-                                        Banco
-                                    </th>
-                                    <th>
-                                        Pagamento
-                                    </th>
+                                        <th>
+                                            Título
+                                        </th>
 
-                                    <th>
-                                        Valor
-                                    </th>
-                                    <th>
-                                        Vencimento
-                                    </th>
-                                </tr>
+                                        <th>
+                                            Banco
+                                        </th>
+                                        <th>
+                                            Pagamento
+                                        </th>
 
-                                @foreach (var item in Model.tb_fatura)
-                                {
+                                        <th>
+                                            Valor
+                                        </th>
+                                        <th>
+                                            Vencimento
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model.tb_fatura)
+                                    {
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.titulo)
@@ -238,66 +257,71 @@
                                             @Html.DisplayFor(modelItem => item.data_prevista)
                                         </td>
                                     </tr>
-                                }
+                                    }
 
-                            </table>
-                        </div>
+                                </table>
+                            </div>
+                        }
                     </div>
                 </div>
-
-                <div class="form-horizontal col-md-12" style="width: 100%">
-                    
+                <div class="form-horizontal col-md-3" style="width: 100%; background-color:rgba(251, 251, 251, 0.75)">
+                    <hr />
                     <div class="col-md-3" style="width: 100%">
-                        <div class="box-head">
-                            <h2 class="left">Anexos</h2>
-                        </div>
-                        <div class="table">
-                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                    <th>
-                                        Título
-                                    </th>
-                                    <th>
-                                        Anotação
-                                    </th>
-                                    <th>
-                                        Criado em
-                                    </th>
-                                    <th>
-                                        Baixar
-                                    </th>
-                                </tr>
-                                @foreach (var itemA in Model.tb_anexo)
-                                {
+                       
+                        @if (Model.tb_anexo.Count == 0)
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Não Contém Anexos</h2>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="box-head">
+                                <h2 class="left">Anexos</h2>
+                            </div>
+                            <div class="table">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td>
-                                            <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + " .png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => itemA.titulo)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => itemA.data_cadastro)
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Download", "Download", new { id = itemA.id })
-                                        </td>
+                                        <th>
+                                            Título
+                                        </th>
+                                        <th>
+                                            Anotação
+                                        </th>
+                                        <th>
+                                            Criado em
+                                        </th>
+                                        <th>
+                                            Baixar
+                                        </th>
                                     </tr>
-                                }
-                            </table>
-                        </div>
-
+                                    @foreach (var itemA in Model.tb_anexo)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + " .png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemA.titulo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => itemA.data_cadastro)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Download", "Download", new { id = itemA.id })
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        }
                     </div>
                 </div>
-
-
-
             </div>
             <div class="form-horizontal col-md-12">
                 <hr />
                 <br><br><br><br>
             </div>
         </div>
-
     }
 </div>

@@ -32,7 +32,8 @@ namespace Web_Ages.Controllers
             orc.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.id_usuario);
             orc.tb_projeto.tb_usuario = new Manter_Usuario().obterUsuarioByid(orc.tb_projeto.id_usuario);
            // orc.tb_fatura = new Manter_Fatura().ObterFaturasporOrcamento((int)orc.id);
-            orc.tb_orcamento_servico = new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)orc.id);
+
+
             
             return View(orc);
 
@@ -103,6 +104,9 @@ namespace Web_Ages.Controllers
             ViewBag.id_usuario = userr;
             if (Request.Form["bt_submit_1"] != null)
             {
+                tb_orcamento.valor = Convert.ToDecimal((Request.Form["valor"]).Replace(",", "").Replace(".", ","));
+                ModelState["valor"].Errors.Clear();
+
                 if (ModelState.IsValid)
                 {
                     Servico.Manter_ m = new Servico.Manter_();
@@ -219,6 +223,8 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult CreateServico(tb_orcamento_servico tb_orcamento_servico)
         {
+            tb_orcamento_servico.valor = Convert.ToDecimal( (Request.Form["valor"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor"].Errors.Clear();
             if (ModelState.IsValid)
             {
                 tb_orcamento_servico.data_cadastro = DateTime.Now;
@@ -248,6 +254,7 @@ namespace Web_Ages.Controllers
             List<tb_orcamento_servico> hList = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
             hList.RemoveAt(id_servico);
             Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico = hList;
+            @ViewBag.tb_orcamento_servico = hList;
           //  ((List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico).RemoveAt(id_servico);
             return ListarServicos();
         }
