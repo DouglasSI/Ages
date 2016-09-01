@@ -268,6 +268,7 @@
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.maskMoney.js" />
     <Content Include="Scripts\jquery.MetaData.js" />
     <Content Include="Scripts\jquery.MultiFile.js" />
     <Content Include="Scripts\jquery.MultiFile.pack.js" />
@@ -352,6 +353,8 @@
     <Content Include="Views\Projeto\Baixa.cshtml" />
     <Content Include="Views\Orcamento\CreateAnexo.cshtml" />
     <Content Include="Views\Orcamento\ListarAnexos.cshtml" />
+    <Content Include="Views\Projeto\AutorizarMaterial.cshtml" />
+    <Content Include="Views\Projeto\BaixaMaterial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

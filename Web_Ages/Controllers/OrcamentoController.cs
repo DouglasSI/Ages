@@ -66,7 +66,7 @@ namespace Web_Ages.Controllers
         public ActionResult Create(int? id_projeto)
         {
             Model.Super.SuperOrcamento.orcamento = new tb_orcamento();
-            @ViewBag.tb_orcamento_servico = new List<tb_orcamento_servico>();
+            
             @ViewBag.tb_fatura = new List<tb_fatura>();
             ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
             ViewBag.id_servico = new SelectList(new Manter_Servico().obterServicos(), "id", "titulo");
@@ -77,7 +77,9 @@ namespace Web_Ages.Controllers
             ViewBag.id_status = new Manter_Status().obterByIdOrcamento(1);
             ViewBag.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name);
 
-            @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
+            List<tb_orcamento_servico> hList = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
+            @ViewBag.tb_orcamento_servico = hList;
+
 
 
             Models.TempAnexo.models = new List<Models.ViewModel>();
@@ -151,7 +153,8 @@ namespace Web_Ages.Controllers
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
             Model.Super.SuperOrcamento.orcamento.tb_fatura.Clear();
-            @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
+            List<tb_fatura> hList = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
+            @ViewBag.tb_fatura = hList;
             return PartialView();
 
         }
@@ -161,31 +164,24 @@ namespace Web_Ages.Controllers
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
             if (ModelState.IsValid)
-            {
-                if (Request.Form["bt_submit_1"] != null)
-                {
-
-                }
+            {   
                 tb_fatura.tb_forma_pagamento = new Manter_FormaPagamento().obterFormaPagamento(tb_fatura.id_forma_pagamento);
-
                 tb_fatura.is_aditivo = false;
                 tb_fatura.data_cadastro = DateTime.Now;
-
                 Model.Super.SuperOrcamento.orcamento.tb_fatura.Add(tb_fatura);
-                @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
-
-                return ListarFaturas();
             }
+            List<tb_fatura> hList = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
+            @ViewBag.tb_fatura = hList;
             return ListarFaturas();
-
         }
         public ActionResult ListarFaturas()
         {
-            @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
+            List<tb_fatura> hList = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
+
+            @ViewBag.tb_fatura = hList;
             return PartialView("ListarFaturas");
 
         }
-
         public FileResult Download(int? id)
         {
 
@@ -209,57 +205,51 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult RemoverFatura(int id)
         {
-            ((List<tb_fatura>)
-                Model.Super.SuperOrcamento.orcamento.tb_fatura).RemoveAt(id);
-            @ViewBag.tb_fatura = Model.Super.SuperOrcamento.orcamento.tb_fatura;
+            
+            List<tb_fatura> hList = Model.Super.SuperOrcamento.orcamento.tb_fatura.ToList();
+            hList.RemoveAt(id);
+            Model.Super.SuperOrcamento.orcamento.tb_fatura = hList;
+            @ViewBag.tb_fatura = hList;
+
               @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
-           // return PartialView("CreateFatura");
+           
              return ListarFaturas();
         }
-
         [HttpPost]
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
         public ActionResult CreateServico(tb_orcamento_servico tb_orcamento_servico)
         {
-
             if (ModelState.IsValid)
             {
                 tb_orcamento_servico.data_cadastro = DateTime.Now;
-
-                string id_servico = Request.Params.Get("id_servico");
-                tb_servico s = new Manter_Servico().obterServico(int.Parse(id_servico)); //retorna um objeto servico
+                tb_servico s = new Manter_Servico().obterServico(tb_orcamento_servico.id_servico ); //retorna um objeto servico
                 List<tb_servico> svs = new Manter_Servico().obterServicos();
-
                 ViewBag.id_servico = new SelectList(svs, "id", "titulo");
-
                 tb_orcamento_servico.tb_servico = s;
-                for (int i = 0; i < Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.Count; i++)
-                    if (((List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico)[i].
-                        id_servico
-                        == tb_orcamento_servico.id_servico)
-                        ((List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico).RemoveAt(i);
-
-                Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.Add(tb_orcamento_servico);
-
-                @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
-
-                return ListarServicos();
+                List<tb_orcamento_servico> hList = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
+                for (int i = 0; i < hList.Count; i++)
+                    if (hList[i].id_servico == tb_orcamento_servico.id_servico)
+                        hList.RemoveAt(i);
+                hList.Add(tb_orcamento_servico);
+                Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico = hList;
+                @ViewBag.tb_orcamento_servico = hList;
             }
             return ListarServicos();
-
         }
-
         public ActionResult ListarServicos()
         {
-            @ViewBag.tb_orcamento_servico = (List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico;
+            List<tb_orcamento_servico> hList = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
+            @ViewBag.tb_orcamento_servico = hList;
             return PartialView("ListaServicosOrcamento");
         }
 
-        public void RemoverServico(int id_servico)
+        public ActionResult RemoverServico(int id_servico)
         {
-            foreach (tb_orcamento_servico os in ((List<tb_orcamento_servico>)ViewBag.Servicos))
-                if (os.id_servico == id_servico)
-                    ((List<tb_orcamento_servico>)ViewBag.Servicos).Remove(os);
+            List<tb_orcamento_servico> hList = Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico.ToList();
+            hList.RemoveAt(id_servico);
+            Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico = hList;
+          //  ((List<tb_orcamento_servico>)Model.Super.SuperOrcamento.orcamento.tb_orcamento_servico).RemoveAt(id_servico);
+            return ListarServicos();
         }
         // POST: Orcamento/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
