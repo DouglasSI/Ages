@@ -17,9 +17,9 @@ namespace Model
         public int id_orcamento { get; set; }
         public int id_servico { get; set; }
         public System.DateTime data_cadastro { get; set; }
-        public decimal valor { get; set; }
         public string anotacao { get; set; }
-    
+        public decimal valor_servico { get; set; }
+            
         public virtual tb_orcamento tb_orcamento { get; set; }
         public virtual tb_servico tb_servico { get; set; }
     }

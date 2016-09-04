@@ -60,20 +60,20 @@
                                         </tr>
                                         @foreach (var itemA in item.tb_anexo)
                                         {
-                                        <tr>
-                                            <td>
-                                                <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + " .png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => itemA.titulo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => itemA.data_cadastro)
-                                            </td>
-                                            <td>
-                                                @Html.ActionLink("Download", "Download", new { id = itemA.id })
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <img width="64" height="64" src="~/Content/pic/@( itemA.tipo + " .png")" alt="carregando" onerror="this.onerror=null;this.src = '~/Content/pic/default.png';" />
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => itemA.titulo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => itemA.data_cadastro)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Download", "Download", new { id = itemA.id })
+                                                </td>
+                                            </tr>
                                         }
                                     </table>
                                 </div>
@@ -89,222 +89,232 @@
                                 <div class="box-content" style="background-color:gray">
                                     @foreach (var fat in item.tb_fatura.Where(f => !f.is_aditivo))
                                     {
-                                    <div class="box" style="background-color:blue">
-                                        <div class=" box-head" style="background-color:darkblue">
-                                            <h2 class="left">Descricao da Fatura - @fat.titulo</h2>
-                                        </div>
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <div class="box" style="background-color:blue">
+                                            <div class=" box-head" style="background-color:darkblue">
+                                                <h2 class="left">Descricao da Fatura - @fat.titulo</h2>
+                                            </div>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
 
-                                            <tr>
-                                                <th>
-                                                    Valor Inicial:
-                                                </th>
-                                                <th>
-                                                    Valor Pendente:
-                                                </th>
-                                                <th>
-                                                    Vencimento:
-                                                </th>
-                                                <th>
-                                                    Autorizacao
-                                                </th>
-                                                <th>
-                                                    Financeiro
-                                                </th>
-                                                <th>
-                                                    Anexos
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.valor_inicial)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.valor_pendente)
+                                                <tr>
+                                                    <th>
+                                                        Valor Inicial:
+                                                    </th>
+                                                    <th>
+                                                        Valor Pendente:
+                                                    </th>
+                                                    <th>
+                                                        Vencimento:
+                                                    </th>
+                                                    <th>
+                                                        Autorizacao
+                                                    </th>
+                                                    <th>
+                                                        Financeiro
+                                                    </th>
+                                                    <th>
+                                                        Anexos
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.valor_inicial)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.valor_pendente)
 
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.data_prevista)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.data_prevista)
 
-                                                </td>
-                                                @if (!fat.encerrado)
+                                                    </td>
+                                                    @if (!fat.encerrado)
                                                     {
                                                         if (fat.autorizado)
                                                         {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_autorizacao)
-                                                    </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => fat.data_autorizacao)
+                                                            </td>
                                                             if (User.IsInRole("Financeiro"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                    <td>
-                                                        Aguardando Baixa
-                                                    </td>
+                                                                <td>
+                                                                    Aguardando Baixa
+                                                                </td>
                                                             }
                                                         }
                                                         else
                                                         {
                                                             if (User.IsInRole("Diretor-Infra"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
-                                                    <td>
-                                                        Aguardando Autorização
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando Autorização
+                                                                </td>
                                                             }
                                                             else if (User.IsInRole("Infra"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
-                                                    <td>
-                                                        Aguardando Autorização
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando Autorização
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                    <td>
-                                                        Não Autorizado
-                                                    </td>
-                                                    <td>
-                                                        Aguardando
-                                                    </td>
+                                                                <td>
+                                                                    Não Autorizado
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando
+                                                                </td>
                                                             }
                                                         }
                                                     }
                                                     else
                                                     {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_autorizacao)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_pagamento)
-                                                    </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => fat.data_autorizacao)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => fat.data_pagamento)
+                                                        </td>
                                                     }
-                                                <td>
-                                                    @foreach (Model.tb_anexo anexo in fat.tb_anexo)
+                                                    <td>
+                                                        @foreach (Model.tb_anexo anexo in fat.tb_anexo)
                                                         {
 
-                                                        @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
-                                                        <br>
+                                                            @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                            <br>
                                                         }
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        @if (fat.tb_compra.Count > 0)
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            @if (fat.tb_compra.Count > 0)
                                             {
-                                            <div class="box-content" style="background-color:whitesmoke">
-                                                <div class="box" style="background-color:white ; width:100%">
-                                                    <div class="box-head">
-                                                        <h2 class="left" width="50%">Materiais Dessa fatura</h2>
-                                                    </div>
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <th>
-                                                                Anotação
-                                                            </th>
-                                                            <th>
-                                                                Valor
-                                                            </th>
-                                                            <th>
-                                                                Comprou em
-                                                            </th>
-                                                            <th>
-                                                                Autorizacao
-                                                            </th>
-                                                            <th>
-                                                                Financeiro
-                                                            </th>
-                                                            <th>
-                                                                Anexos
-                                                            </th>
-                                                        </tr>
-                                                        @foreach (var material in fat.tb_compra)
-                                                            {
+                                                <div class="box-content" style="background-color:whitesmoke">
+                                                    <div class="box" style="background-color:white ; width:100%">
+                                                        <div class="box-head">
+                                                            <h2 class="left" width="50%">Materiais Dessa fatura</h2>
+                                                        </div>
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
+                                                                <th>
+                                                                    Anotação
+                                                                </th>
+                                                                <th>
+                                                                    Valor
+                                                                </th>
+                                                                <th>
+                                                                    Comprou em
+                                                                </th>
+                                                                <th>
+                                                                    Remover
+                                                                </th>
+                                                                <th>
+                                                                    Autorizacao
+                                                                </th>
+                                                                <th>
+                                                                    Financeiro
+                                                                </th>
+                                                                <th>
+                                                                    Anexos
+                                                                </th>
+                                                            </tr>
+                                                            @foreach (var material in fat.tb_compra)
+                                                            {
+                                                                <tr>
 
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.anotacao)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.valor)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.data_compra)
-                                                                </td>
-                                                                @if (!material.encerrado)
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.anotacao)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.valor)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.data_compra)
+                                                                    </td>
+                                                                    <td>
+                                                                        @if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                                                                        {
+
+                                                                            @Html.ActionLink("Excluir", "DeleteMaterial", "Projeto", new { id_material = material.id }, null)
+                                                                        }
+                                                                    </td>
+                                                                    @if (!material.encerrado)
                                                                     {
                                                                         if (material.autorizado)
                                                                         {
-                                                                    <td>
-                                                                        @Html.DisplayFor(modelItem => material.data_autorizacao)
-                                                                    </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => material.data_autorizacao)
+                                                                            </td>
                                                                             if (User.IsInRole("Financeiro"))
                                                                             {
-                                                                    <td>
-                                                                        <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "BaixaMaterial", "Projeto", new { id_material = material.id }, null)</a>
-                                                                    </td>
+                                                                                <td>
+                                                                                    <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "BaixaMaterial", "Projeto", new { id_material = material.id }, null)</a>
+                                                                                </td>
                                                                             }
                                                                             else
                                                                             {
-                                                                    <td>
-                                                                        Aguardando Baixa
-                                                                    </td>
+                                                                                <td>
+                                                                                    Aguardando Baixa
+                                                                                </td>
                                                                             }
                                                                         }
                                                                         else
                                                                         {
                                                                             if (User.IsInRole("Diretor-Infra"))
                                                                             {
-                                                                    <td>
-                                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "AutorizarMaterial", "Projeto", new { id_material = material.id }, null)</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        Aguardando Autorização
-                                                                    </td>
+                                                                                <td>
+                                                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "AutorizarMaterial", "Projeto", new { id_material = material.id }, null)</a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    Aguardando Autorização
+                                                                                </td>
                                                                             }
                                                                             else
                                                                             {
-                                                                    <td>
-                                                                        Não Autorizado
-                                                                    </td>
-                                                                    <td>
-                                                                        Aguardando
-                                                                    </td>
+                                                                                <td>
+                                                                                    Não Autorizado
+                                                                                </td>
+                                                                                <td>
+                                                                                    Aguardando
+                                                                                </td>
                                                                             }
                                                                         }
                                                                     }
                                                                     else
                                                                     {
-                                                                    <td>
-                                                                        Autorizado em - @Html.DisplayFor(modelItem => material.data_autorizacao)
-                                                                    </td>
-                                                                    <td>
-                                                                        Baixa em - @Html.DisplayFor(modelItem => material.data_pagamento)
-                                                                    </td>
+                                                                        <td>
+                                                                            Autorizado em - @Html.DisplayFor(modelItem => material.data_autorizacao)
+                                                                        </td>
+                                                                        <td>
+                                                                            Baixa em - @Html.DisplayFor(modelItem => material.data_pagamento)
+                                                                        </td>
                                                                     }
-                                                                <td>
-                                                                    @foreach (Model.tb_anexo anexo in material.tb_anexo)
+                                                                    <td>
+                                                                        @foreach (Model.tb_anexo anexo in material.tb_anexo)
                                                                         {
-                                                                        @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
-                                                                        <br>
+                                                                            @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                                            <br>
                                                                         }
-                                                                </td>
-                                                            </tr>
+                                                                    </td>
+                                                                </tr>
                                                             }
-                                                    </table>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             }
 
-                                    </div>
+                                        </div>
                                     }
                                 </div>
                             </div>
@@ -316,191 +326,200 @@
                                 </div>
                                 @if (User.IsInRole("Diretor-Infra") || User.IsInRole("Infra"))
                                 {
-                                <div class="box-content" style="background-color:grey">
-                                    @using (Html.BeginForm())
-                                    {
-                                        Html.AntiForgeryToken();
-                                    <div class="table" style="background-color:transparent">
-                                        <div class="form-actions no-color">
-                                            <input name="orcamento" type="hidden" value=@item.id>
-                                            <input type="submit" name="aditivo" value="Adicionar Aditivo"
-                                                   class="btn btn-default" style="background-color:darkblue; color:white" />
-                                        </div>
+                                    <div class="box-content" style="background-color:grey">
+                                        @using (Html.BeginForm())
+                                        {
+                                            Html.AntiForgeryToken();
+                                            <div class="table" style="background-color:transparent">
+                                                <div class="form-actions no-color">
+                                                    <input name="orcamento" type="hidden" value=@item.id>
+                                                    <input type="submit" name="aditivo" value="Adicionar Aditivo"
+                                                           class="btn btn-default" style="background-color:darkblue; color:white" />
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
-                                    }
-                                </div>
                                 }
                                 <div class="box-content" style="background-color:gray">
                                     @foreach (var fat in item.tb_fatura.Where(f => f.is_aditivo))
                                     {
-                                    <div class="box" style="background-color:blue">
-                                        <div class=" box-head" style="background-color:darkblue">
-                                            <h2 class="left">Descricao do Aditivo - @fat.titulo</h2>
-                                        </div>
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <th>
-                                                    Valor Inicial:
-                                                </th>
-                                                <th>
-                                                    Valor Pendente:
-                                                </th>
-                                                <th>
-                                                    Vencimento:
-                                                </th>
-                                                <th>
-                                                    Autorizacao
-                                                </th>
-                                                <th>
-                                                    Financeiro
-                                                </th>
-                                                <th>
-                                                    Anexos
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.valor_inicial)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.valor_pendente)
+                                        <div class="box" style="background-color:blue">
+                                            <div class=" box-head" style="background-color:darkblue">
+                                                <h2 class="left">Descricao do Aditivo - @fat.titulo</h2>
+                                            </div>
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <th>
+                                                        Valor Inicial:
+                                                    </th>
+                                                    <th>
+                                                        Valor Pendente:
+                                                    </th>
+                                                    <th>
+                                                        Vencimento:
+                                                    </th>
+                                                    <th>
+                                                        Autorizacao
+                                                    </th>
+                                                    <th>
+                                                        Financeiro
+                                                    </th>
+                                                    <th>
+                                                        Anexos
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.valor_inicial)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.valor_pendente)
 
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => fat.data_prevista)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => fat.data_prevista)
 
-                                                </td>
-                                                @if (!fat.encerrado)
+                                                    </td>
+                                                    @if (!fat.encerrado)
                                                     {
                                                         if (fat.autorizado)
                                                         {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_autorizacao)
-                                                    </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => fat.data_autorizacao)
+                                                            </td>
                                                             if (User.IsInRole("Financeiro"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "Baixa", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                    <td>
-                                                        Aguardando Baixa
-                                                    </td>
+                                                                <td>
+                                                                    Aguardando Baixa
+                                                                </td>
                                                             }
                                                         }
                                                         else
                                                         {
                                                             if (User.IsInRole("Diretor-Infra"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
-                                                    <td>
-                                                        Aguardando Autorização
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "Autorizar", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando Autorização
+                                                                </td>
                                                             }
                                                             else if (User.IsInRole("Infra"))
                                                             {
-                                                    <td>
-                                                        <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
-                                                    </td>
-                                                    <td>
-                                                        Aguardando Autorização
-                                                    </td>
+                                                                <td>
+                                                                    <a href="#" class="ico del">@Html.ActionLink("Material", "Material", "Projeto", new { id_fatura = fat.id }, null)</a>
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando Autorização
+                                                                </td>
                                                             }
                                                             else
                                                             {
-                                                    <td>
-                                                        Não Autorizado
-                                                    </td>
-                                                    <td>
-                                                        Aguardando
-                                                    </td>
+                                                                <td>
+                                                                    Não Autorizado
+                                                                </td>
+                                                                <td>
+                                                                    Aguardando
+                                                                </td>
                                                             }
                                                         }
                                                     }
                                                     else
                                                     {
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_autorizacao)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => fat.data_pagamento)
-                                                    </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => fat.data_autorizacao)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => fat.data_pagamento)
+                                                        </td>
                                                     }
-                                                <td>
-                                                    @foreach (Model.tb_anexo anexo in fat.tb_anexo)
+                                                    <td>
+                                                        @foreach (Model.tb_anexo anexo in fat.tb_anexo)
                                                         {
 
-                                                        @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
-                                                        <br>
+                                                            @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                            <br>
                                                         }
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
-                                        </table>
-                                        @if (fat.tb_compra.Count > 0)
+                                            </table>
+                                            @if (fat.tb_compra.Count > 0)
                                             {
-                                            <div class="box-content" style="background-color:whitesmoke">
-                                                <div class="box" style="background-color:white ; width:100%">
-                                                    <div class="box-head">
-                                                        <h2 class="left" width="50%">Materiais Dessa fatura</h2>
-                                                    </div>
-                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                            <th>
-                                                                Anotação
-                                                            </th>
-                                                            <th>
-                                                                Valor
-                                                            </th>
-                                                            <th>
-                                                                Comprou em
-                                                            </th>
-                                                            <th>
-                                                                Autorizacao
-                                                            </th>
-                                                            <th>
-                                                                Financeiro
-                                                            </th>
-                                                            <th>
-                                                                Anexos
-                                                            </th>
-                                                        </tr>
-                                                        @foreach (var material in fat.tb_compra)
-                                                            {
+                                                <div class="box-content" style="background-color:whitesmoke">
+                                                    <div class="box" style="background-color:white ; width:100%">
+                                                        <div class="box-head">
+                                                            <h2 class="left" width="50%">Materiais Dessa fatura</h2>
+                                                        </div>
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <tr>
+                                                                <th>
+                                                                    Anotação
+                                                                </th>
+                                                                <th>
+                                                                    Valor
+                                                                </th>
+                                                                <th>
+                                                                    Comprou em
+                                                                </th>
+                                                                <th>
+                                                                    Remover
+                                                                </th>
+                                                                <th>
+                                                                    Autorizacao
+                                                                </th>
+                                                                <th>
+                                                                    Financeiro
+                                                                </th>
+                                                                <th>
+                                                                    Anexos
+                                                                </th>
+                                                            </tr>
+                                                            @foreach (var material in fat.tb_compra)
+                                                            {
+                                                                <tr>
 
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.anotacao)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.valor)
-                                                                </td>
-                                                                <td>
-                                                                    @Html.DisplayFor(modelItem => material.data_compra)
-                                                                </td>
-                                                                @if (!material.encerrado)
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.anotacao)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.valor)
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DisplayFor(modelItem => material.data_compra)
+                                                                    </td>
+                                                                    <td>
+                                                                        @if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                                                                        {
+                                                                            @Html.ActionLink("Excluir", "DeleteMaterial", "Projeto", new { id_material = material.id }, null)
+                                                                        }
+                                                                    </td>
+                                                                    @if (!material.encerrado)
                                                                     {
                                                                         if (material.autorizado)
                                                                         {
-                                                                    <td>
-                                                                        @Html.DisplayFor(modelItem => material.data_autorizacao)
-                                                                    </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => material.data_autorizacao)
+                                                                            </td>
                                                                             if (User.IsInRole("Financeiro"))
                                                                             {
-                                                                    <td>
-                                                                        <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "BaixaMaterial", "Projeto", new { id_material = material.id }, null)</a>
-                                                                    </td>
+                                                                                <td>
+                                                                                    <a href="#" class="icon-bar">@Html.ActionLink("Baixa Financeira", "BaixaMaterial", "Projeto", new { id_material = material.id }, null)</a>
+                                                                                </td>
                                                                             }
                                                                             else
                                                                             {
-                                                                    <td>
-                                                                        Aguardando Baixa
-                                                                    </td>
+                                                                                <td>
+                                                                                    Aguardando Baixa
+                                                                                </td>
 
                                                                             }
                                                                         }
@@ -508,48 +527,48 @@
                                                                         {
                                                                             if (User.IsInRole("Diretor-Infra"))
                                                                             {
-                                                                    <td>
-                                                                        <a href="#" class="ico del">@Html.ActionLink("Autorizar", "AutorizarMaterial", "Projeto", new { id_material = material.id }, null)</a>
-                                                                    </td>
-                                                                    <td>
-                                                                        Aguardando Autorização
-                                                                    </td>
+                                                                                <td>
+                                                                                    <a href="#" class="ico del">@Html.ActionLink("Autorizar", "AutorizarMaterial", "Projeto", new { id_material = material.id }, null)</a>
+                                                                                </td>
+                                                                                <td>
+                                                                                    Aguardando Autorização
+                                                                                </td>
                                                                             }
                                                                             else
                                                                             {
-                                                                    <td>
-                                                                        Não Autorizado
-                                                                    </td>
-                                                                    <td>
-                                                                        Aguardando
-                                                                    </td>
+                                                                                <td>
+                                                                                    Não Autorizado
+                                                                                </td>
+                                                                                <td>
+                                                                                    Aguardando
+                                                                                </td>
 
                                                                             }
                                                                         }
                                                                     }
                                                                     else
                                                                     {
-                                                                    <td>
-                                                                        @Html.DisplayFor(modelItem => material.data_autorizacao)
-                                                                    </td>
-                                                                    <td>
-                                                                        @Html.DisplayFor(modelItem => material.data_pagamento)
-                                                                    </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => material.data_autorizacao)
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DisplayFor(modelItem => material.data_pagamento)
+                                                                        </td>
                                                                     }
-                                                                <td>
-                                                                    @foreach (Model.tb_anexo anexo in material.tb_anexo)
+                                                                    <td>
+                                                                        @foreach (Model.tb_anexo anexo in material.tb_anexo)
                                                                         {
-                                                                        @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
-                                                                        <br>
+                                                                            @Html.ActionLink((anexo.nome_arquivo.Count() > 14 ? anexo.nome_arquivo.Substring(0, 14) : anexo.nome_arquivo).ToUpper(), "Download", new { id = anexo.id })
+                                                                            <br>
                                                                         }
-                                                                </td>
-                                                            </tr>
+                                                                    </td>
+                                                                </tr>
                                                             }
-                                                    </table>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                            </div>
                                             }
-                                    </div>
+                                        </div>
                                     }
                                 </div>
                             </div>
@@ -575,24 +594,32 @@
                                                 Anotação
                                             </th>
                                         </tr>
+
                                         @foreach (var serv in item.tb_orcamento_servico)
                                         {
-                                        <tr>
+                                            <tr>
 
-                                            @Html.HiddenFor(modelItem => serv.id_servico)
-                                            @Html.HiddenFor(modelItem => serv.tb_servico.id)
-                                            <td>
-                                                @Html.DisplayFor(modelItem => serv.tb_servico.titulo)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => serv.valor)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => serv.anotacao)
-                                            </td>
-                                        </tr>
+                                                @Html.HiddenFor(modelItem => serv.id_servico)
+                                                @Html.HiddenFor(modelItem => serv.tb_servico.id)
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => serv.tb_servico.titulo)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => serv.valor_servico)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => serv.anotacao)
+                                                </td>
+
+                                            </tr>
+
                                         }
+
                                     </table>
+                                    Valor Total dos Serviços:
+                                    @( item.tb_orcamento_servico.Sum(x => x.valor_servico).ToString("0.00")) <br />
+                                    Desconto:
+                                    @((Model.tb_orcamento.Sum(x => x.valor) - item.tb_orcamento_servico.Sum(x => x.valor_servico)).ToString("0.00"))
                                 </div>
                             </div>
                         </div>
@@ -618,16 +645,17 @@
                 <div class="table" style="background-color:transparent">
                     @using (Html.BeginForm())
                     {
-                        Html.AntiForgeryToken();                       
-                            <div class="form-actions no-color">
-                                <input name="orcamento" type="hidden" value=@Model.id>
-                                <input type="submit" name="encerrarProjeto" value="Finalizar este Projeto"
-                                       class="btn btn-default" style="background-color:black; color:white" />
-                            </div>                       
+                        Html.AntiForgeryToken();
+                        <div class="form-actions no-color">
+                            <input name="orcamento" type="hidden" value=@Model.id>
+                            <input type="submit" name="encerrarProjeto" value="Finalizar este Projeto"
+                                   class="btn btn-default" style="background-color:black; color:white" />
+                        </div>
                     }
                 </div>
             }
         </div>
-    </div><div class="form-horizontal col-md-12">.
-</div>
+    </div><div class="form-horizontal col-md-12">
+        .
+    </div>
 }

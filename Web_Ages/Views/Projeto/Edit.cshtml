@@ -1,6 +1,7 @@
 ﻿@model Model.tb_projeto
 @{Layout = "~/Views/Shared/_Layout.cshtml";}
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskMoney.js")"></script>
 <div class="small-nav">
     <div>
         <a href="#">
@@ -44,7 +45,8 @@
                         @Html.LabelFor(model => model.valor_estimado, "Valor Estimado")
                     </div>
                     <div class="col-md-3" style="width: 20%">
-                        @Html.EditorFor(model => model.valor_estimado,"" , new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.valor_estimado, "", new { htmlAttributes = new { @class = "form-control", @id = "valor_estimado", required = "required" } })
+                        <script type="text/javascript">$("#valor_estimado").maskMoney();</script>
                         @Html.ValidationMessageFor(model => model.valor_estimado, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -53,7 +55,7 @@
                         @Html.LabelFor(model => model.titulo, "Nome do Projeto")
                     </div>
                     <div class="col-md-3" style="width: 85%">
-                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control", @maxlength = 100, required = "required" } })
                         @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
                     </div>
 
@@ -63,7 +65,7 @@
                         @Html.LabelFor(model => model.anotacao, "Observação")
                     </div>
                     <div class="col-md-3" style="width: 85%">
-                        @Html.TextAreaFor(model => model.anotacao, new { @class = "form-control" })
+                        @Html.TextAreaFor(model => model.anotacao, new { @class = "form-control", @maxlength = 1000 })
                         @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
                     </div>
                 </div>

@@ -22,9 +22,7 @@ namespace Model
     
         public int id { get; set; }
         public int id_usuario { get; set; }
-        public decimal valor { get; set; }
         public string titulo { get; set; }
-        public string anotacao { get; set; }
         public System.DateTime data_cadastro { get; set; }
     
         public virtual ICollection<tb_orcamento_servico> tb_orcamento_servico { get; set; }

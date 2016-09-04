@@ -29,7 +29,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.descricao,"Descrição", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.descricao, new { htmlAttributes = new { @class = "form-control", @maxlength = 75 } })
                     @Html.ValidationMessageFor(model => model.descricao, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.banco, "Banco", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.banco, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.banco, new { htmlAttributes = new { @class = "form-control", @maxlength = 50 } })
                     @Html.ValidationMessageFor(model => model.banco, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.agencia, "Agência", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.agencia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.agencia, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.agencia, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -53,7 +53,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.conta_corrente, "Conta", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.conta_corrente, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.conta_corrente, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.conta_corrente, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.digito, "Digito verificador", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.digito, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.digito, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.digito, "", new { @class = "text-danger" })
                 </div>
             </div>

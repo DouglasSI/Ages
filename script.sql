@@ -753,7 +753,7 @@ ALTER TABLE TB_COMPRA ADD COLUMN encerrado BOOLEAN NOT NULL DEFAULT FALSE;
 
 
 ALTER TABLE TB_COMPRA ADD COLUMN id_empresa integer not null  default 1 ,
-ADD constraint fk_ce FOREIGN KEY (id_empresa) references Tb_Compra (id);
+ADD constraint fk_ce FOREIGN KEY (id_empresa) references Tb_empresa (id);
 
 
 ALTER TABLE TB_MANTENEDORA DROP COLUMN num_inscricao;

@@ -83,6 +83,7 @@ namespace Web_Ages.Controllers
 
             Models.TempAnexo.models = new List<Models.ViewModel>();
             @ViewBag.tb_anexo = Web_Ages.Models.TempAnexo.models;
+            
             return PartialView(projeto);
             //return View(projeto); local de mudanca 1
         }
@@ -120,8 +121,12 @@ namespace Web_Ages.Controllers
         public ActionResult Aditivo(tb_fatura tb_fatura)
         {
             @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
+            tb_fatura.valor_inicial = Convert.ToDecimal((Request.Form["valor_inicial"]).Replace(",", "").Replace(".", ","));
+            tb_fatura.valor_pendente = Convert.ToDecimal((Request.Form["valor_inicial"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor_inicial"].Errors.Clear();
             if (ModelState.IsValid)
             {
+               
                 tb_fatura.tb_forma_pagamento = new Manter_FormaPagamento().obterFormaPagamento(tb_fatura.id_forma_pagamento);
 
                 tb_fatura.is_aditivo = true;
@@ -256,12 +261,20 @@ namespace Web_Ages.Controllers
                     new Manter_().PersistirAnexo(model.tb_anexo, Manter_.tipo.compra, tb_compra.id);
                 }
                 return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = r.id_projeto });
-            
-
-
-            
-
+       
            
+        }
+
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult  DeleteMaterial(int? id_material)
+        {
+            tb_compra compra = new Manter_Compra().obterCompraInt((int)id_material);
+            tb_fatura fat = new Manter_Fatura().ObterFatura((int)compra.id_fatura);
+            tb_orcamento orc = new Manter_Orcamento().obterOrcamento((int)fat.id_orcamento);
+            
+           
+            new Manter_Compra().remover(id_material);
+            return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = orc.id_projeto });
         }
 
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
@@ -289,6 +302,8 @@ namespace Web_Ages.Controllers
         {
             if (Request.Form["bt_submit_1"] != null)
             {
+                compra.valor = Convert.ToDecimal((Request.Form["valor"]).Replace(",", "").Replace(".", ","));
+                ModelState["valor"].Errors.Clear();
                 if (ModelState.IsValid)
                 {
                     new Manter_().PersistirCompra(compra);
@@ -664,6 +679,8 @@ namespace Web_Ages.Controllers
         public ActionResult Create( tb_projeto tb_projeto)
         {
             #region if
+            tb_projeto.valor_estimado = Convert.ToDecimal((Request.Form["valor_estimado"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor_estimado"].Errors.Clear();
             if (Request.Form["projeto"] != null && ModelState.IsValid)
             {
 
@@ -736,6 +753,8 @@ namespace Web_Ages.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Edit([Bind(Include = "id,id_usuario,id_status,id_campi,titulo,anotacao,valor_estimado")] tb_projeto tb_projeto)
         {
+            tb_projeto.valor_estimado = Convert.ToDecimal((Request.Form["valor_estimado"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor_estimado"].Errors.Clear();
             if (ModelState.IsValid)
             {
                 tb_projeto.id_usuario = new Manter_Usuario().obterUsuario(User.Identity.Name).id;

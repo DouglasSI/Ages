@@ -95,7 +95,7 @@ namespace Servico
                         id_orcamento = orc.id,
                         id_servico = os.id_servico,
                         anotacao = os.anotacao,
-                        valor = os.valor
+                        valor_servico = os.valor_servico
                     });
                     context.SaveChanges();
                 }

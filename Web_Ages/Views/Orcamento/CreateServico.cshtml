@@ -1,5 +1,7 @@
 ﻿@model  Model.tb_orcamento_servico
-@using (Ajax.BeginForm("CreateServico", "Orcamento", new AjaxOptions { UpdateTargetId = "foda", HttpMethod = "Post" }))
+
+
+@using (Ajax.BeginForm("CreateServico", "Orcamento", null, new AjaxOptions { HttpMethod = "Post", UpdateTargetId = "foda" }))
 {
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -13,13 +15,15 @@
             @Html.ValidationMessageFor(model => model.tb_servico.titulo, "", new { @class = "text-danger" })
         </div>
         <div class="control-label col-md-2" style="width: 15%">
-            @Html.LabelFor(model => model.valor, "Valor")
+            @Html.LabelFor(model => model.valor_servico, "Valor")
         </div>
         <div class="col-md-3" style="width: 20%">
-            @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control", @id = "valor" } })
-            <script type="text/javascript">$("#valor").maskMoney();</script>
+            
+            @Html.EditorFor(model => model.valor_servico, new { htmlAttributes = new { @class = "form-control", @id = "valor_servico", required = "required" } })
+            <script type="text/javascript">$("#valor_servico").maskMoney();</script>
 
-            @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+
+            @Html.ValidationMessageFor(model => model.valor_servico, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
@@ -27,7 +31,7 @@
             @Html.LabelFor(model => model.anotacao, "Observação")
         </div>
         <div class="col-md-3" style="width:61%">
-            @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control", @maxlength = 500 } })
             @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-3" style="width: 20%">

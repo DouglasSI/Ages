@@ -19,12 +19,13 @@
             @for (int i = 0; i < ((List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico).ToList().Count; i++)
             {
                 var item = ((List<Model.tb_orcamento_servico>)@ViewBag.tb_orcamento_servico)[i];
+
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.tb_servico.titulo)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.valor)
+                        @Html.DisplayFor(modelItem => item.valor_servico)
                     </td>
 
                     <td>
@@ -45,5 +46,6 @@
                 </tr>
             }
         </table>
+
     </div>
 </div>

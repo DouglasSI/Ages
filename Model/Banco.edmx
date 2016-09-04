@@ -210,7 +210,7 @@
           <Property Name="id_orcamento" Type="int" Nullable="false" />
           <Property Name="id_servico" Type="int" Nullable="false" />
           <Property Name="data_cadastro" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="valor_servico" Type="decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="anotacao" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="tb_projeto">
@@ -223,7 +223,7 @@
           <Property Name="id_campi" Type="int" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="anotacao" Type="text" />
-          <Property Name="valor_estimado" Type="decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="valor_estimado" Type="decimal" Precision="19" Scale="4" Nullable="false" />
           <Property Name="data_criacao" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="data_analise" Type="datetime" Precision="0" />
           <Property Name="data_aprovacao" Type="datetime" Precision="0" />
@@ -247,9 +247,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_usuario" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="10" Scale="4" Nullable="false" />
           <Property Name="titulo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="anotacao" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="data_cadastro" Type="datetime" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_status_orcamento">
@@ -1090,10 +1088,10 @@
           <Property Name="id_orcamento" Type="Int32" Nullable="false" />
           <Property Name="id_servico" Type="Int32" Nullable="false" />
           <Property Name="data_cadastro" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="valor" Type="Decimal" Nullable="false" />
           <Property Name="anotacao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tb_orcamento" Relationship="Self.fk_os_orcamento" FromRole="tb_orcamento_servico" ToRole="tb_orcamento" />
           <NavigationProperty Name="tb_servico" Relationship="Self.fk_os_servico" FromRole="tb_orcamento_servico" ToRole="tb_servico" />
+          <Property Name="valor_servico" Type="Decimal" Nullable="false" />
         </EntityType>
         <EntityType Name="tb_projeto">
           <Key>
@@ -1137,9 +1135,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_usuario" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" />
           <Property Name="titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="anotacao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="data_cadastro" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="tb_orcamento_servico" Relationship="Self.fk_os_servico" FromRole="tb_servico" ToRole="tb_orcamento_servico" />
           <NavigationProperty Name="tb_projeto_servico" Relationship="Self.fk_ps_servico" FromRole="tb_servico" ToRole="tb_projeto_servico" />
@@ -1833,10 +1829,10 @@
           <EntitySetMapping Name="tb_orcamento_servico">
             <EntityTypeMapping TypeName="db_agesModel.tb_orcamento_servico">
               <MappingFragment StoreEntitySet="tb_orcamento_servico">
+                <ScalarProperty Name="valor_servico" ColumnName="valor_servico" />
                 <ScalarProperty Name="id_orcamento" ColumnName="id_orcamento" />
                 <ScalarProperty Name="id_servico" ColumnName="id_servico" />
                 <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="anotacao" ColumnName="anotacao" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1875,9 +1871,7 @@
               <MappingFragment StoreEntitySet="tb_servico">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="titulo" ColumnName="titulo" />
-                <ScalarProperty Name="anotacao" ColumnName="anotacao" />
                 <ScalarProperty Name="data_cadastro" ColumnName="data_cadastro" />
               </MappingFragment>
             </EntityTypeMapping>

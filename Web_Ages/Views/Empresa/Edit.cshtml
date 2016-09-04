@@ -33,14 +33,14 @@
                     @Html.LabelFor(model => model.inscricao_estadual, "Nr. Estadual")
                 </div>
                 <div class="col-md-3" style="width: 43%">
-                    @Html.EditorFor(model => model.inscricao_estadual, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.inscricao_estadual, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.inscricao_estadual, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 10%">
                     @Html.LabelFor(model => model.inscricao_municipal, "Nr. Municipal")
                 </div>
                 <div class="col-md-3" style="width: 37%">
-                    @Html.EditorFor(model => model.inscricao_municipal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.inscricao_municipal, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.inscricao_municipal, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -49,21 +49,21 @@
                     @Html.LabelFor(model => model.cnpj, "Cnpj")
                 </div>
                 <div class="col-md-3" style="width: 20%">
-                    @Html.EditorFor(model => model.cnpj, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidarCNPJ(this);", @onKeyPress = "MascaraCNPJ(this);" } })
+                    @Html.EditorFor(model => model.cnpj, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidarCNPJ(this);", @onKeyPress = "MascaraCNPJ(this);", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.cnpj, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 10%">
                     @Html.LabelFor(model => model.razao_social, "Razão Social")
                 </div>
                 <div class="col-md-3" style="width: 25%">
-                    @Html.EditorFor(model => model.razao_social, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.razao_social, new { htmlAttributes = new { @class = "form-control", @maxlength = 75 } })
                     @Html.ValidationMessageFor(model => model.razao_social, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 10%">
                     @Html.LabelFor(model => model.nome_fantasia, "Fantasia")
                 </div>
                 <div class="col-md-3" style="width: 25%">
-                    @Html.EditorFor(model => model.nome_fantasia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.nome_fantasia, new { htmlAttributes = new { @class = "form-control", @maxlength = 75 } })
                     @Html.ValidationMessageFor(model => model.nome_fantasia, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -72,7 +72,7 @@
                     @Html.LabelFor(model => model.atividade_principal, "1ª Atividade")
                 </div>
                 <div class="col-md-3" style="width: 43%">
-                    @Html.EditorFor(model => model.atividade_principal, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.atividade_principal, new { htmlAttributes = new { @class = "form-control", @maxlength = 75 } })
                     @Html.ValidationMessageFor(model => model.atividade_principal, "", new { @class = "text-danger" })
                 </div>
                
@@ -87,21 +87,21 @@
                     @Html.LabelFor(model => model.tb_endereco.logradouro, "Logradouro")
                 </div>
                 <div class="col-md-3" style="width: 43%">
-                    @Html.EditorFor(model => model.tb_endereco.logradouro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.logradouro, new { htmlAttributes = new { @class = "form-control", @maxlength = 100 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.logradouro, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 5%">
                     @Html.LabelFor(model => model.tb_endereco.numero, "Nro")
                 </div>
                 <div class="col-md-3" style="width: 7%">
-                    @Html.EditorFor(model => model.tb_endereco.numero, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.numero, new { htmlAttributes = new { @class = "form-control", @maxlength = 10 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.numero, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 10%">
                     @Html.LabelFor(model => model.tb_endereco.complemento, "Complemento")
                 </div>
                 <div class="col-md-3" style="width: 25%">
-                    @Html.EditorFor(model => model.tb_endereco.complemento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.complemento, new { htmlAttributes = new { @class = "form-control", @maxlength = 100 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.complemento, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -110,28 +110,28 @@
                     @Html.LabelFor(model => model.tb_endereco.municipio, "Município")
                 </div>
                 <div class="col-md-3" style="width: 20%">
-                    @Html.EditorFor(model => model.tb_endereco.municipio, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.municipio, new { htmlAttributes = new { @class = "form-control", @maxlength = 100 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.municipio, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 6%">
                     @Html.LabelFor(model => model.tb_endereco.bairro, "Bairro")
                 </div>
                 <div class="col-md-3" style="width: 17%">
-                    @Html.EditorFor(model => model.tb_endereco.bairro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.bairro, new { htmlAttributes = new { @class = "form-control", @maxlength = 100 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.bairro, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 5%">
                     @Html.LabelFor(model => model.tb_endereco.uf, "UF")
                 </div>
                 <div class="col-md-3" style="width: 7%">
-                    @Html.EditorFor(model => model.tb_endereco.uf, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_endereco.uf, new { htmlAttributes = new { @class = "form-control", @maxlength = 2} })
                     @Html.ValidationMessageFor(model => model.tb_endereco.uf, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 10%">
                     @Html.LabelFor(model => model.tb_endereco.cep, "CEP")
                 </div>
                 <div class="col-md-3" style="width: 25%">
-                    @Html.EditorFor(model => model.tb_endereco.cep, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidaCep(this);", @onKeyPress = "MascaraCep(this);" } })
+                    @Html.EditorFor(model => model.tb_endereco.cep, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidaCep(this);", @onKeyPress = "MascaraCep(this);", @maxlength = 10 } })
                     @Html.ValidationMessageFor(model => model.tb_endereco.cep, "", new { @class = "text-danger" })
                 </div>
 
@@ -143,14 +143,14 @@
                     @Html.LabelFor(model => model.tb_contato.email, "Email")
                 </div>
                 <div class="col-md-3" style="width: 43%">
-                    @Html.EditorFor(model => model.tb_contato.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_contato.email, new { htmlAttributes = new { @class = "form-control", @maxlength = 60 } })
                     @Html.ValidationMessageFor(model => model.tb_contato.email, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 5%">
                     @Html.LabelFor(model => model.tb_contato.site, "Site")
                 </div>
                 <div class="col-md-3" style="width: 42%">
-                    @Html.EditorFor(model => model.tb_contato.site, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_contato.site, new { htmlAttributes = new { @class = "form-control", @maxlength = 40 } })
                     @Html.ValidationMessageFor(model => model.tb_contato.site, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -159,21 +159,21 @@
                     @Html.LabelFor(model => model.tb_contato.telefone, "Telefone")
                 </div>
                 <div class="col-md-3" style="width: 20%">
-                    @Html.EditorFor(model => model.tb_contato.telefone, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidaTelefone(this);", @onKeyPress = "MascaraTelefone(this);" } })
+                    @Html.EditorFor(model => model.tb_contato.telefone, new { htmlAttributes = new { @class = "form-control", @onBlur = "ValidaTelefone(this);", @onKeyPress = "MascaraTelefone(this);", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.tb_contato.telefone, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 6%">
                     @Html.LabelFor(model => model.tb_contato.celular, "Celular")
                 </div>
                 <div class="col-md-3" style="width: 17%">
-                    @Html.EditorFor(model => model.tb_contato.celular, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "MascaraCelular(this);" } })
+                    @Html.EditorFor(model => model.tb_contato.celular, new { htmlAttributes = new { @class = "form-control", @onKeyPress = "MascaraCelular(this);", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.tb_contato.celular, "", new { @class = "text-danger" })
                 </div>
                 <div class="control-label col-md-2" style="width: 22%">
                     @Html.LabelFor(model => model.tb_contato.fax, "Fax")
                 </div>
                 <div class="col-md-3" style="width: 25%">
-                    @Html.EditorFor(model => model.tb_contato.fax, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.tb_contato.fax, new { htmlAttributes = new { @class = "form-control", @maxlength = 20 } })
                     @Html.ValidationMessageFor(model => model.tb_contato.fax, "", new { @class = "text-danger" })
                 </div>
             </div>

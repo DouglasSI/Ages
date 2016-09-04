@@ -48,7 +48,7 @@ namespace Web_Ages.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
-        public ActionResult Create([Bind(Include = "id,id_usuario,valor,titulo,anotacao,data_cadastro")] tb_servico tb_servico)
+        public ActionResult Create([Bind(Include = "id,id_usuario,titulo,data_cadastro")] tb_servico tb_servico)
         {
             if (ModelState.IsValid)
             {

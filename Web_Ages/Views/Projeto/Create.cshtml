@@ -57,7 +57,7 @@
                         @Html.LabelFor(model => model.titulo, "Nome do Projeto")
                     </div>
                     <div class="col-md-3" style="width: 50%">
-                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.titulo, new { htmlAttributes = new { @class = "form-control" , @maxlength = 100,required="required"} })
                         @Html.ValidationMessageFor(model => model.titulo, "", new { @class = "text-danger" })
                     </div>
                     <div class="control-label col-md-2" style="width: 15%">
@@ -66,8 +66,8 @@
                     <div class="col-md-3" style="width: 20%" >
                         
                         
-                        @Html.EditorFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control", @id = "demo1" } })
-                        <script type="text/javascript">$("#demo1").maskMoney();</script>
+                        @Html.EditorFor(model => model.valor_estimado, new { htmlAttributes = new { @class = "form-control", @id = "valor_estimado",required="required" } })
+                        <script type="text/javascript">$("#valor_estimado").maskMoney();</script>
                         @Html.ValidationMessageFor(model => model.valor_estimado, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         @Html.LabelFor(model => model.anotacao, "Observação")
                     </div>
                     <div class="col-md-3" style="width: 85%">
-                        @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.anotacao, new { htmlAttributes = new { @class = "form-control", @maxlength = 1000 } })
                         @Html.ValidationMessageFor(model => model.anotacao, "", new { @class = "text-danger" })
                     </div>
                 </div>

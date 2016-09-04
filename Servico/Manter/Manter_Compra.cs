@@ -59,7 +59,12 @@ namespace Servico.Manter
             tb_compra compra = entidade.tb_compra.Where(f => f.id.Equals(id)).FirstOrDefault();
             return compra;
         }
-
+        public void remover(int? id)
+        {
+            
+            entidade.tb_compra.Remove(obterCompraInt((int)id));
+            entidade.SaveChanges();
+        }
 
     }
 }

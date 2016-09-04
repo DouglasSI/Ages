@@ -31,15 +31,11 @@
         {
             <table class="table">
                 <tr>
-                    <th>
-                        Valor Esperado
-                    </th>
+            
                     <th>
                         @Html.DisplayNameFor(model => model.titulo)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.anotacao)
-                    </th>
+            
                     <th>
                         Ultima Modificacao
                     </th>
@@ -52,15 +48,11 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.valor)
-                        </td>
+            
                         <td>
                             @Html.DisplayFor(modelItem => item.titulo)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.anotacao)
-                        </td>
+            
                         <td>
                             @Html.DisplayFor(modelItem => item.data_cadastro)
                         </td>
