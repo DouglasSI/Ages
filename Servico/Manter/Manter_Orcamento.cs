@@ -64,9 +64,9 @@ namespace Servico.Manter
             entry.State = System.Data.Entity.EntityState.Modified;
             entidade.SaveChanges();
         }
-        public void remover(int id)
+        public void remover(int? id)
         {
-            tb_orcamento orcamento = obterOrcamento(id);
+            tb_orcamento orcamento = obterOrcamento((int)id);
             entidade.tb_anexo.RemoveRange(orcamento.tb_anexo);
             entidade.tb_orcamento.Remove(orcamento);
             entidade.SaveChanges();

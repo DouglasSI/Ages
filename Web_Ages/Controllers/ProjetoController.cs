@@ -238,7 +238,8 @@ namespace Web_Ages.Controllers
                 tb_compra.autorizado = true;
                 tb_compra.data_autorizacao = DateTime.Now;
                 new Manter_Compra().editar(tb_compra);
-                tb_orcamento r = new Manter_Orcamento().obterOrcamento((int)tb_compra.tb_fatura.id);
+                tb_fatura fat = new Manter_Fatura().ObterFatura((int)tb_compra.id_fatura);
+                tb_orcamento r = new Manter_Orcamento().obterOrcamento((int)fat.id_orcamento);
                 ViewBag.id_empresa = new SelectList(new Manter_Empresa().obterEmpresas(), "id", "nome_fantasia");
                 foreach (Models.ViewModel model in Models.TempAnexo.models)
                 {
@@ -373,7 +374,8 @@ namespace Web_Ages.Controllers
             
             tb_compra.encerrado = true;
             new Manter_Compra().editar(tb_compra);
-            tb_orcamento r = new Manter_Orcamento().obterOrcamento(tb_compra.tb_fatura.id_orcamento);
+            tb_fatura fat = new Manter_Fatura().ObterFatura((int)tb_compra.id_fatura);
+            tb_orcamento r = new Manter_Orcamento().obterOrcamento(fat.id_orcamento);
 
             foreach (Models.ViewModel model in Models.TempAnexo.models)
             {

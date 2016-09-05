@@ -26,15 +26,15 @@ namespace Servico.Manter
             List<tb_orcamento_servico> servicos = entidade.tb_orcamento_servico.ToList().Where(f => f.id_orcamento.Equals(id)).ToList();
             return servicos;
         }
-        public tb_orcamento_servico ObterServicoPorOrcamento(int id)
+        public tb_orcamento_servico ObterServicoPorOrcamento(int? id)
         {
-            tb_orcamento_servico tb_orcamento_servico = entidade.tb_orcamento_servico.Where(f => f.id_orcamento.Equals(id)).FirstOrDefault();
+            tb_orcamento_servico tb_orcamento_servico = entidade.tb_orcamento_servico.Where(f => f.id_orcamento.Equals((int)id)).FirstOrDefault();
             return tb_orcamento_servico;
         }
-        public void remover(int id)
+        public void remover(int? id)
         {
 
-            entidade.tb_orcamento_servico.Remove(ObterServicoPorOrcamento(id));
+            entidade.tb_orcamento_servico.Remove(ObterServicoPorOrcamento((int)id));
             entidade.SaveChanges();
         }
     }

@@ -353,12 +353,17 @@ namespace Web_Ages.Controllers
             int id_projeto = 0;
             foreach (var item in new Manter_Fatura().ObterFaturasporOrcamento((int)id))
             {
-
-                new Manter_Fatura().remover((int)item.id_orcamento);
+                if (item.id != 0)
+                {
+                    new Manter_Fatura().remover((int)item.id_orcamento);
+                }
             }
             foreach (var item in new Manter_Orcamento_Servico().ObterServicosporOrcamento((int)id))
             {
-                new Manter_Orcamento_Servico().remover((int)item.id_orcamento);
+                if (item.id_orcamento != 0 || item.id_servico!= 0)
+                { 
+                 new Manter_Orcamento_Servico().remover((int)item.id_orcamento);
+                }
             }
             tb_orcamento os = new Manter_Orcamento().obterOrcamento((int)id);
             id_projeto = os.id_projeto;

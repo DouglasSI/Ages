@@ -62,10 +62,15 @@ namespace Servico.Manter
             tb_fatura tb_fatura = entidade.tb_fatura.Where(f => f.id.Equals(id)).FirstOrDefault();
             return tb_fatura;
         }
-        public void remover(int id)
+        public tb_fatura ObterFaturaporOrcamento(int? id)
+        {
+            tb_fatura fatura = entidade.tb_fatura.Where(f => f.id_orcamento.Equals((int)id)).FirstOrDefault();
+            return fatura;
+        }
+        public void remover(int? id)
         {
 
-            entidade.tb_fatura.Remove(ObterFatura(id));
+            entidade.tb_fatura.Remove(ObterFaturaporOrcamento((int)id));
             entidade.SaveChanges();
         }
     }
