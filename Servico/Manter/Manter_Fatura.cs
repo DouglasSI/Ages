@@ -50,6 +50,40 @@ namespace Servico.Manter
             }
 
         }
+        public void Editar(tb_fatura fat)
+        {
+            
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_fatura fatura = new tb_fatura()
+                {
+                    id = fat.id,
+                    id_forma_pagamento = fat.id_forma_pagamento,
+                    id_orcamento = fat.id_orcamento,
+                    id_usuario = fat.id_usuario,
+                    is_aditivo = fat.is_aditivo,
+                    agencia = fat.agencia,
+                    banco = fat.banco,
+                    conta = fat.conta,
+                    anotacao = fat.anotacao,
+                    titulo = fat.titulo,
+                    valor_inicial = fat.valor_inicial,
+                    valor_pendente = fat.valor_pendente,
+                    data_cadastro = fat.data_cadastro,
+                    data_pagamento = fat.data_pagamento,
+                    data_prevista = fat.data_prevista,
+                    autorizado = fat.autorizado,
+                    encerrado = fat.encerrado
+
+                };
+                context.tb_fatura.Attach(fatura);
+                var entry = context.Entry(fatura);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
+
+        }
 
 
         public List<tb_fatura> ObterFaturasporOrcamento(int id)

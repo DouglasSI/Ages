@@ -72,6 +72,9 @@ namespace Servico
         }
         public void PersistirGrupo(tb_orcamento grupo)
         {
+            if (grupo.anotacao == null)
+            {grupo.anotacao = "-";}
+            
             using (db_agesEntities2 context = new db_agesEntities2())
             {
                 //new Manter_Orcamento(context).cadastrar(grupo);

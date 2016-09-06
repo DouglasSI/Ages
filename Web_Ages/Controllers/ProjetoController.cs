@@ -271,6 +271,8 @@ namespace Web_Ages.Controllers
         {
             tb_compra compra = new Manter_Compra().obterCompraInt((int)id_material);
             tb_fatura fat = new Manter_Fatura().ObterFatura((int)compra.id_fatura);
+            fat.valor_pendente = compra.valor + fat.valor_pendente;
+            new Manter_Fatura().Editar(fat);
             tb_orcamento orc = new Manter_Orcamento().obterOrcamento((int)fat.id_orcamento);
             
            
@@ -723,6 +725,73 @@ namespace Web_Ages.Controllers
 
 
             return View(tb_projeto);
+        }
+        [HttpGet]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult EditFatura(int? id_fatura)
+        {
+            @ViewBag.id_forma_pagamento = new SelectList(new Manter_FormaPagamento().obterFormasPag(), "id", "descricao");
+            tb_fatura fat = new Manter_Fatura().ObterFatura((int)id_fatura);
+            return View(fat);
+        }
+        [HttpPost]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult EditFatura(tb_fatura fat)
+        {
+            fat.valor_inicial = Convert.ToDecimal((Request.Form["valor_inicial"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor_inicial"].Errors.Clear();
+            
+            tb_fatura faturaAnt = new Manter_Fatura().ObterFatura(fat.id);
+            if (fat.data_prevista == DateTime.MinValue)
+            {
+                fat.data_prevista = faturaAnt.data_prevista;
+            }
+             
+            string valor = fat.valor_inicial.ToString();
+            string valor_novo=   valor.Substring(0, valor.Length - 2);
+             fat.valor_inicial = Convert.ToDecimal(valor_novo);
+            if (fat.valor_inicial != faturaAnt.valor_inicial) 
+            { 
+                if (fat.valor_inicial < faturaAnt.valor_inicial )
+                {
+                    fat.valor_pendente =faturaAnt.valor_pendente - (faturaAnt.valor_inicial-fat.valor_inicial);
+                }
+                else {
+                    fat.valor_pendente = faturaAnt.valor_pendente + (fat.valor_inicial-faturaAnt.valor_inicial);
+                }
+             }
+                new Manter_Fatura().Editar(fat);
+                tb_orcamento orcamento = new Manter_Orcamento().obterOrcamento(fat.id_orcamento);
+                return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = orcamento.id_projeto });
+         
+        }
+        [HttpGet]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult EditServico(int? id_servico, int? id_orcamento)
+        {
+            tb_orcamento_servico orc_serv = new Manter_Orcamento_Servico().ObterOrcamentoServico(id_servico,id_orcamento);
+
+            return View(orc_serv);
+        }
+        [HttpPost]
+        [Authorize(Roles = "INFRA,DIRETOR-INFRA")]
+        public ActionResult EditServico(tb_orcamento_servico orc_serv)
+        {
+            orc_serv.valor_servico = Convert.ToDecimal((Request.Form["valor_servico"]).Replace(",", "").Replace(".", ","));
+            ModelState["valor_servico"].Errors.Clear();
+            string valor = orc_serv.valor_servico.ToString();
+            string valor_novo = valor.Substring(0, valor.Length - 2);
+            orc_serv.valor_servico = Convert.ToDecimal(valor_novo);
+            if (ModelState.IsValid)
+            {
+
+                new Manter_Orcamento_Servico().Editar(orc_serv);
+
+            }
+            tb_orcamento orcamento = new Manter_Orcamento().obterOrcamento(orc_serv.id_orcamento);
+
+
+            return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = orcamento.id_projeto });
         }
         // GET: Projeto/Edit/5
         [Authorize(Roles = "Diretor")]

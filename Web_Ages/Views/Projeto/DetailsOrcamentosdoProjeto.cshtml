@@ -112,6 +112,9 @@
                                                         Financeiro
                                                     </th>
                                                     <th>
+                                                        Ação
+                                                    </th>
+                                                    <th>
                                                         Anexos
                                                     </th>
                                                 </tr>
@@ -188,6 +191,12 @@
                                                             @Html.DisplayFor(modelItem => fat.data_pagamento)
                                                         </td>
                                                     }
+                                                    <td>
+                                                        @if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                                                        {
+                                                            @Html.ActionLink("Editar", "EditFatura", "Projeto", new { id_fatura = fat.id }, null)
+                                                        }
+                                                    </td>
                                                     <td>
                                                         @foreach (Model.tb_anexo anexo in fat.tb_anexo)
                                                         {
@@ -365,6 +374,9 @@
                                                         Financeiro
                                                     </th>
                                                     <th>
+                                                        Ação
+                                                    </th>
+                                                    <th>
                                                         Anexos
                                                     </th>
                                                 </tr>
@@ -441,6 +453,12 @@
                                                             @Html.DisplayFor(modelItem => fat.data_pagamento)
                                                         </td>
                                                     }
+                                                    <td>
+                                                        @if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                                                        {
+                                                            @Html.ActionLink("Editar", "EditFatura", "Projeto", new { id_fatura = fat.id }, null)
+                                                        }
+                                                    </td>
                                                     <td>
                                                         @foreach (Model.tb_anexo anexo in fat.tb_anexo)
                                                         {
@@ -593,6 +611,10 @@
                                             <th>
                                                 Anotação
                                             </th>
+                                            <th>
+                                                Ação
+                                            </th>
+
                                         </tr>
 
                                         @foreach (var serv in item.tb_orcamento_servico)
@@ -609,6 +631,13 @@
                                                 </td>
                                                 <td>
                                                     @Html.DisplayFor(modelItem => serv.anotacao)
+                                                </td>
+                                                <td>
+                                                    @if (User.IsInRole("INFRA") || User.IsInRole("DIRETOR-INFRA"))
+                                                    {
+
+                                                        @Html.ActionLink("Editar", "EditServico", "Projeto", new { id_servico = serv.id_servico, id_orcamento = serv.id_orcamento }, null)
+                                                    }
                                                 </td>
 
                                             </tr>

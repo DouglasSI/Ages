@@ -360,6 +360,8 @@
     <Content Include="Views\Orcamento\ListarAnexos.cshtml" />
     <Content Include="Views\Projeto\AutorizarMaterial.cshtml" />
     <Content Include="Views\Projeto\BaixaMaterial.cshtml" />
+    <Content Include="Views\Projeto\EditServico.cshtml" />
+    <Content Include="Views\Projeto\EditFatura.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

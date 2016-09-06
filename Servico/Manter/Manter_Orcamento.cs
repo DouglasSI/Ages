@@ -29,13 +29,16 @@ namespace Servico.Manter
 
         public void cadastrar(tb_orcamento objeto)
         {
+            if (objeto.anotacao == null)
+            { objeto.anotacao = "-"; }
             entidade.tb_orcamento.Add(objeto);
             //entidade.SaveChangesAsync();
             entidade.SaveChanges();
         }
         public void editarStatus(tb_orcamento orcamento,  int id_status)
         {
-            
+            if (orcamento.anotacao == null)
+            { orcamento.anotacao = "-"; }
             using (db_agesEntities2 context = new db_agesEntities2())
             {
                 tb_orcamento orc = new tb_orcamento()
@@ -58,11 +61,29 @@ namespace Servico.Manter
         }
         public void editar(tb_orcamento objeto)
         {
+            if (objeto.anotacao == null)
+            { objeto.anotacao = "-"; }
+            using (db_agesEntities2 context = new db_agesEntities2())
+            {
+                tb_orcamento orc = new tb_orcamento()
+                {
+                    id = objeto.id,
+                    id_status = objeto.id_status,
+                    valor = objeto.valor,
+                    anotacao = objeto.anotacao,
+                    id_empresa = objeto.id_empresa,
+                    id_projeto = objeto.id_projeto,
+                    id_usuario = objeto.id_usuario
+                };
+                context.tb_orcamento.Attach(orc);
+                var entry = context.Entry(orc);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
+
             
-            entidade.tb_orcamento.Attach(objeto);
-            var entry = entidade.Entry(objeto);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            entidade.SaveChanges();
+            
         }
         public void remover(int? id)
         {
