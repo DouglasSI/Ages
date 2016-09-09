@@ -1,0 +1,222 @@
+﻿@model  PagedList.IPagedList<Model.tb_orcamento>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Relatórios", "Index")
+            <span>&gt;</span>
+            Visualizar
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Relatório do projeto!</strong></p>
+</div>
+<div class="msg msg-error">
+    <p><strong>Valores Finais!</strong></p>
+</div>
+<hr />
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    foreach (var item in Model)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    Nome do Projeto
+                </th>
+                <th>
+                    Data de criação
+                </th>
+                <th>
+                    Fornecedor Responsável
+                </th>
+                <th>
+                    Valor Total Orçado
+                </th>
+
+            </tr>
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tb_projeto.titulo)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.data_criacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tb_empresa.nome_fantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+            </tr>
+            Valor Total das Faturas:
+            @( item.tb_fatura.Sum(x => x.valor_inicial).ToString("0.00")) //
+            Valor Total dos Serviços:
+            @( item.tb_orcamento_servico.Sum(x => x.valor_servico).ToString("0.00"))
+
+            @foreach (var itemF in item.tb_fatura)
+            {
+                <table class="table">
+                    <tr>
+                        <th>
+                            Descrição da fatura
+                        </th>
+                        <th>
+                            Data de criação
+                        </th>
+                        <th>
+                            Data de pagamento
+                        </th>
+                        <th>
+                            Vencimento
+                        </th>
+                        <th>
+                            Valor da fatura
+                        </th>
+
+
+                    </tr>
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemF.titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemF.data_cadastro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemF.data_pagamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemF.data_prevista)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemF.valor_inicial)
+                        </td>
+
+                    </tr>
+                    @if (itemF.tb_compra.Count > 0)
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Descrição do Material
+                                </th>
+                                <th>
+                                    Data de criação
+                                </th>
+                                <th>
+                                    Data de pagamento
+                                </th>
+                                <th>
+                                    Fornecedor
+                                </th>
+                                <th>
+                                    Valor do Material
+                                </th>
+                            </tr>
+                            Valor Total dos Materiais:
+                            @( itemF.tb_compra.Sum(x => x.valor).ToString("0.00"))
+                            @foreach (var itemM in itemF.tb_compra)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => itemM.anotacao)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => itemF.data_cadastro)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => itemF.data_pagamento)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => itemM.tb_empresa.nome_fantasia)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => itemM.valor)
+                                    </td>
+
+                                </tr>
+
+                            }   @*///foreach material*@
+
+                        </table> @*///table de material*@
+                    } @*///if de material*@
+                </table> @*///table da fatura*@
+            } @*///foreach da fatura*@
+            <table class="table">
+                <tr>
+                    <th>
+                        Servico
+                    </th>
+                    <th>
+                        Valor do Serviço
+                    </th>
+                </tr>
+                @foreach (var itemS in item.tb_orcamento_servico)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemS.tb_servico.titulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => itemS.valor_servico)
+                        </td>
+                    </tr>
+                } @*///foreach de serviço*@
+            </table>  @*/// table de serviço*@
+        </table> @*/// table do model*@
+    } @*///foreach do model*@
+
+    <tr>
+
+        <td><b>@Model.Count registros de @Model.TotalItemCount</b></td>
+        <td><a href=""><b>GERAR PDF</b></a></td>
+    </tr>
+    <br /> <br /> <br />
+    {
+        if (Model.TotalItemCount != Model.Count)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+                    @if (Model.HasPreviousPage)
+                    {
+                        @Html.ActionLink("<<", "ProjetoValores", new { pagina = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                        @Html.Raw(" ");
+                        @Html.ActionLink("< Anterior", "ProjetoValores", new { pagina = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                    }
+                    else
+                    {
+                        @:<<
+                        @Html.Raw(" ");
+                        @:< Anterior
+                           }
+
+                    @if (Model.HasNextPage)
+                    {
+                        @Html.ActionLink("Próxima >", "ProjetoValores", new { pagina = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                        @Html.Raw(" ");
+                        @Html.ActionLink(">>", "ProjetoValores", new { pagina = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                    }
+                    else
+                    {
+                        @:Próxima >
+                        @Html.Raw(" ")
+                        @:>>
+                    }
+                </div>
+            </div>
+        }
+    }
+
+}

@@ -1,0 +1,127 @@
+﻿@model  PagedList.IPagedList<Model.tb_empresa>
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+
+
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            @Html.ActionLink("Relatórios", "Index")
+            <span>&gt;</span>
+            Visualizar
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Relatórios!</strong></p>
+</div>
+<hr />
+ @if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Razão Social
+            </th>
+            <th>
+                Nome Fantasia
+            </th>
+            <th>
+                CNPJ
+            </th>
+            <th>
+                Inscrição estadual
+            </th>
+            <th>
+                Inscrição municipal
+            </th>
+            <th>
+                Atividade principal
+            </th>
+            <th>
+                Telefone
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.razao_social)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nome_fantasia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cnpj)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inscricao_estadual)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.inscricao_municipal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.atividade_principal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tb_contato.telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tb_endereco.logradouro)
+                </td>
+                
+            </tr>
+        }
+        <tr>
+            
+            <td><b>@Model.Count registos de @Model.TotalItemCount</b></td>
+            
+            <td><a href="~/Relatorio/ListagemEmpresas?gerarPDF=true"><b>GERAR PDF</b></a></td>
+            
+        </tr>
+
+    </table>
+{
+            if (Model.TotalItemCount != Model.Count)
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+                        @if (Model.HasPreviousPage)
+                        {
+                            @Html.ActionLink("<<", "ListagemEmpresas", new { pagina = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                            @Html.Raw(" ");
+                            @Html.ActionLink("< Anterior", "ListagemEmpresas", new { pagina = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                        }
+                        else
+                        {
+                            @:<<
+                            @Html.Raw(" ");
+                            @:< Anterior
+                           }
+
+                        @if (Model.HasNextPage)
+                        {
+                            @Html.ActionLink("Próxima >", "ListagemEmpresas", new { pagina = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                            @Html.Raw(" ");
+                            @Html.ActionLink(">>", "ListagemEmpresas", new { pagina = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+                        }
+                        else
+                        {
+                            @:Próxima >
+                            @Html.Raw(" ")
+                            @:>>
+                    }
+                    </div>
+                </div>
+            }
+       }
+
+ }

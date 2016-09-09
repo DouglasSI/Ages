@@ -760,6 +760,10 @@ namespace Web_Ages.Controllers
                     fat.valor_pendente = faturaAnt.valor_pendente + (fat.valor_inicial-faturaAnt.valor_inicial);
                 }
              }
+            if (fat.valor_inicial == faturaAnt.valor_inicial)
+            {
+                fat.valor_pendente = fat.valor_inicial;
+            }
                 new Manter_Fatura().Editar(fat);
                 tb_orcamento orcamento = new Manter_Orcamento().obterOrcamento(fat.id_orcamento);
                 return RedirectToAction("DetailsOrcamentosdoProjeto", new { id = orcamento.id_projeto });

@@ -21,6 +21,12 @@ namespace Servico.Manter
             List<tb_orcamento> retur =entidade.tb_orcamento.ToList().Where(f => f.id_projeto.Equals(id_projeto)).ToList();
             return retur;
         }
+
+        public List<tb_orcamento> obterOrcamentosPorEmpresa(int id_empresa)
+        {
+            List<tb_orcamento> retur = entidade.tb_orcamento.ToList().Where(f => f.id_empresa.Equals(id_empresa)).ToList();
+            return retur;
+        }
         public List<tb_orcamento> obterOrcamentosAprovados(int id_projeto)
         {
             List<tb_orcamento> retur = entidade.tb_orcamento.ToList().Where(f => f.id_projeto.Equals(id_projeto) && f.id_status.Equals(2)).ToList();

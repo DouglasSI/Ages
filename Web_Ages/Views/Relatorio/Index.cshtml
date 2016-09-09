@@ -1,0 +1,69 @@
+﻿@model Model.tb_orcamento
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+<script>
+    $(function () {
+        $('.form-control').change(function () {
+            var id = $(this).val();
+            var target = $(this).attr('targetid');
+            var url = $(this).attr('url');
+            $('#' + target).attr('href', url + id);
+        });
+    });
+</script>
+
+<div class="small-nav">
+    <div>
+        <a href="#">
+            @Html.ActionLink("Página Inicial", "Index", "Home")
+            <span>&gt;</span>
+            Lista de Relatórios
+        </a>
+    </div>
+</div>
+<div class="msg msg-ok">
+    <p><strong>Relatórios!</strong></p>
+</div>
+<hr />
+@if (HttpContext.Current.User.Identity.IsAuthenticated)
+{
+
+    <div class="form-group">
+
+        <div class="col-md-3" style="width: 55%">
+            Projetos em Execução:  @Html.DropDownList("id_projeto", null, new { @class = "form-control", targetid = "changeLink", url = "/Relatorio/ProjetoValores/" })
+            <br />
+            <a id="changeLink" href="#"><b>GERAR RELATÓRIO</b></a>
+            <hr />
+            @Html.ValidationMessageFor(model => model.id_projeto, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-md-3" style="width: 55%">
+            Projetos Finalizados:  @Html.DropDownList("id_projetoFinalizado", null, new { @class = "form-control", targetid = "changeLink2", url = "/Relatorio/ProjetoValoresFinalizados/" })
+            <br />
+            <a id="changeLink2" href="#"><b>GERAR RELATÓRIO</b></a>
+            <hr />
+            @Html.ValidationMessageFor(model => model.id_projeto, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+
+    @*<div class="form-group">
+
+        <div class="col-md-3" style="width: 55%">
+            Fornecedores:
+            @Html.DropDownList("id_empresa", null, new { @class = "form-control", targetid = "changeLink3", url = "/Relatorio/FornecedoresValores/" })
+            <br />
+            <a id="changeLink3" href="#"><b>GERAR RELATÓRIO</b></a>
+            <hr />
+            @Html.ValidationMessageFor(model => model.id_empresa, "", new { @class = "text-danger" })
+
+        </div>
+    </div>*@
+
+
+}
